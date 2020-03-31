@@ -1,0 +1,5 @@
+@mixin customDiv($height,$width,$border){
+  height: $height;
+  width: $width;
+  border-radius: $border;
+}

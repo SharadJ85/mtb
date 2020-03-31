@@ -1,0 +1,57 @@
+//@use "_partial/avatarDiv";
+
+@mixin box($height,$width,$border){
+  height: $height;
+  width: $width;
+  border-radius: $border;
+}
+
+.avatarCircle{
+  @include box(2rem,2rem,50%);
+  cursor: pointer;
+}
+
+.mainNav{
+  height: 3.5rem;
+}
+
+.childNavs{
+  position: relative;
+}
+
+.searchInput:focus{
+  border: 1px solid darkgrey;
+  background-color: #343a40;
+  color: white;
+}
+
+.parentText{
+  color: #00e676 !important;
+  position: relative;
+}
+
+.parentText:hover .childText{
+  display: block;
+}
+
+.childText{
+  display: none;
+  position: absolute;
+  top: 2.5rem;
+  font-size: 0.8rem;
+  min-width: max-content;
+}
+
+.child1{
+  left: 1rem;
+}
+.child2{
+  left: 5.4rem;
+}
+.child3{
+  left: 10.5rem;
+}
+.child4{
+  left: 16.2rem;
+}
+
