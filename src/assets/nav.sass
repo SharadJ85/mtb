@@ -1,0 +1,58 @@
+
+@mixin box($height,$width,$borderRadius:0)
+  height: $height
+  width: $width
+  border-radius: $borderRadius
+
+
+.logo
+  height: 2rem
+
+
+.avatarCircle
+  @include box(2rem,2rem,50%)
+  cursor: pointer
+
+.navDiv
+  height: 3.5rem
+
+.childNavs
+  position: relative
+
+
+.searchInput:focus
+  border: 1px solid darkgrey
+  color: white
+
+
+.parentText
+  color: #00e63c !important
+  position: relative
+  letter-spacing: 0.8px
+
+
+.parentText:hover .childText
+  display: block
+
+
+.childText
+  display: none
+  position: absolute
+  top: 2.5rem
+  font-size: 0.8rem
+  min-width: max-content
+
+
+.child1
+  left: 1rem
+
+.child2
+  left: 5.8rem
+
+.child3
+  left: 11.4rem
+
+.child4
+  left: 17.7rem
+
+
