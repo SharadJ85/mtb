@@ -1,0 +1,118 @@
+@import "imageCollage"
+//@import "_partial/customDiv"
+
+//search
+.searchList
+  background-color: #02131b
+
+
+
+
+
+
+
+
+//InvalidKeywords
+.InvalidKeywords
+  height: 100vh
+  width: 100vw
+
+.InvalidKeywordsText
+  font-size: 3rem
+
+
+
+
+
+
+
+
+
+//media
+.posterSize
+  height: 19rem
+  width: 13rem
+
+.posterDiv
+  box-shadow: -5px 5px 10px 0 rgba(0,0,0,0.75)
+  background-size: cover
+  border-radius: 5px
+  position: absolute
+  right: -2rem
+  top: -2rem
+  @extend .smallThumbnail
+  @include boxSize(19rem,13rem)
+
+.posterDiv:hover
+  @extend .smallThumbnail:hover
+
+a
+  text-decoration: none
+
+
+
+
+
+
+
+
+
+//searchMovieTvCard
+.movieTvDataSec
+  position: absolute
+  right: 9.5rem
+  width: 40rem
+
+.movieTvDataContainer
+  max-height: 15.8rem
+  overflow: hidden
+
+.movieTvDataTitle
+  font-size: 1.6rem
+
+.overview
+  font-size: 1.1rem
+
+.overviewText
+  font-size: 0.96rem
+
+.MediaType
+  max-width: 50rem
+  height: 18rem
+  border-radius: 5px
+  position: relative
+  margin-top: 4rem
+  margin-bottom: 1rem
+  background-color: #212529
+
+
+
+
+
+
+
+
+//searchActorCard
+
+
+.actorDataSec
+  position: absolute
+  left: 11.5rem
+  width: 40rem
+
+.knownFor
+  font-size: 0.9rem
+
+.smallPoster
+  background-size: cover
+  border-radius: 2px
+  @extend .smallThumbnail
+
+.smallPoster:hover
+  transform: scale(1.1)
+  @extend .smallThumbnail:hover
+
+.smallPosterImage
+  height: 9rem
+  width: 6rem
+  border-radius: 2px

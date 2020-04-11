@@ -1,4 +1,7 @@
-@mixin box( $height, $width, $borderRadius:0)
+@mixin boxSize($height,$width,$margin:0,$borderRadius:0)
   height: $height
   width: $width
+  max-height: $height
+  max-width: $width
+  margin: $margin
   border-radius: $borderRadius

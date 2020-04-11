@@ -1,0 +1,178 @@
+a
+  text-decoration: none
+
+h3
+  font-family: "Open Sans", sans-serif
+  font-weight: 300
+
+.background
+  width: 205px
+  height: 300px
+  background-color: rgba(255, 255, 255, 0)
+  position: relative
+  overflow: hidden
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2)
+  filter: brightness(65%)
+  background-size: cover
+
+.mediaCard
+  width: max-content
+  position: relative
+  .data .content p
+    font-size: 15px
+    font-weight: 400
+
+  .menu-content
+    margin: 0
+    padding: 0
+    list-style-type: none
+
+    &::before
+      content: ''
+      display: table
+
+    &::after
+      content: ''
+      display: table
+      clear: both
+
+    li
+      display: inline-block
+
+    a
+      color: #fff
+
+    span
+      position: absolute
+      left: 50%
+      top: 0
+      font-size: 10px
+      font-weight: 700
+      font-family: 'Open Sans', sans-serif
+      -webkit-transform: translate(-50%, 0)
+      transform: translate(-50%, 0)
+
+  .wrapper
+    width: 205px
+    height: 300px
+    background-color: rgba(255, 255, 255, 0)
+    position: relative
+    overflow: hidden
+    border-radius: 4px
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2)
+
+    &:hover .data
+      -webkit-transform: translateY(0)
+      transform: translateY(0)
+
+  .data
+    position: absolute
+    bottom: 0
+    width: 100%
+    -webkit-transition: -webkit-transform 0.3s
+    transition: -webkit-transform 0.3s
+    transition: transform 0.3s, -webkit-transform 0.3s
+
+    .content
+      position: relative
+      z-index: 1
+
+  .author
+    font-size: 12px
+
+  .title
+    text-shadow: 2px 2px 4px #000000
+    margin-top: 0
+    font-weight: 300
+
+  .text
+    text-shadow: 2px 2px 4px #000000
+    padding-left: 0.3rem
+    padding-right: 0.3rem
+    text-align: start
+    overflow: hidden
+    height: 4.5rem
+    margin: -2px
+    margin:
+      top: 1rem
+
+  /*      white-space: nowrap;
+   * overflow: hidden;
+   * text-overflow: ellipsis;
+
+  input[type='checkbox']
+    display: none
+
+    &:checked + .menu-content
+      -webkit-transform: translateY(-60px)
+      transform: translateY(-60px)
+
+.poster
+  position: relative
+  .wrapper:hover .menu-content span
+    -webkit-transform: translate(-50%, -10px)
+    transform: translate(-50%, -10px)
+    opacity: 1
+
+  .header
+    color: #fff
+    padding: 1rem
+
+    &::before
+      content: ''
+      display: table
+
+    &::after
+      content: ''
+      display: table
+      clear: both
+
+  .menu-content
+    float: right
+
+    li
+      margin: 0 5px
+      position: relative
+
+    span
+      -webkit-transition: all 0.3s
+      transition: all 0.3s
+      opacity: 0
+
+  .data
+    filter: none
+    color: #fff
+
+  .title a
+    color: #fff
+
+  .button
+    display: block
+    width: 100px
+    margin: 0.5rem auto 0
+    text-align: start
+    font-size: 12px
+    color: #fff
+    line-height: 1
+    position: relative
+    font-weight: 700
+
+    &::after
+      content: '\2192'
+      opacity: 0
+      position: absolute
+      right: 0
+      top: 5%
+      -webkit-transform: translate(0, -50%)
+      transform: translate(0, -50%)
+      -webkit-transition: all 0.3s
+      transition: all 0.3s
+
+    &:hover::after
+      -webkit-transform: translate(5px, -5%)
+      transform: translate(5px, -5%)
+      opacity: 1
+
+.shiftVertically
+  -webkit-transform: translateY(calc(70px + 3.5rem))
+  transform: translateY(calc(70px + 3.5rem))
