@@ -1,53 +1,81 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "../../assets/imageCollage.sass"
 import {Col, Row} from "react-bootstrap";
+import LoadingSpinner from "./loadingSpinner";
 
-const ImageCollage=()=> {
-    return (
-        <div className="imageCollage">
-          <Row className="no-gutters">
-            <Col className="Col1">
-              <Row className="bigThumbnail">
-                <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                <h3 className="px-2 font-weight-light align-self-end text-white thumbnailTextBottom">John Wick</h3>
-              </Row>
-              <Row className="no-gutters">
-                <Col className="smallThumbnail bg-danger">
-                  <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                  <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextBottom">John Wick</h4>
-                </Col>
-                <Col className="smallThumbnail bg-warning">
-                  <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                  <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextBottom">John Wick</h4></Col>
-              </Row>
-            </Col>
-            <Col className="Col2">
-              <Row className="smallThumbnail bg-info">
-                <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextBottom">John Wick</h4></Row>
-              <Row className="smallThumbnail bg-secondary">
-                <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextBottom">John Wick</h4></Row>
-              <Row className="smallThumbnail bg-info">
-                <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextBottom">John Wick</h4></Row>
-            </Col>
-            <Col className="Col3 bg-info">
-              <Row className="no-gutters">
-                <Col className="smallThumbnail bg-warning">
-                  <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                  <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextTop">John Wick</h4></Col>
-                <Col className="smallThumbnail bg-danger">
-                  <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                  <h4 className="px-2 font-weight-light align-self-end text-white thumbnailTextTop">John Wick</h4></Col>
-              </Row>
-              <Row className="bigThumbnail bg-success">
-                <img className="image" src="http://image.tmdb.org/t/p/original/lvjRFFyNLdaMWIMYQvoebeO1JlF.jpg" alt=""/>
-                <h3 className="px-2 font-weight-light align-self-end text-white thumbnailTextTop">John Wick</h3></Row>
-            </Col>
+const ImageCollage = (props) => {
+
+  const stateObjectList = () => {
+    const objectArray = [];
+    props.list.map((el, index) => {
+      objectArray.push({
+        title: (props.list[index].name || props.list[index].title),
+        id: props.list[index].id,
+        backDrop: props.list[index].backdrop_path
+      })
+    });
+    return objectArray
+  };
+
+  const [data, setData] = useState({});
+  useEffect(() => {
+    if (props.list.length > 0) {
+      setData(stateObjectList())
+    }
+  }, [props.list]);
+
+
+if (data.length>0){
+  const num = [3, 4, 5];
+  return (
+    <div className="imageCollage">
+      <Row className="no-gutters">
+
+        <Col className="Col1">
+          <Row className="bigThumbnail">
+            <img className="image" src={`http://image.tmdb.org/t/p/original${data[0].backDrop}`} alt={data[0].title}/>
+            <h3
+              className="px-2  align-self-end text-white thumbnailTextBottom">{data[0].title}</h3>
           </Row>
-        </div>
-    );
+          <Row className="no-gutters">
+            {num.filter(e=>e<5).map(el=>(
+              <Col className="smallThumbnail ">
+                <img className="image" src={`http://image.tmdb.org/t/p/original${data[el-2].backDrop}`} alt={data[el-2].title} />
+                <h4 className="px-2  align-self-end text-white thumbnailTextBottom">{data[el-2].title}</h4></Col>
+            ))}
+          </Row>
+        </Col>
+
+        <Col className="Col2">
+          {num.map(el=>(
+            <Row className="smallThumbnail ">
+              <img className="image" src={`http://image.tmdb.org/t/p/original${data[el].backDrop}`} alt={data[el].title} />
+              <h4 className="px-2  align-self-end text-white thumbnailTextBottom">{data[el].title}</h4></Row>
+          ))}
+        </Col>
+
+        <Col className="Col3 ">
+          <Row className="no-gutters">
+            {num.filter(e=>e>3).map(el=>(
+            <Col className="smallThumbnail ">
+              <img className="image" src={`http://image.tmdb.org/t/p/original${data[el+2].backDrop}`} alt={data[el+2].title} />
+              <h4 className="px-2  align-self-end text-white thumbnailTextBottom">{data[el+2].title}</h4></Col>
+          ))}
+          </Row>
+          <Row className="bigThumbnail ">
+            <img className="image" src={`http://image.tmdb.org/t/p/original${data[8].backDrop}`} alt={data[8].title} />
+            <h3 className="px-2  align-self-end text-white thumbnailTextTop">{data[8].title}</h3></Row>
+        </Col>
+      </Row>
+    </div>
+  );}
+else{
+  return (
+    <div className="container text-center py-5">
+      <LoadingSpinner />
+    </div>
+  )
+}
 };
 
 export default ImageCollage;

@@ -2,10 +2,12 @@ import React from 'react';
 import "../../assets/mediaCard.sass"
 import {Link} from "react-router-dom";
 import Ratings from "./ratings"
-import apiUrl from "../apiUrl";
+import TmdbApiUrl from "../apiUrl";
+
+const api=new TmdbApiUrl();
 
 const MediaCard=(props)=> {
-  const cardStyle= {backgroundImage:`url(${apiUrl.imageURL(1)}${props.posterPath})`};
+  const cardStyle= {backgroundImage:`url(${api.imageURL(1)}${props.posterPath})`};
   const ratingsStyle={width:'3.3rem',position:'absolute',top:'-1rem',right:'-1rem'};
   console.log('card');
   return (

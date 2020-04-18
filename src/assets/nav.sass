@@ -4,17 +4,12 @@
   width: $width
   border-radius: $borderRadius
 
-.logo
-  height: 2rem
-
-
-.avatarCircle
-  @include box(2rem,2rem,50%)
-  cursor: pointer
 
 .navDiv
   height: 3.5rem
   background-color: #151515 !important
+  z-index: 20
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.3)!important
 
 .childNavs
   position: relative
@@ -23,6 +18,13 @@
 .searchInput:focus
   border: 1px solid darkgrey
   color: white
+
+.logo
+  height: 2rem
+
+.avatarCircle
+  @include box(2rem,2rem,50%)
+  cursor: pointer
 
 
 .parentText

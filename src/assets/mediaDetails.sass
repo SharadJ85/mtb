@@ -1,0 +1,254 @@
+//
+//
+//
+//MAIN DIV
+.mediaDiv
+  position: relative
+  background-color: #02131b
+//
+//
+//
+//BRIEF DETAILS
+#backDropImage
+  border-bottom: 2px solid gray
+
+
+#briefDetails
+  position: absolute
+  top: 18vh
+  bottom: 10vh
+  left: 10vw
+  height: max-content
+
+h1
+  font-size: 2rem
+
+.mediaTagLine
+  color: #9a9c9e
+
+.ratingDiv
+  max-width: 5rem !important
+
+h5
+  font-size: 1.2rem !important
+
+h4
+  font-size: 1.3rem
+
+.mediaSummary
+  max-width: 48rem
+
+p
+  font-size: 1rem
+
+
+.card-meta--container
+  display: -webkit-box
+  display: flex
+  padding-bottom: 0.8rem
+
+
+.card-meta--avatar
+  width: 40px
+  height: 40px
+  align-self: center
+
+
+.card-meta--title
+  padding: 0.2rem 1rem
+
+
+.card-meta--name
+  font-size: 1.1rem
+
+
+.card-meta--character
+  color: #A5A9BB
+  font-size: 0.9rem
+//
+//
+//
+//VIDEO DETAILS
+.videos
+  background-color: #0a0a0a
+
+.trailers
+  overflow-x: hidden
+  height: 17rem
+
+.trailers:hover
+  overflow-x: scroll
+
+.trailers::-webkit-scrollbar
+  height: 0.8rem
+
+.trailers::-webkit-scrollbar-thumb
+  background: #666
+
+.trailers::-webkit-scrollbar-track
+  background: rgba(102, 102, 102, 0.45)
+
+.videoThumbnail
+  background-size: contain
+  background-repeat: no-repeat
+  position: relative
+  cursor: pointer
+
+
+.videoImage
+  border-radius: 0.5rem
+  background-repeat: no-repeat
+  height: 13rem
+  width: auto
+
+.playButton
+  border: none
+  outline: none
+  background: red
+  border-radius: 50% / 10%
+  color: #FFFFFF
+  height: 3rem
+  width: 4rem
+  margin: 20px auto
+  padding: 0
+  position: absolute
+  left: calc(50% - 2rem)
+  top: calc(50% - 2.5rem)
+  text-align: center
+  text-indent: 0.1em
+  transition: all 150ms ease-out
+
+.videoThumbnail:hover .playButton
+  cursor: pointer
+  background: darkcyan
+
+.playButton::before
+  background: inherit
+  border-radius: 5% / 50%
+  bottom: 9%
+  content: ""
+  left: -5%
+  position: absolute
+  right: -5%
+  top: 9%
+
+.playButton::after
+  border-style: solid
+  border-width: 1rem 0 1rem 1.732rem
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.75)
+  content: ' '
+  font-size: 0.75rem
+  height: 0
+  margin: -1rem 0 0 -0.75rem
+  top: 50%
+  position: absolute
+  width: 0
+
+.trailersText
+  max-width: 17rem
+
+.modal-content
+  background-color: #1a202c
+
+.modal-body
+  height: 500px
+//
+//
+//
+//DETAILS
+//
+// cast/crew
+.CrewCast
+  min-height: 100vh
+
+.tabCrewCast
+  display: grid
+
+.listTab
+  border-radius: 25px
+  outline: none
+  width: 26.4rem
+  transition-duration: 0.2s
+
+.listTab:hover
+  transform: translateY(-5px)
+  transition-duration: 0.4s
+
+
+.tabContentCrewCast
+  max-height: 20rem
+
+.castCrewDiv
+  max-width: 54.6rem
+  height: 17.8rem
+  overflow-x: hidden
+  padding: 0
+  margin: 0
+
+
+.castCrewDiv:hover
+  overflow-x: auto
+
+.castCrewDiv::-webkit-scrollbar
+  height: 0.8rem
+
+.castCrewDiv::-webkit-scrollbar-thumb
+  background: #666
+
+.castCrewDiv::-webkit-scrollbar-track
+  background: rgba(102, 102, 102, 0.45)
+
+.nameCrewCast
+  font-size: 1rem
+
+.jobCrewCast
+  font-size: 0.8rem
+
+.imageCrewCast
+  height: 195px
+  width: inherit
+  background-size: contain
+  border-top-left-radius: 3px
+  border-top-right-radius: 3px
+  margin-bottom: -.5rem
+
+.btnCrewCast
+  height: max-content
+  width: 130px
+  border-radius: 3px
+  background-color: darkslategray
+//
+//status
+.detailsStatus
+  background-color: #050e15b3
+  min-height: 100vh
+  -webkit-box-shadow: 0 0 15px 3px rgba(0,0,0,0.75)
+  -moz-box-shadow: 0 0 15px 3px rgba(0,0,0,0.75)
+  box-shadow: 0 0 15px 3px rgba(0,0,0,0.75)
+
+.headText
+  letter-spacing: 1px
+
+hr
+  background-color: aqua
+
+.externalLink
+  height: 4rem
+  max-width: 277px
+  background-position: center
+  background-size: cover
+  border-radius: 4px
+
+.reviews
+  max-width: 54rem
+
+.reviewsBody
+  background-color: #0a0a0aa3
+
+.reviewsCardHead
+  background-color: #111721
+  color: ghostwhite
+
+.reviewsCardBody
+  background-color: #ffffffd1
+  color: #191a1b

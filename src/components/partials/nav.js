@@ -9,9 +9,9 @@ import {Link as RouterLink} from "react-router-dom";
 const Navigation = () => {
   const navBarText={ color: '#00bce6'};
   return (
-    <div className="fluid mainDiv">
+    <div className="fluid">
       <Navbar bg="dark" variant="dark" className="navDiv">
-        <RouterLink to="/home">
+        <RouterLink to="/">
           <img src={mtb} alt="MTB" className="logo"/></RouterLink>
         <Nav className="mr-auto ml-2 childNavs">
           <div className="mx-1 text-uppercase font-weight-normal font-weight-bold parentText">

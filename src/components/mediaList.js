@@ -5,7 +5,6 @@ import TmdbApiUrl from "./apiUrl"
 import "../assets/mediaList.sass"
 import Navigation from "./partials/nav";
 import MediaCard from "./partials/mediaCard";
-import FetchUrl from "./fetchUrl"
 import Pagination from "./partials/pagination";
 
 
@@ -37,7 +36,7 @@ const MediaList = ()=> {
   // const key=process.env.API_KEY;
    const apiKey=`d531f0b35e33ab3572f10065361d3ae1`;
    const url=`${TmdbApiUrl.baseURL()}${media}/${generalType}?api_key=${apiKey}&page=${pageId}`;
-  const rat=new FetchUrl(url);
+  const rat={};
   console.log(`rat==>${rat}`);
   console.log(`rat==>${(JSON.stringify(rat.state))}`);
   console.log(`#@generalType==>${generalType}`);

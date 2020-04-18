@@ -14,7 +14,7 @@ export default class TmdbApiUrl {
   /**
    * returns baseURL=https://api.themoviedb.org/3/
    */
-  static baseURL() {
+   baseURL() {
     return "https://api.themoviedb.org/3/";
   }
 
@@ -22,7 +22,7 @@ export default class TmdbApiUrl {
    * returns imageURL="http://image.tmdb.org/t/p/(-type-)"
    * @param imageSize | 0: original | 1: w500
    */
-  static imageURL(imageSize) {
+   imageURL(imageSize) {
     const size = ["original", "w500"];
     return `http://image.tmdb.org/t/p/${size[imageSize]}`;
   }
@@ -67,6 +67,7 @@ export default class TmdbApiUrl {
    * returns "?api_key=(--the user API_KEY stored in ".env" file--)"
    */
    apiKey() {
-    return ("?api_key=" + process.env.API_KEY);
+    // return ("?api_key=" + process.env.API_KEY);
+    return ("?api_key=d531f0b35e33ab3572f10065361d3ae1");
   }
 }

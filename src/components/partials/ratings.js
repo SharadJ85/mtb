@@ -10,7 +10,7 @@ const Ratings=(props)=> {
     return color[list.findIndex(value=>value<=rating)]
   };
   return (
-      <div>
+      <div className="fluid">
         <svg viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="48" fill="#0c0c0c"/>
           <path fill="none" strokeLinecap="round" strokeWidth="8"
