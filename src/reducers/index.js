@@ -1,6 +1,8 @@
-// import {combineReducers} from "redux";
-// import {Home_Movies_Reducer} from "./home"
-//
-// export const allReducers=combineReducers({
-//   Home_Movies_Reducer
-// });
+import {combineReducers} from "redux";
+import CounterReducer from "./counter";
+
+const allReducers = combineReducers({
+  Counter: CounterReducer
+});
+
+export default allReducers

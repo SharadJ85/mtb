@@ -40,7 +40,7 @@ if (data.length>0){
           <Row className="no-gutters">
             {num.filter(e=>e<5).map(el=>(
               <Col className="smallThumbnail ">
-                <img className="image" src={`http://image.tmdb.org/t/p/original${data[el-2].backDrop}`} alt={data[el-2].title} />
+                <img className="image" src={`http://image.tmdb.org/t/p/w500${data[el-2].backDrop}`} alt={data[el-2].title} />
                 <h4 className="px-2  align-self-end text-white thumbnailTextBottom">{data[el-2].title}</h4></Col>
             ))}
           </Row>
@@ -49,7 +49,7 @@ if (data.length>0){
         <Col className="Col2">
           {num.map(el=>(
             <Row className="smallThumbnail ">
-              <img className="image" src={`http://image.tmdb.org/t/p/original${data[el].backDrop}`} alt={data[el].title} />
+              <img className="image" src={`http://image.tmdb.org/t/p/w500${data[el].backDrop}`} alt={data[el].title} />
               <h4 className="px-2  align-self-end text-white thumbnailTextBottom">{data[el].title}</h4></Row>
           ))}
         </Col>
@@ -58,7 +58,7 @@ if (data.length>0){
           <Row className="no-gutters">
             {num.filter(e=>e>3).map(el=>(
             <Col className="smallThumbnail ">
-              <img className="image" src={`http://image.tmdb.org/t/p/original${data[el+2].backDrop}`} alt={data[el+2].title} />
+              <img className="image" src={`http://image.tmdb.org/t/p/w500${data[el+2].backDrop}`} alt={data[el+2].title} />
               <h4 className="px-2  align-self-end text-white thumbnailTextBottom">{data[el+2].title}</h4></Col>
           ))}
           </Row>
