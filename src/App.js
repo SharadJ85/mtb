@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./assets/app.sass";
 import "./assets/customBootstrap.sass";
 import {BrowserRouter as Router, Route ,Switch  } from "react-router-dom";
@@ -9,9 +9,33 @@ import Media_Details from "./components/mediaDetails"
 import Media_List from "./components/mediaList"
 import User from "./components/user"
 import Actor_Details from "./components/actorDetails"
+import {
+  actorPopular,
+  movieNowPlaying,
+  moviePopular,
+  movieTopRated,
+  movieUpcoming, tvAiringToday,
+  tvOnTheAir,
+  tvPopular,
+  tvTopRated
+} from "./actions";
+import {useDispatch} from "react-redux";
 
+const App=()=> {//rerender
+const dispatch=useDispatch();
+  useEffect(()=>{
+      dispatch(movieNowPlaying());
+      dispatch(tvOnTheAir());
+      dispatch(moviePopular());
+      dispatch(movieUpcoming());
+      dispatch(movieTopRated());
+      dispatch(tvPopular());
+      dispatch(tvTopRated());
+      dispatch(tvAiringToday());
+      dispatch(actorPopular());
+    }
+    ,[dispatch]);
 
-const App=()=> {
   return (
       <Router>
     <div className="App">

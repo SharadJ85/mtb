@@ -6,7 +6,18 @@ import ImageCollage from "./partials/imageCollage"
 import axios from "axios"
 import TmdbApiUrl from "./apiUrl";
 import {useDispatch, useSelector} from "react-redux";
-import {increment,decrement} from "../actions";
+import {
+  movieNowPlaying,
+  tvOnTheAir,
+  moviePopular,
+  movieUpcoming,
+  movieTopRated,
+  tvPopular,
+  tvTopRated,
+  tvAiringToday,
+  actorPopular
+} from "../actions";
+import myStore from "../store"
 
 const Home=()=> {
   //url
@@ -15,7 +26,7 @@ const Home=()=> {
   const tvUrl=`${api.baseURL()}${api.mediaType(1)}/${api.generalFeatures(5)}${api.apiKey()}`;
   //redux
   const reduxStateCounter=useSelector(state=>state.Counter);
-  const dispatch=useDispatch();
+
   //local state
   const[data,setData]=useState({movie:[],tv:[]});
   //fetch function
@@ -23,8 +34,8 @@ const Home=()=> {
     try {
     const [movieData, tvData] = await Promise.all([movieUrl, tvUrl].map(el => axios.get(el)));
     setData({
-      movie:movieData.data.results.filter((el, index) => index < 9) ,
-      tv: tvData.data.results.filter((el, index) => index < 9)
+      movie:movieData.data.results.slice(0,9) ,
+      tv: tvData.data.results.slice(0,9)
     });
       console.log("home fetchMyApi function data is==>",data)
     }
@@ -32,11 +43,15 @@ const Home=()=> {
       console.log("home fetchMyApi function error is==>",err)
     }
   };
-  //rerender
   useEffect(()=>{
-    fetchMyAPI();
-  }
-  ,[]);
+    fetchMyAPI()
+  },[]);
+
+   // console.log(`state.Movie==${JSON.stringify(useSelector(state=>state.Movie.now_playing.results))}`);
+   // console.log(`state.Tv==${JSON.stringify(useSelector(state=>state.Tv.on_the_air.results))}`);
+   // console.log(`getState().Movie==${JSON.stringify(myStore.getState().Movie.now_playing.results)}`);
+   // console.log(`getState().Tv==${JSON.stringify(myStore.getState().Tv.on_the_air.results)}`);
+
     return (
       <div className="mainHome text-center">
         <Navigation />
@@ -49,9 +64,6 @@ const Home=()=> {
             <h4>Now on Air</h4>
           </Row>
           <ImageCollage list={data.tv}/>
-          <button className="btn btn-light p-2 m-2 px-5" onClick={()=>dispatch(increment())}>INC</button>
-          <button className="btn btn-light p-2 m-2 px-5" onClick={()=>dispatch(decrement())} >DEC</button>
-          <h5>Count is {reduxStateCounter}</h5>
         </Container>
       </div>
     );

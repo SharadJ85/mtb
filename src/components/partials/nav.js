@@ -7,7 +7,7 @@ import mtb from '../../assets/images/mtb.png'
 import {Link as RouterLink} from "react-router-dom";
 
 const Navigation = () => {
-  const navBarText={ color: '#00bce6'};
+  const navBarText={ color: '#00bce6',cursor:"default"};
   return (
     <div className="fluid">
       <Navbar bg="dark" variant="dark" className="navDiv">

@@ -56,7 +56,7 @@ export default class TmdbApiUrl {
 
   /**
    * returns type
-   * @param type | 0: popular | 1: now_playing | 2: top_rated | 3: upcoming | 4: airing_today | 5: on_the_air
+   * @param type | 0: upcoming | 1: now_playing | 2: top_rated | 3: popular | 4: airing_today | 5: on_the_air
    */
   generalFeatures(type) {
     const feature= ["upcoming", "now_playing", "top_rated", "popular", "airing_today", "on_the_air"];
