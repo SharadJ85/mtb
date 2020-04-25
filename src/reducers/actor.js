@@ -1,8 +1,9 @@
+import {ACTOR_POPULAR} from "../actions/actor";
 
- const ActorReducer = (state = {
+const ActorReducer = (state = {
   popular: {}
 }, action) => {
-  if (action.type === "ACTOR_POPULAR") {
+  if (action.type === ACTOR_POPULAR) {
     return {
       ...state,
       popular: action.payload

@@ -4,19 +4,8 @@ import {Container,Row} from 'react-bootstrap'
 import Navigation from "./partials/nav";
 import ImageCollage from "./partials/imageCollage"
 import axios from "axios"
-import TmdbApiUrl from "./apiUrl";
+import TmdbApiUrl from "./partials/apiUrl";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  movieNowPlaying,
-  tvOnTheAir,
-  moviePopular,
-  movieUpcoming,
-  movieTopRated,
-  tvPopular,
-  tvTopRated,
-  tvAiringToday,
-  actorPopular
-} from "../actions";
 import myStore from "../store"
 
 const Home=()=> {
@@ -53,7 +42,7 @@ const Home=()=> {
    // console.log(`getState().Tv==${JSON.stringify(myStore.getState().Tv.on_the_air.results)}`);
 
     return (
-      <div className="mainHome text-center">
+      <div className="mainHome text-center pb-3">
         <Navigation />
         <Container fluid>
           <Row className="pt-2 pb-1 justify-content-center headingText">

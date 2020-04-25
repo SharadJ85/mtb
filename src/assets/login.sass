@@ -1,10 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Gudea:400,700)
+//
+//.App
+//  background: #1fa2ff
+//  background: -webkit-linear-gradient(to right, #1fa2ff, #12d8fa, #1fa2ff)
+//  background: linear-gradient(to right, #1fa2ff, #12d8fa, #1fa2ff)
 
-.App
-  filter: brightness(0.9)
-  background: #1fa2ff
-  background: -webkit-linear-gradient(to right, #1fa2ff, #12d8fa, #1fa2ff)
-  background: linear-gradient(to right, #1fa2ff, #12d8fa, #1fa2ff)
 
 #cardDisplay
   display: none
@@ -25,6 +25,10 @@
   border-radius: 4px
   font-family: "Gudea", sans-serif
   box-shadow: 0 3px 2rem 6px #000
+  z-index: 2
+
+.mainLoginDiv
+  position: relative
   transition: all 1s
 
 
@@ -52,5 +56,12 @@ a
   transition: 0.2s
   box-shadow: 0 2px 3px 1px rgba(115, 115, 115, 0.35)
 
+.logInButtons
+  margin-top: 76px
+
 .validation
   width: 1rem
+
+.stylesPopOver
+  background-color: #14141c
+  opacity: 0.8

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Navigation from "./partials/nav";
-import apiUrl from "./apiUrl";
+import apiUrl from "./partials/apiUrl";
 import Ratings from "./partials/ratings";
 import {Link} from "react-router-dom";
 import "../assets/mediaDetails.sass"

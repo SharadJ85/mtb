@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios"
 import {useParams} from 'react-router-dom'
-import TmdbApiUrl from "./apiUrl"
+import TmdbApiUrl from "./partials/apiUrl"
 import "../assets/mediaList.sass"
 import Navigation from "./partials/nav";
 import MediaCard from "./partials/mediaCard";

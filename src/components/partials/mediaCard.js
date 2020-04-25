@@ -2,7 +2,7 @@ import React from 'react';
 import "../../assets/mediaCard.sass"
 import {Link} from "react-router-dom";
 import Ratings from "./ratings"
-import TmdbApiUrl from "../apiUrl";
+import TmdbApiUrl from "./apiUrl";
 
 const api=new TmdbApiUrl();
 
