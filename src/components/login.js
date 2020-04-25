@@ -10,16 +10,14 @@ import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {loginUser} from "../actions/auth"
 
-const Login = ({loginError, isAuthenticated, dispatch}) => {
-
+const Login = ({loginError, isAuthenticated, dispatch, props}) => {
+  const {from} = {from: {pathname: "/"}};
+  //const {from} = props.location.state || {from: {pathname: "/"}};
+console.log(`path from==>${from}`);
   const signUpErrorText = ['password do not match'];
-  const logInErrorText = ['Incorrect email or password'];
 
   const [data, setData] = useState({
     logInDiv: true,
-    displayNone: `none`,
-    displayBlock: `block`,
-    spinner: false
   });
   const [logInData, setLogInData] = useState({
     email: ``,
@@ -38,20 +36,15 @@ const Login = ({loginError, isAuthenticated, dispatch}) => {
   };
 
   const handleSubmitClick = () => {
-    const {email,password} = logInData;
+    const {email, password} = logInData;
     dispatch(loginUser(email, password));
   };
-//
-// useEffect(()=>{
-//   handleEmailChange();
-//   handleEmailChange()
-// })
 
   //styles
   const stylesPopOver = {};
 
   if (isAuthenticated) {
-    return <Redirect to="/" />;
+    return <Redirect to={from} />;
   } else {
     return (
       <div className="mainLoginDiv">
@@ -74,7 +67,8 @@ const Login = ({loginError, isAuthenticated, dispatch}) => {
                         <div className="icon col-1 pl-2 align-self-center typeLogo">
                           <FontAwesomeIcon icon={faEnvelope} className="text-white-50" />
                         </div>
-                        <input placeholder="Email" type="text" onChange={e=>setLogInData({...logInData, email: e.target.value})}
+                        <input placeholder="Email" type="text"
+                               onChange={e => setLogInData({...logInData, email: e.target.value})}
                                className="col text-white-50 px-2"
                                autoComplete="email" />
                         <div className="validation align-self-center mr-3">
@@ -84,7 +78,8 @@ const Login = ({loginError, isAuthenticated, dispatch}) => {
                         <div className="icon col-1 pl-2 align-self-center typeLogo ">
                           <FontAwesomeIcon icon={faLock} className="text-white-50" />
                         </div>
-                        <input placeholder="Password" type="password" onChange={e=>setLogInData({...logInData, password: e.target.value})}
+                        <input placeholder="Password" type="password"
+                               onChange={e => setLogInData({...logInData, password: e.target.value})}
                                className="col text-white-50 px-2"
                                autoComplete="current-password" />
                         <div className="validation align-self-center">
@@ -94,7 +89,9 @@ const Login = ({loginError, isAuthenticated, dispatch}) => {
                   </div>
                   <div className="container-fluid m-0 p-0 row " style={{height: "0.8rem"}}>
                     <div className="col-7 font-weight-bold m-0 px-2">
-                      {/*<p className="text-danger ml-2" style={{fontSize: "1rem", display: data.displayNone}}>{loginError && logInErrorText[0]}</p>*/}
+                      <p className="text-danger ml-2"
+                         style={{fontSize: "1rem",display:loginError?`block`:`none`}}>
+                        Incorrect email or password</p>
                     </div>
                     <div className="col forgot m-0 p-0 ml-3">
                       <Link to="#">Forgot Password?</Link>

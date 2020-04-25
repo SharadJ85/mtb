@@ -7,6 +7,7 @@ import Navigation from "./partials/nav";
 import MediaCard from "./partials/mediaCard";
 import Pagination from "./partials/pagination";
 
+let api=new TmdbApiUrl();
 
 //
 // export const FetchUrl=(url)=> {
@@ -33,9 +34,8 @@ const MediaList = ()=> {
    const {generalType} = useParams();
    const {media} = useParams();
    const {pageId} = useParams();
-  // const key=process.env.API_KEY;
    const apiKey=`d531f0b35e33ab3572f10065361d3ae1`;
-   const url=`${TmdbApiUrl.baseURL()}${media}/${generalType}?api_key=${apiKey}&page=${pageId}`;
+   const url=`${api.baseURL()}${media}/${generalType}?api_key=${apiKey}&page=${pageId}`;
   const rat={};
   console.log(`rat==>${rat}`);
   console.log(`rat==>${(JSON.stringify(rat.state))}`);
@@ -68,57 +68,10 @@ const MediaList = ()=> {
           text={`Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text `}/>
         </div>))}
       </div>
-      <Pagination totalPages={500} pageType={`media_list`} media={media} generalType={generalType} pageId={pageId} />
+      <div className="pb-4">
+        <Pagination totalPages={500} pageType={`media_list`} media={media} generalType={generalType} pageId={pageId} />
+      </div>
     </div>
   );
 };
 export default MediaList;
-
-
-
-//
-//
-//
-// export default class MediaList extends Component {
-//   state = {
-//     loading:true,
-//     status:null,
-//     mainData:null
-//   }
-//   componentDidMount() {
-//     const apiKey=`d531f0b35e33ab3572f10065361d3ae1`;
-//     const url=`${TmdbApiUrl.baseURL()}movie/popular?api_key=${apiKey}&page=1`;
-//     axios
-//       .get(url)
-//       .then((res) => {
-//         this.setState({
-//           loading:false,
-//           status:res.status,
-//           mainData:res.data })
-//         console.log(`#@loading==>${this.state.loading}`);
-//         console.log(`#@status==>${this.state.status}`);
-//         console.log(`#@FetchedData==>${(this.state.mainData)}`);
-//         console.log(`#@FetchedData.page==>${(this.state.mainData.page)}`);
-//         console.log(`#@FetchedData(stringify)==>${JSON.stringify(this.state.mainData)}`);
-//       })
-//   }
-//   render() {
-//     return (
-//         <div className="container">
-//          <div className="col-xs-8">
-//         <h1>React Axios Example</h1>
-//          {this.state.users.map((user) => (
-//           <div className="card">
-//            <div className="card-body">
-//                <h5 className="card-title">{user.name}</h5>
-//               <h6 className="card-subtitle mb-2 text-muted">
-//               {user.email}
-//               </h6>
-//             </div>
-//           </div>
-//         ))}
-//         </div>
-//        </div>
-//     );
-//   }
-// }

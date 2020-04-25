@@ -2,6 +2,8 @@
 @mixin box($height,$width,$borderRadius:0)
   height: $height
   width: $width
+  min-height: $height
+  min-width: $width
   border-radius: $borderRadius
 
 
@@ -26,15 +28,30 @@
   @include box(2rem,2rem,50%)
   cursor: pointer
 
+.avatarCircleBig
+  @include box(3rem,3rem,50%)
+
+.avatarDiv
+  position: relative
+
+.avatarChild
+  display: none
+  min-width: 12rem
+  position: absolute
+  top: -5px
+  left: -4rem
+  z-index: 15
+  box-shadow: 0 11px 20px 10px rgba(0, 0, 0, 0.75)
+
+.avatarDiv:hover .avatarChild
+  display: block
 
 .parentText
   position: relative
   letter-spacing: 0.8px
 
-
 .parentText:hover .childText
   display: block
-
 
 .childText
   display: none

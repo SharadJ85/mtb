@@ -16,7 +16,7 @@ import {movieNowPlaying, moviePopular, movieUpcoming, movieTopRated} from "../sr
 import {tvOnTheAir, tvPopular, tvTopRated, tvAiringToday} from "../src/actions/tv"
 import {actorPopular} from "../src/actions/actor"
 
-const App = ({ isAuthenticated, isVerifying, dispatch }) => {
+const App = ({ isAuthenticated, isVerifying, userId, dispatch }) => {
   //actions rerender
   useEffect(() => {
       dispatch(movieNowPlaying());
@@ -34,7 +34,6 @@ const App = ({ isAuthenticated, isVerifying, dispatch }) => {
     <div className="App">
       <div className="main">
         <Switch>
-          <Route exact path="/" component={Home} />
           <ProtectedRoute
             exact
             path="/"
@@ -42,12 +41,42 @@ const App = ({ isAuthenticated, isVerifying, dispatch }) => {
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}
           />
+          <ProtectedRoute
+            exact
+            path="/search/:query"
+            component={Search}
+            isAuthenticated={isAuthenticated}
+            isVerifying={isVerifying}
+          />
+          <ProtectedRoute
+            exact
+            path="/media_list/:media/:generalType/:pageId"
+            component={Media_List}
+            isAuthenticated={isAuthenticated}
+            isVerifying={isVerifying}
+          />
+          <ProtectedRoute
+            exact
+            path="/media_details/:media/:mediaId"
+            component={Media_Details}
+            isAuthenticated={isAuthenticated}
+            isVerifying={isVerifying}
+          />
+          <ProtectedRoute
+            exact
+            path="/actor_details/:actorId"
+            component={Actor_Details}
+            isAuthenticated={isAuthenticated}
+            isVerifying={isVerifying}
+          />
+          <ProtectedRoute
+            exact
+            path={`/user_details/${userId}`}
+            component={User}
+            isAuthenticated={isAuthenticated}
+            isVerifying={isVerifying}
+          />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/search/:query" component={Search} />
-          <Route exact path="/media_list/:media/:generalType/:pageId" component={Media_List} />
-          <Route exact path="/media_details/:media/:mediaId" component={Media_Details} />
-          <Route exact path="/actor_details/:actorId" component={Actor_Details} />
-          <Route exact path="/user_details/:userId" component={User} />
         </Switch>
       </div>
       <Footer/>
@@ -58,7 +87,8 @@ const App = ({ isAuthenticated, isVerifying, dispatch }) => {
 const mapStateToProps=(state)=>{
   return {
     isAuthenticated: state.Auth.isAuthenticated,
-    isVerifying: state.Auth.isVerifying
+    isVerifying: state.Auth.isVerifying,
+    userId:state.Auth.user.uid
   };
 };
 export default connect(mapStateToProps)(App);

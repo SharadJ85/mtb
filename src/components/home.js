@@ -5,8 +5,7 @@ import Navigation from "./partials/nav";
 import ImageCollage from "./partials/imageCollage"
 import axios from "axios"
 import TmdbApiUrl from "./partials/apiUrl";
-import {useDispatch, useSelector} from "react-redux";
-import myStore from "../store"
+import { useSelector} from "react-redux";
 
 const Home=()=> {
   //url

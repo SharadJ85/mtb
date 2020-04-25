@@ -5,9 +5,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import mtb from '../../assets/images/mtb.png'
 import {Link as RouterLink} from "react-router-dom";
-import {Fade} from "react-reveal"
+import {Fade, Zoom} from "react-reveal"
+import {logoutUser} from "../../actions/auth";
+import {connect} from "react-redux";
 
-const Navigation = () => {
+const Navigation = ({userName, userEmail, dispatch}) => {
   const navBarText = {color: '#00bce6', cursor: "default"};
   return (
     <div className="fluid">
@@ -74,15 +76,29 @@ const Navigation = () => {
           </div>
         </Nav>
         {/*user*/}
-        <div className="fluid mx-3">
-          <RouterLink to="/user_details/userId">
-            <img className="ml-3 bg-white avatarCircle" alt="U" />
-          </RouterLink>
+        <div className="fluid mr-3 rounded-circle avatarDiv">
+          <img className="ml-3 bg-white avatarCircle" alt="U" />
+          <Zoom delay={200} duration={300}>
+            <div
+              className="px-3 avatarChild justify-content-center text-center text-white bg-dark rounded border border-secondary">
+              <div className=" w-100 pt-4"><img className="bg-white avatarCircleBig" alt="U" /></div>
+              <div className=" w-100"><h4 className="pt-3">{userName}</h4></div>
+              <div className=" w-100"><h4 className="py-2">{userEmail}</h4></div>
+              <div className="pb-3 pt-2 w-100">
+                <RouterLink to="/user_details/userId">
+                  <button className="btn btn-sm btn-light text-dark mx-2 font-weight-bold">Profile</button>
+                </RouterLink>
+                <button className="btn btn-sm btn-light text-dark font-weight-bold"
+                        onClick={() => dispatch(logoutUser())}>Log out
+                </button>
+              </div>
+            </div>
+          </Zoom>
         </div>
         {/*search*/}
         <Form inline>
           <InputGroup>
-            <FormControl id="searchInput" type="text" placeholder="Search"/>
+            <FormControl id="searchInput" type="text" placeholder="Search" />
             <Button type="submit" variant="info" className="btn bg-secondary btn-outline-dark">
               <FontAwesomeIcon icon={faSearch} />
             </Button>
@@ -92,5 +108,10 @@ const Navigation = () => {
     </div>
   );
 };
-
-export default Navigation;
+const mapStateToProps = (state) => {
+  return {
+    userName: state.Auth.user.displayName,
+    userEmail: state.Auth.user.email
+  }
+};
+export default connect(mapStateToProps)(Navigation);
