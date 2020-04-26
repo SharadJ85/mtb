@@ -9,8 +9,13 @@ import {Fade, Zoom} from "react-reveal"
 import {logoutUser} from "../../actions/auth";
 import {connect} from "react-redux";
 
-const Navigation = ({userName, userEmail, dispatch}) => {
+const Navigation = ({userProfileID, userFirstName, userLastName, userEmail, dispatch}) => {
   const navBarText = {color: '#00bce6', cursor: "default"};
+
+  const handleLogOut=()=>{
+    dispatch(logoutUser())
+  };
+
   return (
     <div className="fluid">
       <Navbar bg="dark" variant="dark" className="navDiv">
@@ -77,19 +82,23 @@ const Navigation = ({userName, userEmail, dispatch}) => {
         </Nav>
         {/*user*/}
         <div className="fluid mr-3 rounded-circle avatarDiv">
-          <img className="ml-3 bg-white avatarCircle" alt="U" />
+          <div className="avatarCircle d-flex align-items-center justify-content-center bg-light text-dark font-weight-bold">SJ</div>
           <Zoom delay={200} duration={300}>
             <div
               className="px-3 avatarChild justify-content-center text-center text-white bg-dark rounded border border-secondary">
-              <div className=" w-100 pt-4"><img className="bg-white avatarCircleBig" alt="U" /></div>
-              <div className=" w-100"><h4 className="pt-3">{userName}</h4></div>
-              <div className=" w-100"><h4 className="py-2">{userEmail}</h4></div>
+              <div className=" w-100 pt-4 d-flex justify-content-center">
+                <div className="avatarCircleBig d-flex align-items-center justify-content-center bg-light text-dark font-weight-bold">
+                  SJ
+                </div>
+              </div>
+              <div className=" w-100"><h4 className="pt-3">{userFirstName}</h4></div>
+              <div className=" w-100"><h4 className="py-2">{userLastName}</h4></div>
               <div className="pb-3 pt-2 w-100">
-                <RouterLink to="/user_details/userId">
+                <RouterLink to={`/user_details/${userProfileID}`}>
                   <button className="btn btn-sm btn-light text-dark mx-2 font-weight-bold">Profile</button>
                 </RouterLink>
                 <button className="btn btn-sm btn-light text-dark font-weight-bold"
-                        onClick={() => dispatch(logoutUser())}>Log out
+                        onClick={() => handleLogOut()}>Log out
                 </button>
               </div>
             </div>
@@ -110,8 +119,11 @@ const Navigation = ({userName, userEmail, dispatch}) => {
 };
 const mapStateToProps = (state) => {
   return {
-    userName: state.Auth.user.displayName,
-    userEmail: state.Auth.user.email
+    userProfileID:state.Auth.user.uid,
+    userFirstName: state.Auth.user.displayName,
+    userLastName: state.Auth.user.displayName,
+    userEmail: state.Auth.user.email,
+    userPassword: state.Auth.user.email
   }
 };
 export default connect(mapStateToProps)(Navigation);

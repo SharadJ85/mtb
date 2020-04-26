@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import "./assets/app.sass";
 import "./assets/customBootstrap.sass";
-import {Route, Switch, Redirect} from "react-router-dom";
-import {connect, useDispatch} from "react-redux";
+import {Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 import Footer from "./components/partials/footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./components/login"
@@ -12,8 +12,8 @@ import Media_Details from "./components/mediaDetails"
 import Media_List from "./components/mediaList"
 import User from "./components/user"
 import Actor_Details from "./components/actorDetails"
-import {movieNowPlaying, moviePopular, movieUpcoming, movieTopRated} from "../src/actions/movie"
-import {tvOnTheAir, tvPopular, tvTopRated, tvAiringToday} from "../src/actions/tv"
+import {movieNowPlaying, moviePopular, movieTopRated, movieUpcoming} from "../src/actions/movie"
+import {tvAiringToday, tvOnTheAir, tvPopular, tvTopRated} from "../src/actions/tv"
 import {actorPopular} from "../src/actions/actor"
 
 const App = ({ isAuthenticated, isVerifying, userId, dispatch }) => {
@@ -34,6 +34,7 @@ const App = ({ isAuthenticated, isVerifying, userId, dispatch }) => {
     <div className="App">
       <div className="main">
         <Switch>
+          <Route exact path="/login" component={Login} />
           <ProtectedRoute
             exact
             path="/"
@@ -76,7 +77,6 @@ const App = ({ isAuthenticated, isVerifying, userId, dispatch }) => {
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}
           />
-          <Route exact path="/login" component={Login} />
         </Switch>
       </div>
       <Footer/>

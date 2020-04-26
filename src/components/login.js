@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import mtb from '../assets/images/mtb.png'
 import "../assets/login.sass"
+import RegexVerify from "./partials/RegexVerify";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {Fade, Slide} from 'react-reveal';
 import {faCheck, faEnvelope, faLock, faTimes, faUser,} from "@fortawesome/free-solid-svg-icons";
@@ -8,40 +9,75 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ParticlesBg from 'particles-bg'
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {loginUser} from "../actions/auth"
+import {loginUser, signUpUser} from "../actions/auth"
 
 const Login = ({loginError, isAuthenticated, dispatch, props}) => {
   const {from} = {from: {pathname: "/"}};
   //const {from} = props.location.state || {from: {pathname: "/"}};
-console.log(`path from==>${from}`);
+  if (props ) {
+    console.log(`path props.location.state==>${props}`);
+  }
   const signUpErrorText = ['password do not match'];
 
-  const [data, setData] = useState({
+  const [currentCard, setCurrentCard] = useState({
     logInDiv: true,
   });
   const [logInData, setLogInData] = useState({
     email: ``,
     password: ``
   });
-  const [signUpData, setsignUpData] = useState({
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    repeatPassword: null
+  const [signUpData, setSignUpData] = useState({
+    firstName: ``,
+    lastName: ``,
+    email: ``,
+    password: ``,
+    repeatPassword: ``
   });
+  const [signUpDataError, setSignUpDataError] = useState({error: []});
 
   const handleOtherClick = () => {
-    setData({...data, logInDiv: !data.logInDiv});
+    setCurrentCard({...currentCard, logInDiv: !currentCard.logInDiv});
   };
 
-  const handleSubmitClick = () => {
+  const handleLogInSubmit = () => {
     const {email, password} = logInData;
     dispatch(loginUser(email, password));
   };
 
-  //styles
-  const stylesPopOver = {};
+  const handleSignUpSubmit = () => {
+    const {firstName, lastName, email, password} = signUpData;
+    dispatch(signUpUser(firstName, lastName, email, password));
+  };
+
+  const regex = new RegexVerify();
+
+  const checkDataWithRegexExp = (regexEpx, matchWith) => {
+    if (matchWith !== ``) {
+      switch (true) {
+        case regexEpx && matchWith !== signUpData.repeatPassword:
+          return (
+            <Fade>
+              <FontAwesomeIcon icon={faCheck} className="text-success" />
+            </Fade>);
+        case regexEpx && matchWith === signUpData.repeatPassword:
+          if (signUpData.repeatPassword !== signUpData.password) {
+            return (
+              <Fade>
+                < FontAwesomeIcon icon={faTimes} className="text-danger" />
+              </Fade>);
+          }
+          return (
+            <Fade>
+              <FontAwesomeIcon icon={faCheck} className="text-success" />
+            </Fade>);
+        default:
+          return (
+            <Fade>
+              < FontAwesomeIcon icon={faTimes} className="text-danger" />
+            </Fade>)
+      }
+    }
+  };
 
   if (isAuthenticated) {
     return <Redirect to={from} />;
@@ -51,7 +87,7 @@ console.log(`path from==>${from}`);
         <ParticlesBg type="circle" className="p-0 m-0"
                      style={{position: "absolute", zIndex: 2, top: 0, left: 0}} />
         <Fade cascade effect="fadein">
-          {(data.logInDiv)
+          {(currentCard.logInDiv)
             ? (
               <Fade cascade effect="fadein">
                 <div className="login">
@@ -90,7 +126,7 @@ console.log(`path from==>${from}`);
                   <div className="container-fluid m-0 p-0 row " style={{height: "0.8rem"}}>
                     <div className="col-7 font-weight-bold m-0 px-2">
                       <p className="text-danger ml-2"
-                         style={{fontSize: "1rem",display:loginError?`block`:`none`}}>
+                         style={{fontSize: "1rem", display: loginError ? `block` : `none`}}>
                         Incorrect email or password</p>
                     </div>
                     <div className="col forgot m-0 p-0 ml-3">
@@ -103,7 +139,7 @@ console.log(`path from==>${from}`);
                               className="btn btn-outline-light px-5 m-2 mt-3">
                         Sign up
                       </button>
-                      <button type={"submit"} onClick={() => handleSubmitClick()}
+                      <button type={"submit"} onClick={() => handleLogInSubmit()}
                               className="btn btn-outline-light px-5 m-2 mt-3">
                         Log In
                       </button>
@@ -133,22 +169,19 @@ console.log(`path from==>${from}`);
                           key="left"
                           placement="left"
                           overlay={
-                            <Popover className=" rounded mr-5 stylesPopOver" id={`popover-positioned-left`}
-                                     style={stylesPopOver}>
-                              <Popover.Title className=" text-white border-bottom stylesPopOver" as="h3"
-                                             style={stylesPopOver}>
+                            <Popover className=" rounded mr-5 stylesPopOver" id={`popover-positioned-left`}>
+                              <Popover.Title className=" text-white border-bottom stylesPopOver" as="h3">
                                 First name must contain...</Popover.Title>
                               <Popover.Content className=" text-white">
-                                alphabetical character <br /> (a-z) or (A-Z)
+                                2 or more alphabetical character <br /> (a-z) or (A-Z)
                               </Popover.Content>
                             </Popover>}>
-                          <input placeholder="FirstName" type="text" className="col text-white-50 px-2" />
+                          <input placeholder="FirstName" type="text"
+                                 onChange={e => setSignUpData({...signUpData, firstName: e.target.value})}
+                                 className="col text-white-50 px-2" />
                         </OverlayTrigger>
                         <div className="validation align-self-center">
-                          <FontAwesomeIcon icon={faCheck} className="text-success"
-                                           style={{display: data.displayNone}} />
-                          <FontAwesomeIcon icon={faTimes} className="text-success"
-                                           style={{display: data.displayNone}} />
+                          {checkDataWithRegexExp(regex.nameRegex(signUpData.firstName), signUpData.firstName)}
                         </div>
                       </div>
                       <div className="col container-fluid row">
@@ -162,22 +195,19 @@ console.log(`path from==>${from}`);
                           key="right"
                           placement="right"
                           overlay={
-                            <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}
-                                     style={stylesPopOver}>
-                              <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3"
-                                             style={stylesPopOver}>
+                            <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                              <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
                                 Last name must contain...</Popover.Title>
                               <Popover.Content className=" text-white">
-                                alphabetical character <br /> (a-z) or (A-Z)
+                                2 or more alphabetical character <br /> (a-z) or (A-Z)
                               </Popover.Content>
                             </Popover>}>
-                          <input placeholder="LastName" type="text" className="col text-white-50 px-2" />
+                          <input placeholder="LastName" type="text"
+                                 onChange={e => setSignUpData({...signUpData, lastName: e.target.value})}
+                                 className="col text-white-50 px-2" />
                         </OverlayTrigger>
                         <div className="validation align-self-center">
-                          <FontAwesomeIcon icon={faCheck} className="text-success"
-                                           style={{display: data.displayNone}} />
-                          <FontAwesomeIcon icon={faTimes} className="text-success"
-                                           style={{display: data.displayNone}} />
+                          {checkDataWithRegexExp(regex.nameRegex(signUpData.lastName), signUpData.lastName)}
                         </div>
                       </div>
                     </div>
@@ -191,10 +221,8 @@ console.log(`path from==>${from}`);
                         key="right"
                         placement="right"
                         overlay={
-                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}
-                                   style={stylesPopOver}>
-                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3"
-                                           style={stylesPopOver}>
+                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
                               Email must contain ...
                             </Popover.Title>
                             <Popover.Content className=" text-white">
@@ -202,11 +230,12 @@ console.log(`path from==>${from}`);
                               (a-z) or (A-Z) or (0-9) or (._-)
                             </Popover.Content>
                           </Popover>}>
-                        <input placeholder="Email" type="text" className="col text-white-50 px-2" />
+                        <input placeholder="Email" type="text"
+                               onChange={e => setSignUpData({...signUpData, email: e.target.value})}
+                               className="col text-white-50 px-2" />
                       </OverlayTrigger>
                       <div className="validation align-self-center">
-                        <FontAwesomeIcon icon={faCheck} className="text-success" style={{display: data.displayNone}} />
-                        <FontAwesomeIcon icon={faTimes} className="text-success" style={{display: data.displayNone}} />
+                        {checkDataWithRegexExp(regex.emailRegex(signUpData.email), signUpData.email)}
                       </div>
                     </div>
                     <div className="login_fields row container-fluid m-0 my-2">
@@ -219,10 +248,8 @@ console.log(`path from==>${from}`);
                         key="right"
                         placement="right"
                         overlay={
-                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}
-                                   style={stylesPopOver}>
-                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3"
-                                           style={stylesPopOver}>
+                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
                               Password must contain at least...</Popover.Title>
                             <Popover.Content className=" text-white">
                               1 lowercase alphabetical character(a-z).<br />
@@ -232,11 +259,12 @@ console.log(`path from==>${from}`);
                               6 characters or more.
                             </Popover.Content>
                           </Popover>}>
-                        <input placeholder="Password" type="password" className="col text-white-50 px-2" />
+                        <input placeholder="Password" type="password"
+                               onChange={e => setSignUpData({...signUpData, password: e.target.value})}
+                               className="col text-white-50 px-2" />
                       </OverlayTrigger>
                       <div className="validation align-self-center">
-                        <FontAwesomeIcon icon={faCheck} className="text-success" style={{display: data.displayNone}} />
-                        <FontAwesomeIcon icon={faTimes} className="text-success" style={{display: data.displayNone}} />
+                        {checkDataWithRegexExp(regex.passwordRegex(signUpData.password), signUpData.password)}
                       </div>
                     </div>
                     <div className="login_fields row container-fluid m-0 ">
@@ -249,26 +277,25 @@ console.log(`path from==>${from}`);
                         key="right"
                         placement="right"
                         overlay={
-                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}
-                                   style={stylesPopOver}>
-                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3"
-                                           style={stylesPopOver}>
+                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
                               Repeat Password...</Popover.Title>
                             <Popover.Content className=" text-white">
                               must be same as above.
                             </Popover.Content>
                           </Popover>}>
-                        <input placeholder="Repeat Password" type="password" className="col text-white-50 px-2" />
+                        <input placeholder="Repeat Password" type="password"
+                               onChange={e => setSignUpData({...signUpData, repeatPassword: e.target.value})}
+                               className="col text-white-50 px-2" />
                       </OverlayTrigger>
                       <div className="validation align-self-center">
-                        <FontAwesomeIcon icon={faCheck} className="text-success" style={{display: data.displayNone}} />
-                        <FontAwesomeIcon icon={faTimes} className="text-success" style={{display: data.displayNone}} />
+                        {checkDataWithRegexExp(regex.passwordRegex(signUpData.repeatPassword), signUpData.repeatPassword)}
                       </div>
                     </div>
                   </Slide>
                   <div className="my-1 px-2" style={{height: "0.8rem"}}>
                     <p className=" ml-2 text-danger"
-                       style={{fontSize: "1rem", display: data.displayNone}}>{signUpErrorText[0]}</p>
+                       style={{fontSize: "1rem", display: currentCard.displayNone}}>{signUpErrorText[0]}</p>
                   </div>
                   <div className="login_fields__submit py-1">
                     <div className="text-center">

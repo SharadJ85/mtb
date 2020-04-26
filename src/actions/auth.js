@@ -97,3 +97,17 @@ export const verifyAuth = () => dispatch => {
       dispatch(verifySuccess());
     });
 };
+
+export const signUpUser = (email, password) => dispatch => {
+  dispatch(requestLogin());
+  myFirebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(user => {
+      dispatch(receiveLogin(user));
+    })
+    .catch(error => {
+      console.log(`action loginUser error==>${error}`);
+      dispatch(loginError());
+    });
+};
