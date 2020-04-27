@@ -9,15 +9,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ParticlesBg from 'particles-bg'
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {loginUser, signUpUser} from "../actions/auth"
+import { signUpUser} from "../actions/auth/signUp";
+import {loginUser} from "../actions/auth/logIn";
 
 const Login = ({loginError, isAuthenticated, dispatch, props}) => {
   const {from} = {from: {pathname: "/"}};
   //const {from} = props.location.state || {from: {pathname: "/"}};
-  if (props ) {
-    console.log(`path props.location.state==>${props}`);
-  }
-  const signUpErrorText = ['password do not match'];
 
   const [currentCard, setCurrentCard] = useState({
     logInDiv: true,
@@ -33,7 +30,6 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
     password: ``,
     repeatPassword: ``
   });
-  const [signUpDataError, setSignUpDataError] = useState({error: []});
 
   const handleOtherClick = () => {
     setCurrentCard({...currentCard, logInDiv: !currentCard.logInDiv});
@@ -50,7 +46,6 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
   };
 
   const regex = new RegexVerify();
-
   const checkDataWithRegexExp = (regexEpx, matchWith) => {
     if (matchWith !== ``) {
       switch (true) {
@@ -135,11 +130,12 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
                   </div>
                   <div className="login_fields__submit">
                     <div className="text-center logInButtons">
-                      <button type={"submit"} onClick={() => handleOtherClick()}
+                      <button onClick={() => handleOtherClick()}
                               className="btn btn-outline-light px-5 m-2 mt-3">
                         Sign up
                       </button>
-                      <button type={"submit"} onClick={() => handleLogInSubmit()}
+                      <button type={"submit"}
+                              onClick={() => handleLogInSubmit()}
                               className="btn btn-outline-light px-5 m-2 mt-3">
                         Log In
                       </button>
@@ -295,11 +291,12 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
                   </Slide>
                   <div className="my-1 px-2" style={{height: "0.8rem"}}>
                     <p className=" ml-2 text-danger"
-                       style={{fontSize: "1rem", display: currentCard.displayNone}}>{signUpErrorText[0]}</p>
+                       style={{fontSize: "1rem", display: `none`}} />
                   </div>
                   <div className="login_fields__submit py-1">
                     <div className="text-center">
-                      <button type={"submit"} className="btn btn-outline-light px-5 m-2">
+                      <button className="btn btn-outline-light px-5 m-2"
+                              onClick={() => handleSignUpSubmit()}>
                         Sign up
                       </button>
                       <button type={"submit"}
@@ -313,7 +310,6 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
               </div>
             )}
         </Fade>
-
       </div>
     )
   }

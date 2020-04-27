@@ -6,7 +6,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import mtb from '../../assets/images/mtb.png'
 import {Link as RouterLink} from "react-router-dom";
 import {Fade, Zoom} from "react-reveal"
-import {logoutUser} from "../../actions/auth";
+import {logoutUser} from "../../actions/auth/logOut";
 import {connect} from "react-redux";
 
 const Navigation = ({userProfileID, userFirstName, userLastName, userEmail, dispatch}) => {
@@ -19,8 +19,9 @@ const Navigation = ({userProfileID, userFirstName, userLastName, userEmail, disp
   return (
     <div className="fluid">
       <Navbar bg="dark" variant="dark" className="navDiv">
-        <RouterLink to="/">
-          <img src={mtb} alt="MTB" className="logo" /></RouterLink>
+        {/*Logo*/}
+        <RouterLink to="/"><img src={mtb} alt="MTB" className="logo" /></RouterLink>
+        {/*Nav links*/}
         <Nav className="mr-auto ml-2 childNavs">
           <div className="mx-1 text-uppercase font-weight-normal font-weight-bold parentText">
             <Nav.Link href="#movies" style={navBarText}>Movies
@@ -94,7 +95,7 @@ const Navigation = ({userProfileID, userFirstName, userLastName, userEmail, disp
               <div className=" w-100"><h4 className="pt-3">{userFirstName}</h4></div>
               <div className=" w-100"><h4 className="py-2">{userLastName}</h4></div>
               <div className="pb-3 pt-2 w-100">
-                <RouterLink to={`/user_details/${userProfileID}`}>
+                <RouterLink to={`/user_details`}>
                   <button className="btn btn-sm btn-light text-dark mx-2 font-weight-bold">Profile</button>
                 </RouterLink>
                 <button className="btn btn-sm btn-light text-dark font-weight-bold"

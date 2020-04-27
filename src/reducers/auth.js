@@ -2,22 +2,49 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+} from "../actions/auth/logIn";
+import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+} from "../actions/auth/logOut";
+import {
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE
+} from "../actions/auth/signUp";
+import {
   VERIFY_REQUEST,
-  VERIFY_SUCCESS
-} from "../actions/auth";
+  VERIFY_SUCCESS,
+} from "../actions/auth/verify";
+import {
+  GET_STORE_USER_DATA_REQUEST,
+  GET_STORE_USER_DATA_SUCCESS,
+  GET_STORE_USER_DATA_FAILURE
+} from "../actions/auth/getUserStoreData";
 
-const FirebaseAuthReducer= (
+const FirebaseAuthReducer = (
   state = {
-    isLoggingIn: false,
-    isLoggingOut: false,
     isVerifying: false,
-    loginError: false,
-    logoutError: false,
     isAuthenticated: false,
-    user: {}
+    isLoggingIn: false,
+    loginError: false,
+    isLoggingOut: false,
+    logoutError: false,
+    isSigningUp: false,
+    signUpError: false,
+    requestUserData: false,
+    requestUserDataError: false,
+    errors:{
+      logIn:{},
+      logOut:{},
+      signUp:{},
+      requestUserData:{}
+    },
+    user: {
+      baseData: {},
+      storeData: {}
+    }
   },
   action) => {
   switch (action.type) {
@@ -32,14 +59,21 @@ const FirebaseAuthReducer= (
         ...state,
         isLoggingIn: false,
         isAuthenticated: true,
-        user: action.user
+        user: {
+          ...state.user,
+          baseData: action.baseData
+        }
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
-        loginError: true
+        loginError: true,
+        errors:{
+          ...state.errors,
+          logIn:action.error,
+        }
       };
     case LOGOUT_REQUEST:
       return {
@@ -52,13 +86,20 @@ const FirebaseAuthReducer= (
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
-        user: {}
+        user: {
+          baseData: {},
+          storeData: {}
+        }
       };
     case LOGOUT_FAILURE:
       return {
         ...state,
         isLoggingOut: false,
-        logoutError: true
+        logoutError: true,
+        errors:{
+          ...state.errors,
+          logOut:action.error,
+        }
       };
     case VERIFY_REQUEST:
       return {
@@ -70,6 +111,53 @@ const FirebaseAuthReducer= (
       return {
         ...state,
         isVerifying: false
+      };
+    case SIGNUP_REQUEST:
+      return {
+        ...state,
+        isSigningUp: true,
+        signUpError: false
+      };
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        isSigningUp: false
+      };
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        isSigningUp: false,
+        signUpError: true,
+        errors:{
+          ...state.errors,
+          signUp:action.error,
+        }
+      };
+    case GET_STORE_USER_DATA_REQUEST:
+      return {
+        ...state,
+        requestUserData: true,
+        requestUserDataError: false,
+
+      };
+    case GET_STORE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        requestUserData: false,
+        user: {
+          ...state.user,
+          storeData: action.userData
+        }
+      };
+    case GET_STORE_USER_DATA_FAILURE:
+      return {
+        ...state,
+        requestUserData: false,
+        requestUserDataError: true,
+        errors:{
+          ...state.errors,
+          requestUserData:action.error,
+        }
       };
     default:
       return state;

@@ -5,7 +5,7 @@
 ### Tools
 >#### ***`React`*** ***`Redux`*** ***`Axios`*** ***`Firebase`*** 
 
->####***`React-Bootstrap`*** ***`Sass`***
+>#### ***`React-Bootstrap`*** ***`Sass`***
 
 ### API
 >#####  [themoviedb.org](https://www.themoviedb.org) API

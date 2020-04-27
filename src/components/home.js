@@ -5,7 +5,9 @@ import Navigation from "./partials/nav";
 import ImageCollage from "./partials/imageCollage"
 import axios from "axios"
 import TmdbApiUrl from "./partials/apiUrl";
-import { useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
+import {movieNowPlaying} from "../actions/movie";
+import {tvOnTheAir} from "../actions/tv";
 
 const Home=()=> {
   //url
@@ -25,7 +27,7 @@ const Home=()=> {
       movie:movieData.data.results.slice(0,9) ,
       tv: tvData.data.results.slice(0,9)
     });
-      console.log("home fetchMyApi function data is==>",data)
+      //console.log("home fetchMyApi function data is==>",data)
     }
     catch (err) {
       console.log("home fetchMyApi function error is==>",err)
@@ -57,4 +59,12 @@ const Home=()=> {
     );
 };
 
-export default Home;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    movieNowPlaying:()=>dispatch(movieNowPlaying()),
+    tvOnTheAir:()=>dispatch(tvOnTheAir())
+  }
+};
+
+export default connect(mapDispatchToProps)(Home);

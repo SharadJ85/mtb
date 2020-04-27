@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {connect} from "react-redux";
 
-const User = () => {
+const User = ({user}) => {
   return (
     <div className="mainUserDiv">
       <Navigation />

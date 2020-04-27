@@ -22,7 +22,7 @@ const ImageCollage = (props) => {
   const [data, setData] = useState({});
   useEffect(() => {
     if (props.list.length > 0) {
-      console.log(`props.list==>${props.list}`);
+      //console.log(`props.list==>${props.list}`);
       setData(stateObjectList())
     }
   }, [props.list]);

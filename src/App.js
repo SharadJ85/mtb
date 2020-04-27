@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./assets/app.sass";
 import "./assets/customBootstrap.sass";
 import {Route, Switch} from "react-router-dom";
@@ -12,24 +12,8 @@ import Media_Details from "./components/mediaDetails"
 import Media_List from "./components/mediaList"
 import User from "./components/user"
 import Actor_Details from "./components/actorDetails"
-import {movieNowPlaying, moviePopular, movieTopRated, movieUpcoming} from "../src/actions/movie"
-import {tvAiringToday, tvOnTheAir, tvPopular, tvTopRated} from "../src/actions/tv"
-import {actorPopular} from "../src/actions/actor"
 
-const App = ({ isAuthenticated, isVerifying, userId, dispatch }) => {
-  //actions rerender
-  useEffect(() => {
-      dispatch(movieNowPlaying());
-      dispatch(tvOnTheAir());
-      dispatch(moviePopular());
-      dispatch(movieUpcoming());
-      dispatch(movieTopRated());
-      dispatch(tvPopular());
-      dispatch(tvTopRated());
-      dispatch(tvAiringToday());
-      dispatch(actorPopular());
-    });
-
+const App = ({isAuthenticated, isVerifying}) => {
   return (
     <div className="App">
       <div className="main">
@@ -72,23 +56,23 @@ const App = ({ isAuthenticated, isVerifying, userId, dispatch }) => {
           />
           <ProtectedRoute
             exact
-            path={`/user_details/${userId}`}
+            path={`/user_details`}
             component={User}
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}
           />
         </Switch>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
 
-const mapStateToProps=(state)=>{
+
+const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.Auth.isAuthenticated,
-    isVerifying: state.Auth.isVerifying,
-    userId:state.Auth.user.uid
+    isVerifying: state.Auth.isVerifying
   };
 };
 export default connect(mapStateToProps)(App);
