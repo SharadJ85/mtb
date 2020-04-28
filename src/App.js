@@ -5,7 +5,7 @@ import {Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import Footer from "./components/partials/footer";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Login from "./components/login"
+import Login from "./components/logIn-signUp"
 import Home from "./components/home"
 import Search from "./components/search"
 import Media_Details from "./components/mediaDetails"

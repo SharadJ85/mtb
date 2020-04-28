@@ -37,7 +37,7 @@ export const getUserData = userId => dispatch => {
       if (doc.exists) {
         dispatch(receiveStoreUserData(doc.data()));
       } else {
-        dispatch(storeUserDataError({message: "No such document!"}));
+        dispatch(storeUserDataError({code: "auth/No-such-document!"}));
       }
     })
     .catch(error => {

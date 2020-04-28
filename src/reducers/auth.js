@@ -28,9 +28,9 @@ const FirebaseAuthReducer = (
     isVerifying: false,
     isAuthenticated: false,
     isLoggingIn: false,
-    loginError: false,
+    logInError: false,
     isLoggingOut: false,
-    logoutError: false,
+    logOutError: false,
     isSigningUp: false,
     signUpError: false,
     requestUserData: false,
@@ -52,13 +52,17 @@ const FirebaseAuthReducer = (
       return {
         ...state,
         isLoggingIn: true,
-        loginError: false
+        logInError: false
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoggingIn: false,
         isAuthenticated: true,
+        errors:{
+          ...state.errors,
+          logIn:{},
+        },
         user: {
           ...state.user,
           baseData: action.baseData
@@ -69,7 +73,7 @@ const FirebaseAuthReducer = (
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
-        loginError: true,
+        logInError: true,
         errors:{
           ...state.errors,
           logIn:action.error,
@@ -86,6 +90,10 @@ const FirebaseAuthReducer = (
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
+        errors:{
+          ...state.errors,
+          logOut:{},
+        },
         user: {
           baseData: {},
           storeData: {}
@@ -121,7 +129,11 @@ const FirebaseAuthReducer = (
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        isSigningUp: false
+        isSigningUp: false,
+        errors:{
+          ...state.errors,
+          signUp:{},
+        }
       };
     case SIGNUP_FAILURE:
       return {
@@ -144,6 +156,10 @@ const FirebaseAuthReducer = (
       return {
         ...state,
         requestUserData: false,
+        errors:{
+          ...state.errors,
+          requestUserData:{},
+        },
         user: {
           ...state.user,
           storeData: action.userData

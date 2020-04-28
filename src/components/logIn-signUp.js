@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import mtb from '../assets/images/mtb.png'
-import "../assets/login.sass"
+import "../assets/logIn-signUp.sass"
 import RegexVerify from "./partials/RegexVerify";
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {Fade, Slide} from 'react-reveal';
@@ -9,10 +9,18 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ParticlesBg from 'particles-bg'
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import { signUpUser} from "../actions/auth/signUp";
+import {signUpUser} from "../actions/auth/signUp";
 import {loginUser} from "../actions/auth/logIn";
 
-const Login = ({loginError, isAuthenticated, dispatch, props}) => {
+const Login = ({
+                 isLoggingIn,
+                 logInError,
+                 logInErrorType,
+                 signUpError,
+                 signUpErrorType,
+                 isAuthenticated,
+                 dispatch
+               }) => {
   const {from} = {from: {pathname: "/"}};
   //const {from} = props.location.state || {from: {pathname: "/"}};
 
@@ -32,7 +40,7 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
   });
 
   const handleOtherClick = () => {
-    setCurrentCard({...currentCard, logInDiv: !currentCard.logInDiv});
+    setCurrentCard({logInDiv: !currentCard.logInDiv});
   };
 
   const handleLogInSubmit = () => {
@@ -74,6 +82,8 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
     }
   };
 
+  console.log("logInErrorType", logInErrorType);
+
   if (isAuthenticated) {
     return <Redirect to={from} />;
   } else {
@@ -85,7 +95,7 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
           {(currentCard.logInDiv)
             ? (
               <Fade cascade effect="fadein">
-                <div className="login">
+                <div className="logIn-signUp">
                   <div className="text-center mr-2 py-4">
                     <img src={mtb} alt="MTB_logo" className=" mainLogo mt-4" />
                   </div>
@@ -120,11 +130,11 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
                   </div>
                   <div className="container-fluid m-0 p-0 row " style={{height: "0.8rem"}}>
                     <div className="col-7 font-weight-bold m-0 px-2">
-                      <p className="text-danger ml-2"
-                         style={{fontSize: "1rem", display: loginError ? `block` : `none`}}>
-                        Incorrect email or password</p>
+                      <p className="text-danger ml-3 mt-1 font-weight-bold text-capitalize"
+                         style={{fontSize: "1rem"}}>
+                        {logInError ? (logInErrorType.code).slice(5).replace(/-/g, ' ') : null}</p>
                     </div>
-                    <div className="col forgot m-0 p-0 ml-3">
+                    <div className="col forgot m-0 p-0 ml-3 mt-1">
                       <Link to="#">Forgot Password?</Link>
                     </div>
                   </div>
@@ -145,7 +155,7 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
               </Fade>
             )
             : (
-              <div className="login">
+              <div className="logIn-signUp">
                 <div className="text-center mr-2 py-4">
                   <img src={mtb} alt="MTB" className=" mainLogo mt-4" />
                 </div>
@@ -291,7 +301,9 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
                   </Slide>
                   <div className="my-1 px-2" style={{height: "0.8rem"}}>
                     <p className=" ml-2 text-danger"
-                       style={{fontSize: "1rem", display: `none`}} />
+                       style={{fontSize: "1rem"}} >
+                      {signUpError?(signUpErrorType.code).slice(5).replace(/-/g,' '):null}
+                    </p>
                   </div>
                   <div className="login_fields__submit py-1">
                     <div className="text-center">
@@ -318,7 +330,10 @@ const Login = ({loginError, isAuthenticated, dispatch, props}) => {
 const mapStateToProps = (state) => {
   return {
     isLoggingIn: state.Auth.isLoggingIn,
-    loginError: state.Auth.loginError,
+    logInError: state.Auth.logInError,
+    logInErrorType: state.Auth.errors.logIn,
+    signUpError: state.Auth.signUpError,
+    signUpErrorType: state.Auth.errors.signUp,
     isAuthenticated: state.Auth.isAuthenticated
   }
 };
