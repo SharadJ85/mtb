@@ -6,8 +6,8 @@ import ImageCollage from "./partials/imageCollage"
 import axios from "axios"
 import TmdbApiUrl from "./partials/apiUrl";
 import {connect, useSelector} from "react-redux";
-import {movieNowPlaying} from "../actions/movie";
-import {tvOnTheAir} from "../actions/tv";
+import {movieNowPlaying} from "../actions/media/movieAction";
+import {tvOnTheAir} from "../actions/media/tvAction";
 
 const Home=()=> {
   //url

@@ -1,5 +1,5 @@
 import {myFirebase, myFirestore} from "../../firebase/firebase";
-import {getUserData} from "./getUserStoreData"
+import {getUserData} from "./getUserStoreDataAction"
 
 //actions types
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";

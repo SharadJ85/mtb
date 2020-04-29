@@ -1,5 +1,5 @@
 import {myFirebase} from "../../firebase/firebase";
-import {getUserData} from "./getUserStoreData";
+import {getUserData} from "./getUserStoreDataAction";
 
 //actions types
 export const LOGIN_REQUEST = "LOGIN_REQUEST";

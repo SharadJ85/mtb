@@ -1,4 +1,4 @@
-import {MOVIE_NOW_PLAYING, MOVIE_POPULAR, MOVIE_TOP_RATED, MOVIE_UPCOMING} from "../actions/movie";
+import {MOVIE_NOW_PLAYING, MOVIE_POPULAR, MOVIE_TOP_RATED, MOVIE_UPCOMING} from "../actions/media/movieAction";
 
 const MovieReducer = (state = {
   popular: {},

@@ -1,9 +1,9 @@
 import {combineReducers} from "redux";
-import CounterReducer from "./counter";
-import ActorReducer from "./actor";
-import MovieReducer from "./movie";
-import TvReducer from "./tv";
-import FirebaseAuthReducer from "./auth"
+import CounterReducer from "./counterReducer";
+import ActorReducer from "./actorReducer";
+import MovieReducer from "./movieReducer";
+import TvReducer from "./tvReducer";
+import FirebaseAuthReducer from "./authReducer"
 
 const allReducers = combineReducers({
   Counter: CounterReducer,

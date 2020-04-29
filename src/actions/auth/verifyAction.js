@@ -1,6 +1,6 @@
 import {myFirebase} from "../../firebase/firebase";
-import {receiveLogin} from "./logIn"
-import {getUserData} from "./getUserStoreData"
+import {receiveLogin} from "./logInAction"
+import {getUserData} from "./getUserStoreDataAction"
 
 //actions types
 export const VERIFY_REQUEST = "VERIFY_REQUEST";

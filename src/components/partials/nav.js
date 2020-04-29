@@ -6,7 +6,7 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons'
 import mtb from '../../assets/images/mtb.png'
 import {Link as RouterLink} from "react-router-dom";
 import {Fade, Zoom} from "react-reveal"
-import {logoutUser} from "../../actions/auth/logOut";
+import {logoutUser} from "../../actions/auth/logOutAction";
 import {connect} from "react-redux";
 
 const Navigation = ({ userFirstName, userLastName, userInitials, dispatch}) => {
@@ -110,7 +110,7 @@ const Navigation = ({ userFirstName, userLastName, userInitials, dispatch}) => {
         <Form inline>
           <InputGroup>
             <FormControl id="searchInput" type="text" placeholder="Search" />
-            <Button type="submit" variant="info" className="btn bg-secondary btn-outline-dark">
+            <Button type="submit" variant="outline-dark" className="btn bg-secondary shadow-none border-0">
               <FontAwesomeIcon icon={faSearch} />
             </Button>
           </InputGroup>

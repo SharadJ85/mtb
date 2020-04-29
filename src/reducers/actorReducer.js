@@ -1,4 +1,4 @@
-import {ACTOR_POPULAR} from "../actions/actor";
+import {ACTOR_POPULAR} from "../actions/media/actorAction";
 
 const ActorReducer = (state = {
   popular: {}

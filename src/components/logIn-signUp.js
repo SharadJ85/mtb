@@ -9,8 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ParticlesBg from 'particles-bg'
 import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {signUpUser} from "../actions/auth/signUp";
-import {loginUser} from "../actions/auth/logIn";
+import {signUpUser} from "../actions/auth/signUpAction";
+import {loginUser} from "../actions/auth/logInAction";
 
 const Login = ({
                  isLoggingIn,
@@ -81,8 +81,6 @@ const Login = ({
       }
     }
   };
-
-  console.log("logInErrorType", logInErrorType);
 
   if (isAuthenticated) {
     return <Redirect to={from} />;
@@ -325,7 +323,6 @@ const Login = ({
       </div>
     )
   }
-
 };
 const mapStateToProps = (state) => {
   return {

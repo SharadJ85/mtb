@@ -1,5 +1,5 @@
-import TmdbApiUrl from "../components/partials/apiUrl";
-import {fetchMyAPI} from "../components/partials/fetchMyApiAction"
+import TmdbApiUrl from "../../components/partials/apiUrl";
+import {fetchMyAPI} from "../../components/partials/fetchMyApiAction"
 
 let api=new TmdbApiUrl();
 
