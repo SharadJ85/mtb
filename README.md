@@ -1,6 +1,6 @@
 # MtB-react
 ### Description
->A *Movies / TvShows / Actors* database site.
+>A *Movies / TV Shows / Actors* database site.
 
 ### Tools
 >#### ***`React`*** ***`Redux`*** ***`Axios`*** ***`Firebase`*** 

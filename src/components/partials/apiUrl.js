@@ -67,7 +67,6 @@ export default class TmdbApiUrl {
    * returns "?api_key=(--the user API_KEY stored in ".env" file--)"
    */
    apiKey() {
-    // return ("?api_key=" + process.env.API_KEY);
-    return ("?api_key=d531f0b35e33ab3572f10065361d3ae1");
+    return ("?api_key=" + process.env.REACT_APP_API_KEY);
   }
 }
