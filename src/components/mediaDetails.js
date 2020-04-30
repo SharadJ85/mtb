@@ -1,19 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Navigation from "./partials/nav";
-import apiUrl from "./partials/apiUrl";
-import Ratings from "./partials/ratings";
-import {Link} from "react-router-dom";
 import "../assets/mediaDetails.sass"
+import Tmdbapi from "./partials/apiUrl";
+import Ratings from "./partials/ratings";
 import Badge from "react-bootstrap/Badge";
 import {Accordion, Card, Col, ListGroup, Row, Tab} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {movieDetails} from "../actions/media/movieAction";
 
 
-const Media_Details = () => {
+const Media_Details = (props) => {
 
-
+let api=new Tmdbapi();
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
   useEffect(() => {
+    props.fetchMediaDetails();
     setHeight(ref.current.clientHeight);
   }, [height]);
 
@@ -28,7 +31,7 @@ const Media_Details = () => {
         {/*backdrop image*/}
         <div id="backDropImage">
           <div className="mt-2 pb-1" style={{
-            backgroundImage: `url(${apiUrl.imageURL(0)}/5iidzov8DrsSyZdefeo7jBLDNUW.jpg)`,
+            backgroundImage: `url(${api.imageURL(0)}/5iidzov8DrsSyZdefeo7jBLDNUW.jpg)`,
             backgroundPosition: `center`,
             backgroundRepeat: `no-repeat`,
             backgroundSize: `cover`,
@@ -47,7 +50,7 @@ const Media_Details = () => {
                 <div className="p-4 m-4 " style={{
                   width: "267px",
                   height: "400px",
-                  backgroundImage: `url(${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg)`,
+                  backgroundImage: `url(${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg)`,
                   backgroundSize: "contain",
                   backgroundRepeat: "no-repeat",
                   borderRadius: "2px"
@@ -114,7 +117,8 @@ const Media_Details = () => {
 
                       <div className="card-meta--container px-2 pb-2 align-self-center">
                         {/*person avatar */}
-                        <div className="card-meta--avatar rounded-circle" style={ {background: `url(${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg) center/cover`}}>
+                        <div className="card-meta--avatar rounded-circle"
+                             style={{background: `url(${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg) center/cover`}}>
                         </div>
 
                         {/*person details */}
@@ -138,7 +142,7 @@ const Media_Details = () => {
                         {/*person avatar */}
                         <div className="card-meta--container px-2 pb-2 align-self-center">
                           <div className="card-meta--avatar rounded-circle"
-                               style={ {background: `url(${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg) center/cover`}}>
+                               style={{background: `url(${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg) center/cover`}}>
                           </div>
 
                           {/*person details */}
@@ -354,7 +358,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -374,7 +378,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -394,7 +398,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -414,7 +418,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -434,7 +438,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -454,7 +458,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -474,7 +478,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -494,7 +498,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -514,7 +518,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -534,7 +538,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -554,7 +558,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -574,7 +578,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -594,7 +598,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -614,7 +618,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -634,7 +638,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -654,7 +658,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -674,7 +678,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -694,7 +698,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -714,7 +718,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -734,7 +738,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -769,7 +773,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -789,7 +793,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -809,7 +813,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -829,7 +833,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -849,7 +853,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -869,7 +873,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -889,7 +893,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -909,7 +913,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -929,7 +933,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -949,7 +953,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -969,7 +973,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -989,7 +993,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1009,7 +1013,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1029,7 +1033,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1049,7 +1053,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1069,7 +1073,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1089,7 +1093,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1109,7 +1113,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1129,7 +1133,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1149,7 +1153,7 @@ const Media_Details = () => {
                           <div className="btnCrewCast text-white mx-2 font-weight-bold">
 
                             {/*cast card cast image*/}
-                            <img src={`${apiUrl.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
+                            <img src={`${api.imageURL(0)}/rNQompSTfAG5O2iXSH8Phay4L45.jpg`}
                                  className="imageCrewCast" />
 
                             {/*cast details */}
@@ -1211,4 +1215,18 @@ const Media_Details = () => {
     </div>)
 };
 
-export default Media_Details;
+
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetchMediaDetails: () => dispatch(movieDetails(ownProps.match.params.mediaId)),
+  }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    media: state.Movie.movieDetails,
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Media_Details);

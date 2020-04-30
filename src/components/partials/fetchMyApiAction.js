@@ -8,17 +8,12 @@ export const fetchMyAPI = (fetchUrl, typeName) => {
   return async dispatch => {
     try {
       const fetchData = await axios.get(fetchUrl);
-      console.log(`${typeName} fetchMyApi function data is==>${fetchData}`);
       dispatch({
         type: typeName,
         payload: fetchData.data,
       })
     } catch (err) {
       console.log(`${typeName} fetchMyApi function error is==>${err}`);
-      dispatch({
-        type: typeName,
-        payload: err
-      })
     }
   }
 };

@@ -69,4 +69,12 @@ export default class TmdbApiUrl {
    apiKey() {
     return ("?api_key=" + process.env.REACT_APP_API_KEY);
   }
+
+  /**
+   * returns "&page=${pageNo}"
+   * @param pageNo
+   */
+   page(pageNo) {
+    return (`&page=${pageNo}`);
+  }
 }

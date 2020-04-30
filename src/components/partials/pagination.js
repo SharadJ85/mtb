@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import "../../assets/pagination.sass"
 
-const Pagination = (props) => {
+const Pagination = ({totalPages,pageId,pageType,media,generalType}) => {
   const range = (min, max) => {
     const array = [];
     for (let i = min; i < max; i++) {
@@ -10,16 +10,8 @@ const Pagination = (props) => {
     }
     return array
   };
-  const pages = parseInt(props.totalPages);
-  const page = parseInt(props.pageId);
-  const pageType=props.pageType;
-  const media=props.media;
-  const generalType=props.generalType;
-
-  console.log(`#@generalType==>${generalType}`);
-  console.log(`#@media==>${media}`);
-  console.log(`#@page==>${page}`);
-  console.log(`#@pages==>${pages}`);
+  const pages = parseInt(totalPages);
+  const page = parseInt(pageId);
   return (
     <div>
       <nav aria-label="...">

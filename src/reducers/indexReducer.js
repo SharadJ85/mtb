@@ -1,13 +1,11 @@
 import {combineReducers} from "redux";
-import CounterReducer from "./counterReducer";
-import ActorReducer from "./actorReducer";
+import PersonReducer from "./personReducer";
 import MovieReducer from "./movieReducer";
 import TvReducer from "./tvReducer";
 import FirebaseAuthReducer from "./authReducer"
 
 const allReducers = combineReducers({
-  Counter: CounterReducer,
-  Actor:ActorReducer,
+  Person:PersonReducer,
   Movie:MovieReducer,
   Tv:TvReducer,
   Auth:FirebaseAuthReducer

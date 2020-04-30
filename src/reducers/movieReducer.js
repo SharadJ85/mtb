@@ -1,10 +1,17 @@
-import {MOVIE_NOW_PLAYING, MOVIE_POPULAR, MOVIE_TOP_RATED, MOVIE_UPCOMING} from "../actions/media/movieAction";
+import {
+  MOVIE_DETAILS,
+  MOVIE_NOW_PLAYING,
+  MOVIE_POPULAR,
+  MOVIE_TOP_RATED,
+  MOVIE_UPCOMING
+} from "../actions/media/movieAction";
 
 const MovieReducer = (state = {
   popular: {},
   top_rated: {},
   now_playing:{},
   upcoming: {},
+  movieDetails:{},
 }, action) => {
   switch (action.type) {
     case MOVIE_POPULAR:
@@ -26,6 +33,11 @@ const MovieReducer = (state = {
       return {
         ...state,
         upcoming: action.payload
+      };
+    case MOVIE_DETAILS:
+      return {
+        ...state,
+        movieDetails: action.payload
       };
     default:
       return state

@@ -1,70 +1,65 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import "../assets/home.sass"
-import {Container,Row} from 'react-bootstrap'
+import {Container, Row} from 'react-bootstrap'
+import LoadingSpinner from "./partials/loadingSpinner";
+import {Fade} from "react-reveal";
 import Navigation from "./partials/nav";
 import ImageCollage from "./partials/imageCollage"
-import axios from "axios"
-import TmdbApiUrl from "./partials/apiUrl";
-import {connect, useSelector} from "react-redux";
-import {movieNowPlaying} from "../actions/media/movieAction";
-import {tvOnTheAir} from "../actions/media/tvAction";
+import {connect} from "react-redux";
+import {movieType} from "../actions/media/movieAction";
+import {tvType} from "../actions/media/tvAction";
 
-const Home=()=> {
-  //url
-  const api=new TmdbApiUrl();
-  const movieUrl=`${api.baseURL()}${api.mediaType(0)}/${api.generalFeatures(1)}${api.apiKey()}`;
-  const tvUrl=`${api.baseURL()}${api.mediaType(1)}/${api.generalFeatures(5)}${api.apiKey()}`;
-  //redux
-  const reduxStateCounter=useSelector(state=>state.Counter);
+const Home = ({fetchMovieNowPlaying, fetchTvOnTheAir, movie, tv}) => {
 
-  //local state
-  const[data,setData]=useState({movie:[],tv:[]});
-  //fetch function
-  const fetchMyAPI=async ()=>{
-    try {
-    const [movieData, tvData] = await Promise.all([movieUrl, tvUrl].map(el => axios.get(el)));
-    setData({
-      movie:movieData.data.results.slice(0,9) ,
-      tv: tvData.data.results.slice(0,9)
-    });
-      //console.log("home fetchMyApi function data is==>",data)
-    }
-    catch (err) {
-      console.log("home fetchMyApi function error is==>",err)
-    }
-  };
-  useEffect(()=>{
-    fetchMyAPI()
-  },[]);
+  useEffect(() => {
+    fetchMovieNowPlaying();
+    fetchTvOnTheAir()
+  }, []);
 
-   // console.log(`state.Movie==${JSON.stringify(useSelector(state=>state.Movie.now_playing.results))}`);
-   // console.log(`state.Tv==${JSON.stringify(useSelector(state=>state.Tv.on_the_air.results))}`);
-   // console.log(`getState().Movie==${JSON.stringify(myStore.getState().Movie.now_playing.results)}`);
-   // console.log(`getState().Tv==${JSON.stringify(myStore.getState().Tv.on_the_air.results)}`);
-
-    return (
-      <div className="mainHome text-center pb-3">
-        <Navigation />
-        <Container fluid>
-          <Row className="pt-2 pb-1 justify-content-center headingText">
-            <h4>Movies in Theaters</h4>
-          </Row>
-          <ImageCollage list={data.movie} />
-          <Row className="pt-2 pb-1 justify-content-center headingText">
-            <h4>Now on Air</h4>
-          </Row>
-          <ImageCollage list={data.tv}/>
-        </Container>
-      </div>
-    );
+  return (
+    <div className="mainHome text-center pb-3">
+      <Navigation />
+      <Container fluid>
+        <Row className="pt-2 pb-1 justify-content-center headingText">
+          <h4>Movies in Theaters</h4>
+        </Row>
+        {movie.results
+          ? (<ImageCollage list={movie.results.slice(0, 9)} />)
+          : (<div className="container text-center py-5">
+            <Fade duration={400}>
+              <LoadingSpinner />
+            </Fade>
+          </div>)
+        }
+        <Row className="pt-2 pb-1 justify-content-center headingText">
+          <h4>Now on Air</h4>
+        </Row>
+        {tv.results
+          ? (<ImageCollage list={tv.results.slice(0, 9)} />)
+          : (<div className="container text-center py-5">
+            <Fade duration={400}>
+              <LoadingSpinner />
+            </Fade>
+          </div>)
+        }
+      </Container>
+    </div>
+  );
 };
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    movieNowPlaying:()=>dispatch(movieNowPlaying()),
-    tvOnTheAir:()=>dispatch(tvOnTheAir())
+    fetchMovieNowPlaying: () => dispatch(movieType(3)),
+    fetchTvOnTheAir: () => dispatch(tvType(3))
   }
 };
 
-export default connect(mapDispatchToProps)(Home);
+const mapStateToProps = (state) => {
+  return {
+    movie: state.Movie.now_playing,
+    tv: state.Tv.on_the_air,
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
