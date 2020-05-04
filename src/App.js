@@ -11,7 +11,7 @@ import Search from "./components/search"
 import Media_Details from "./components/mediaDetails"
 import Media_List from "./components/mediaList"
 import User from "./components/user"
-import Actor_Details from "./components/actorDetails"
+import Person_Details from "./components/personDetails"
 
 const App = ({isAuthenticated, isVerifying}) => {
   return (
@@ -49,8 +49,8 @@ const App = ({isAuthenticated, isVerifying}) => {
           />
           <ProtectedRoute
             exact
-            path="/actor_details/:actorId"
-            component={Actor_Details}
+            path="/person_details/:actorId"
+            component={Person_Details}
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}
           />

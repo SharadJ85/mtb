@@ -1,5 +1,8 @@
 import {
   MOVIE_DETAILS,
+  MOVIE_VIDEOS,
+  MOVIE_CREDITS,
+  MOVIE_REVIEWS,
   MOVIE_NOW_PLAYING,
   MOVIE_POPULAR,
   MOVIE_TOP_RATED,
@@ -11,7 +14,12 @@ const MovieReducer = (state = {
   top_rated: {},
   now_playing:{},
   upcoming: {},
-  movieDetails:{},
+  movieDetails:{
+    movie:{},
+    credits:{},
+    videos:{},
+    reviews:{},
+  },
 }, action) => {
   switch (action.type) {
     case MOVIE_POPULAR:
@@ -37,7 +45,34 @@ const MovieReducer = (state = {
     case MOVIE_DETAILS:
       return {
         ...state,
-        movieDetails: action.payload
+        movieDetails: {
+          ...state.movieDetails,
+          movie:action.payload
+        }
+      };
+    case MOVIE_VIDEOS:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          videos:action.payload
+        }
+      };
+    case MOVIE_CREDITS:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          credits:action.payload
+        }
+      };
+    case MOVIE_REVIEWS:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          reviews:action.payload
+        }
       };
     default:
       return state

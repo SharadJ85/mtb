@@ -18,7 +18,7 @@ const Footer = () => {
               WebkitTextFillColor: "transparent"
             }}>
             Created with
-            <img src={blazingHeart} alt="blazingHeart" className="mx-3" style={{height: "5.5rem"}} />
+            <img src={blazingHeart} alt="blazingHeart" className="pb-1 mb-4" style={{height: "5.5rem"}} />
             by
             <a
               href="https://github.com/SharadJ85"

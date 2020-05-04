@@ -8,6 +8,9 @@ export const MOVIE_TOP_RATED="MOVIE_TOP_RATED";
 export const MOVIE_NOW_PLAYING="MOVIE_NOW_PLAYING";
 export const MOVIE_UPCOMING="MOVIE_UPCOMING";
 export const MOVIE_DETAILS="MOVIE_DETAILS";
+export const MOVIE_VIDEOS="MOVIE_VIDEOS";
+export const MOVIE_CREDITS="MOVIE_CREDITS";
+export const MOVIE_REVIEWS="MOVIE_REVIEWS";
 
 
 
@@ -28,6 +31,17 @@ export const movieType = (type, page = 1) => {
 };
 
 
-export const movieDetails=(id)=>{
-  return fetchMyAPI(`${api.baseURL()}${api.mediaType(0)}/${id}${api.apiKey()}`,MOVIE_DETAILS)
+export const movieDetailsType=(type,id)=>{
+  switch (true) {
+    case type === "details" || type === 1:
+      return fetchMyAPI(`${api.baseURL()}${api.mediaType(0)}/${id}${api.apiKey()}`,MOVIE_DETAILS);
+    case type === "videos" || type === 2:
+      return fetchMyAPI(`${api.baseURL()}${api.mediaType(0)}/${id}/videos${api.apiKey()}`,MOVIE_VIDEOS);
+    case type === "credits" || type === 3:
+      return fetchMyAPI(`${api.baseURL()}${api.mediaType(0)}/${id}/credits${api.apiKey()}`,MOVIE_CREDITS);
+    case type === "reviews" || type === 4:
+      return fetchMyAPI(`${api.baseURL()}${api.mediaType(0)}/${id}/reviews${api.apiKey()}`,MOVIE_REVIEWS);
+    default:
+      return null
+  }
 };

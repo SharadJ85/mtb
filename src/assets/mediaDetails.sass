@@ -1,5 +1,5 @@
-//
-//
+$tiber: rgb(17, 38, 47)
+$cyprus: rgb(4, 15, 22)
 //
 //MAIN DIV
 .mediaDiv
@@ -9,16 +9,16 @@
 //
 //
 //BRIEF DETAILS
-#backDropImage
-  border-bottom: 2px solid gray
-
 
 #briefDetails
-  position: absolute
-  top: 18vh
-  bottom: 10vh
-  left: 10vw
+  border-bottom: 2px solid gray
+  position: relative
   height: max-content
+  min-height: 550px
+
+.briefDetailsContainer
+  padding-top: 4rem
+  padding-bottom: 1.5rem
 
 h1
   font-size: 2rem
@@ -74,7 +74,8 @@ p
 
 .trailers
   overflow-x: hidden
-  height: 17rem
+  overflow-y: hidden
+  height: 19.5rem
 
 .trailers:hover
   overflow-x: scroll
@@ -89,6 +90,8 @@ p
   background: rgba(102, 102, 102, 0.45)
 
 .videoThumbnail
+  min-height: 13rem
+  min-width: 17.3rem
   background-size: contain
   background-repeat: no-repeat
   position: relative
@@ -103,7 +106,7 @@ p
 
 .playButton
   border: none
-  outline: none
+  outline: none!important
   background: red
   border-radius: 50% / 10%
   color: #FFFFFF
@@ -120,7 +123,7 @@ p
 
 .videoThumbnail:hover .playButton
   cursor: pointer
-  background: darkcyan
+  background: $tiber
 
 .playButton::before
   background: inherit
@@ -160,6 +163,7 @@ p
 // cast/crew
 .CrewCast
   min-height: 100vh
+  max-width: 54rem
 
 .tabCrewCast
   display: grid
@@ -184,7 +188,6 @@ p
   overflow-x: hidden
   padding: 0
   margin: 0
-
 
 .castCrewDiv:hover
   overflow-x: auto
@@ -212,7 +215,8 @@ p
   border-top-right-radius: 3px
   margin-bottom: -.5rem
 
-.btnCrewCast
+.crewCastBtn
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.2)
   height: max-content
   width: 130px
   border-radius: 3px
@@ -221,16 +225,17 @@ p
 //status
 .detailsStatus
   background-color: #050e15b3
-  min-height: 100vh
-  -webkit-box-shadow: 0 0 15px 3px rgba(0,0,0,0.75)
-  -moz-box-shadow: 0 0 15px 3px rgba(0,0,0,0.75)
-  box-shadow: 0 0 15px 3px rgba(0,0,0,0.75)
+  min-height: 38rem
+  max-height: 61rem
+  -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
+  -moz-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
 
 .headText
   letter-spacing: 1px
 
 hr
-  background-color: aqua
+  background-color: $tiber
 
 .externalLink
   height: 4rem
@@ -242,8 +247,12 @@ hr
 .reviews
   max-width: 54rem
 
+.reviewsHead
+  background-color: $tiber
+  border-color: $cyprus
+
 .reviewsBody
-  background-color: #0a0a0aa3
+  background-color: #101620
 
 .reviewsCardHead
   background-color: #111721
@@ -252,3 +261,15 @@ hr
 .reviewsCardBody
   background-color: #ffffffd1
   color: #191a1b
+
+.card-header
+  cursor: pointer
+
+Link
+  outline: none
+  box-shadow: none
+
+Link:hover
+  @extend Link
+Link:focus
+  @extend Link

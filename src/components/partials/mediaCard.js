@@ -17,14 +17,14 @@ const MediaCard = ({mediaId, mediaType, posterPath, year, title, overview, ratin
           mediaType === "person"
             ? (<div className="data ">
               <div className="content px-2 ">
-                <Link to={`/actor_details/${mediaId}`} className="text-decoration-none">
+                <Link to={`/person_details/${mediaId}`} className="text-decoration-none">
                   <h2 className="title text-white">{title}</h2>
                 </Link>
               </div>
             </div>)
             : (<div className="data shiftVertically">
               <div className="content px-2 py-3">
-                <span className="date">{year.slice(0, 4)}</span>
+                {year?<span className="date">{year.slice(0, 4)}</span>:null}
                 <Link to={`/media_details/${mediaType}/${mediaId}`} className="text-decoration-none">
                   <h2 className="title text-white pb-2">{title}</h2>
                 </Link>

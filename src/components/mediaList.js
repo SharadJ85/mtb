@@ -16,24 +16,35 @@ const MediaList = (props) => {
   return (
     <div className="mediaList">
       <Navigation />
-      {props.mediaData.results
-        ?
-        (<div className="list m-5 d-flex flex-wrap justify-content-around">
-          {props.mediaData.results.map(media => (
-            <div className="m-5">
-              <Zoom duration={400}>
-                <MediaCard
-                  mediaId={media.id}
-                  mediaType={props.match.params.media}
-                  posterPath={media.poster_path || media.profile_path}
-                  ratingValue={media.vote_average}
-                  year={(media.release_date || media.first_air_date)}
-                  title={media.title || media.name}
-                  overview={media.overview} />
-              </Zoom>
+      {props.mediaData
+        ? props.mediaData.results
+          ?
+          (<div>
+            <div className="list m-5 d-flex flex-wrap justify-content-around">
+              {props.mediaData.results.map(media => (
+                <div className="m-5">
+                  <Zoom duration={400}>
+                    <MediaCard
+                      mediaId={media.id}
+                      mediaType={props.match.params.media}
+                      posterPath={media.poster_path || media.profile_path}
+                      ratingValue={media.vote_average}
+                      year={(media.release_date || media.first_air_date)}
+                      title={media.title || media.name}
+                      overview={media.overview} />
+                  </Zoom>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>)
+            <div className="pb-4">
+              <Pagination pageType={`media_list`}
+                          totalPages={props.mediaData.total_pages}
+                          media={props.match.params.media}
+                          generalType={props.match.params.generalType}
+                          pageId={props.match.params.pageId} />
+            </div>
+          </div>)
+          : null
         : (
           <div className="container text-center py-5">
             <Fade duration={400}>
@@ -41,13 +52,6 @@ const MediaList = (props) => {
             </Fade>
           </div>
         )}
-      <div className="pb-4">
-        <Pagination pageType={`media_list`}
-                    totalPages={props.mediaData.total_pages}
-                    media={props.match.params.media}
-                    generalType={props.match.params.generalType}
-                    pageId={props.match.params.pageId} />
-      </div>
     </div>
   );
 };

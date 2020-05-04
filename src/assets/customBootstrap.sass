@@ -1,4 +1,34 @@
 $theme-colors: ( "info": teal, "danger": #FF1400, "success": #0fe600, "dark":#191a1b)
-
+$tiber: rgb(17, 38, 47)
+$cyprus: rgb(4, 15, 22)
+$lightGrey: #d4d4d4
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap"
+
+.list-group-item.active
+  background-color: $tiber
+  border-color: $cyprus
+  color: white
+  border-radius: 0.2rem
+  transform: scaleY(1.05)
+.list-group-item.active:hover
+  @extend .list-group-item.active
+
+.list-group-item
+  background-color: $lightGrey
+  border-color: $lightGrey
+  color: $tiber
+  border-radius: 0.2rem
+.list-group-item:hover
+  @extend  .list-group-item
+
+.btn:hover
+  outline: none
+  box-shadow: none
+.btn:focus
+  @extend .btn:hover
+.btn-sm:hover
+  @extend .btn:hover
+.btn-sm:hover
+  @extend .btn:hover
+

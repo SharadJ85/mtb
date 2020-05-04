@@ -7,7 +7,7 @@ import {connect} from "react-redux";
 import TmdbApiUrl from "./partials/apiUrl";
 
 
-const Actor_Details = ({fetchPersonDetails, person}) => {
+const Person_Details = ({fetchPersonDetails, person}) => {
   let api = new TmdbApiUrl();
   useEffect(() => {
     fetchPersonDetails();
@@ -76,4 +76,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Actor_Details);
+export default connect(mapStateToProps, mapDispatchToProps)(Person_Details);
