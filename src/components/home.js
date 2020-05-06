@@ -20,22 +20,22 @@ const Home = ({fetchMovieNowPlaying, fetchTvOnTheAir, movie, tv}) => {
     <div className="mainHome text-center pb-3">
       <Navigation />
       <Container fluid>
-        <Row className="pt-2 pb-1 justify-content-center headingText">
-          <h4>Movies in Theaters</h4>
+        <Row className="py-1 justify-content-center headingText">
+          <h4 className="py-2 m-0">Movies in Theaters</h4>
         </Row>
         {movie.results
-          ? (<ImageCollage list={movie.results.slice(0, 9)} />)
+          ? (<ImageCollage list={movie.results.slice(0, 9)} type={`movie`}/>)
           : (<div className="container text-center py-5">
             <Fade duration={400}>
               <LoadingSpinner />
             </Fade>
           </div>)
         }
-        <Row className="pt-2 pb-1 justify-content-center headingText">
-          <h4>Now on Air</h4>
+        <Row className="py-1 justify-content-center headingText">
+          <h4 className="py-2 m-0">Now on Air</h4>
         </Row>
         {tv.results
-          ? (<ImageCollage list={tv.results.slice(0, 9)} />)
+          ? (<ImageCollage list={tv.results.slice(0, 9)} type={`tv`} />)
           : (<div className="container text-center py-5">
             <Fade duration={400}>
               <LoadingSpinner />

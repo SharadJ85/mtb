@@ -1,39 +1,51 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import "../../assets/mediaSearch.sass";
+import TmdbApiUrl from "./apiUrl";
+import {Badge} from "react-bootstrap";
 
-const SearchActorCard=()=> {
-  //const imageSource=el.poster_path?(imageURL + el.poster_path):require(`/images/picUnavailable.jpg`);
-  const imageSource=null;
+const SearchActorCard = ({personId, posterPath, name, department, knownFor}) => {
+  let api = new TmdbApiUrl()
+  const imageSource = null;
   return (
-    <div className="MediaType p-0 mx-auto shadow">
-      <Link to={"/info/"+"el.media_type"+"/"+"el.id"}>
-        <div className="p-0 order-1 posterDiv">
-          <img src={imageSource} alt="unavailable" className="posterSize"/>
-        </div>
-      </Link>
-      <div className=" my-2 text-white container">
-        <div className=" mr-4">
-          <Link to={"/info/"+"el.media_type"+"/"+"el.id"}>
-            <h3 className="font-weight-normal text-white text-capitalize">{"el.name"}Brad</h3>
+    <div className="MediaType p-0 mx-auto shadow container-fluid row">
+      <div className="p-0 order-1 col-3">
+        <div className="actorDataSec posterDiv">
+          <Link to={`/person_details/${personId}`}>
+            <img
+              src={posterPath ? `${api.imageURL(0)}${posterPath}` : `${require(`../../assets/images/imageUnavailable.jpg`)}`}
+              alt={name} className="posterSize" />
           </Link>
-          <h5 className="text-info ml-2 font-weight-light text-capitalize">{"el.known_for_department"}Acting</h5>
         </div>
-        <div className="text-white-50 knownFor">
-          Known for
+      </div>
+      <div className="col order-2">
+        <div className=" my-2 text-white container">
+          <div className=" mr-4">
+            <Link to={`/person_details/${personId}`}>
+              <h3 className="font-weight-normal text-white text-capitalize">{name}</h3>
+            </Link>
+            <h5 className="text-info ml-2 font-weight-light text-capitalize typeOf">{department}</h5>
+          </div>
+          <div className="text-white-50 knownFor">
+            Known for
+          </div>
+          <div className="row mt-2 mx-0 ">
+            {knownFor.map(media => (
+              <div className="mx-1 p-0 m-0  smallPoster"
+                   title={`${media.media_type.toUpperCase()} : ${media.title || media.name}`}>
+                <Link to={`/media_details/${media.media_type}/${media.id}`}>
+                  <img
+                    src={media.poster_path ? `${api.imageURL(0)}${media.poster_path}` : `${require(`../../assets/images/imageUnavailable.jpg`)}`}
+                    alt={media.title || media.name}
+                    className="smallPosterImage" />
+                </Link>
+              </div>
+            ))}
+            <Link to={`/person_details/${personId}`} className="col align-self-end">
+              <Badge variant={`light`} className=" mt-1 px-3 py-2 font-weight-bold ">More Info</Badge>
+            </Link>
+          </div>
         </div>
-        <div className="row mt-2 mx-0 ">
-          {/*{el.known_for.map(movieTv=>(*/}
-          {/*  <Link to={"/info/"+movieTv.media_type+"/"+movieTv.id}>*/}
-          {/*    <div className="mx-1 hoverSmallImage" title="movieTv.title || movieTv.name">*/}
-          {/*      <img src={imageURL+movieTv.poster_path} alt="" className="smallPosterImage"/>*/}
-          {/*    </div>*/}
-          {/*  </Link>*/}
-          {/*))}*/}
-        </div>
-          <Link to={"/info/"+"el.media_type"+"/"+"el.id"}>
-            <p className=" font-italic mt-1 text-white-50">more info</p>
-          </Link>
       </div>
     </div>
   );

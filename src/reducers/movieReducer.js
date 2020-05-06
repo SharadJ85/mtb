@@ -1,24 +1,24 @@
 import {
-  MOVIE_DETAILS,
-  MOVIE_VIDEOS,
   MOVIE_CREDITS,
-  MOVIE_REVIEWS,
+  MOVIE_DETAILS,
   MOVIE_NOW_PLAYING,
   MOVIE_POPULAR,
+  MOVIE_REVIEWS,
   MOVIE_TOP_RATED,
-  MOVIE_UPCOMING
+  MOVIE_UPCOMING,
+  MOVIE_VIDEOS
 } from "../actions/media/movieAction";
 
 const MovieReducer = (state = {
   popular: {},
   top_rated: {},
-  now_playing:{},
+  now_playing: {},
   upcoming: {},
-  movieDetails:{
-    movie:{},
-    credits:{},
-    videos:{},
-    reviews:{},
+  movieDetails: {
+    movie: {},
+    credits: {},
+    videos: {},
+    reviews: {},
   },
 }, action) => {
   switch (action.type) {
@@ -47,7 +47,7 @@ const MovieReducer = (state = {
         ...state,
         movieDetails: {
           ...state.movieDetails,
-          movie:action.payload
+          movie: action.payload
         }
       };
     case MOVIE_VIDEOS:
@@ -55,7 +55,7 @@ const MovieReducer = (state = {
         ...state,
         movieDetails: {
           ...state.movieDetails,
-          videos:action.payload
+          videos: action.payload
         }
       };
     case MOVIE_CREDITS:
@@ -63,7 +63,7 @@ const MovieReducer = (state = {
         ...state,
         movieDetails: {
           ...state.movieDetails,
-          credits:action.payload
+          credits: action.payload
         }
       };
     case MOVIE_REVIEWS:
@@ -71,7 +71,7 @@ const MovieReducer = (state = {
         ...state,
         movieDetails: {
           ...state.movieDetails,
-          reviews:action.payload
+          reviews: action.payload
         }
       };
     default:
@@ -79,4 +79,4 @@ const MovieReducer = (state = {
   }
 };
 
-export  default MovieReducer;
+export default MovieReducer;

@@ -14,13 +14,13 @@ const Ratings=(props)=> {
         <svg viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="48" fill="#0c0c0c"/>
           <path fill="none" strokeLinecap="round" strokeWidth="8"
-                stroke={ratingsColorSwitcher(ratingValue)}
-                strokeDasharray={strokeDasharrayProperty}
+                stroke={ratingValue?ratingsColorSwitcher(ratingValue):`#000`}
+                strokeDasharray={ratingValue?strokeDasharrayProperty:`251.2,0`}
                 d="M50 10
          a 40 40 0 0 1 0 80
          a 40 40 0 0 1 0 -80"/>
           <text x="50" y="55" textAnchor="middle" dy="7" fontSize="2.2rem"
-                className="font-weight-bold " fill="#c2c2c2">{ratingValue}</text>
+                className="font-weight-bold " fill={`#c2c2c2`}>{ratingValue?ratingValue:`NR`}</text>
         </svg>
       </div>
   );

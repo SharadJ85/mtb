@@ -28,7 +28,7 @@ const App = ({isAuthenticated, isVerifying}) => {
           />
           <ProtectedRoute
             exact
-            path="/search/:query"
+            path="/search/:query/:pageId"
             component={Search}
             isAuthenticated={isAuthenticated}
             isVerifying={isVerifying}
