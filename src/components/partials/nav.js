@@ -24,45 +24,45 @@ const Navigation = ({match, userFirstName, userLastName, userInitials, dispatch}
         {/*Nav links*/}
         <Nav className="mr-auto ml-2 childNavs">
           <div className="mx-1 text-uppercase font-weight-normal font-weight-bold parentText">
-            <Nav.Link to="#movies" style={navBarText}>Movies
+            <Nav.Link href="#movies" style={navBarText}>Movies
             </Nav.Link>
             <Fade cascade bottom duration={400}>
               <div className="p-0 m-0 d-flex flex-wrap">
-                <Nav.Link to="/media_list/movie/popular/1"
+                <Nav.Link href="/media_list/movie/popular/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child1">popular
                 </Nav.Link>
-                <Nav.Link to="/media_list/movie/top_rated/1"
+                <Nav.Link href="/media_list/movie/top_rated/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child2">top
                                                                                                                                       rated
                 </Nav.Link>
-                <Nav.Link to="/media_list/movie/in_the_air/1"
+                <Nav.Link href="/media_list/movie/in_the_air/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child3">in
                                                                                                                                       theaters
                 </Nav.Link>
-                <Nav.Link to="/media_list/movie/upcoming/1"
+                <Nav.Link href="/media_list/movie/upcoming/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child4">upcoming
                 </Nav.Link>
               </div>
             </Fade>
           </div>
           <div className="mx-1 text-uppercase font-weight-normal font-weight-bold parentText">
-            <Nav.Link to="#tvShows" style={navBarText}>Tv shows
+            <Nav.Link href="#tvShows" style={navBarText}>Tv shows
             </Nav.Link>
             <Fade cascade bottom duration={400}>
               <div className="p-0 m-0 d-flex flex-wrap">
-                <Nav.Link to="/media_list/tv/popular/1"
+                <Nav.Link href="/media_list/tv/popular/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child1">popular
                 </Nav.Link>
-                <Nav.Link to="/media_list/tv/top_rated/1"
+                <Nav.Link href="/media_list/tv/top_rated/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child2">top
                                                                                                                                       rated
                 </Nav.Link>
-                <Nav.Link to="/media_list/tv/on_the_air/1"
+                <Nav.Link href="/media_list/tv/on_the_air/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child3 "> Now
                                                                                                                                         on
                                                                                                                                         air
                 </Nav.Link>
-                <Nav.Link to="/media_list/tv/airing_today/1"
+                <Nav.Link href="/media_list/tv/airing_today/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child4">Airing
                                                                                                                                       today
                 </Nav.Link>
@@ -70,11 +70,11 @@ const Navigation = ({match, userFirstName, userLastName, userInitials, dispatch}
             </Fade>
           </div>
           <div className="mx-1 text-uppercase font-weight-normal font-weight-bold parentText">
-            <Nav.Link to="#actors" style={navBarText}>Actors
+            <Nav.Link href="#actors" style={navBarText}>Actors
             </Nav.Link>
             <Fade cascade bottom duration={400}>
               <div className="p-0 m-0 d-flex flex-wrap">
-                <Nav.Link to="/media_list/person/popular/1"
+                <Nav.Link href="/media_list/person/popular/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child1">popular
                 </Nav.Link>
               </div>
