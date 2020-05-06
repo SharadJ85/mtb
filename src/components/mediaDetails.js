@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import Navigation from "./partials/nav";
 import "../assets/mediaDetails.sass"
+import isoCodes from "./partials/ISO_639-1_codes_to_english";
 import TmdbApiUrl from "./partials/apiUrl";
 import Ratings from "./partials/ratings";
 import Badge from "react-bootstrap/Badge";
@@ -286,7 +287,11 @@ const Media_Details = (props) => {
                   <div className="mt-2 font-weight-bold pt-1">
                     <h5 className="font-weight-light headText"><em> Original Lang</em></h5>
                     <div className="pt-1">
-                      <p>{props.mediaDetails.original_language}</p>
+                      {isoCodes
+                        .filter(each=>each.code===props.mediaDetails.original_language)
+                        .map(el=>(
+                        <p>{el.English}</p>
+                      ))}
                     </div>
                   </div>
                   <hr />

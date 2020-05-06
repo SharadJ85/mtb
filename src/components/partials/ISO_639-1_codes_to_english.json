@@ -1,738 +1,738 @@
  [
   {
     "English": "Afar",
-    "alpha2": "aa"
+    "code": "aa"
   },
   {
     "English": "Abkhazian",
-    "alpha2": "ab"
+    "code": "ab"
   },
   {
     "English": "Avestan",
-    "alpha2": "ae"
+    "code": "ae"
   },
   {
     "English": "Afrikaans",
-    "alpha2": "af"
+    "code": "af"
   },
   {
     "English": "Akan",
-    "alpha2": "ak"
+    "code": "ak"
   },
   {
     "English": "Amharic",
-    "alpha2": "am"
+    "code": "am"
   },
   {
     "English": "Aragonese",
-    "alpha2": "an"
+    "code": "an"
   },
   {
     "English": "Arabic",
-    "alpha2": "ar"
+    "code": "ar"
   },
   {
     "English": "Assamese",
-    "alpha2": "as"
+    "code": "as"
   },
   {
     "English": "Avaric",
-    "alpha2": "av"
+    "code": "av"
   },
   {
     "English": "Aymara",
-    "alpha2": "ay"
+    "code": "ay"
   },
   {
     "English": "Azerbaijani",
-    "alpha2": "az"
+    "code": "az"
   },
   {
     "English": "Bashkir",
-    "alpha2": "ba"
+    "code": "ba"
   },
   {
     "English": "Belarusian",
-    "alpha2": "be"
+    "code": "be"
   },
   {
     "English": "Bulgarian",
-    "alpha2": "bg"
+    "code": "bg"
   },
   {
     "English": "Bihari languages",
-    "alpha2": "bh"
+    "code": "bh"
   },
   {
     "English": "Bislama",
-    "alpha2": "bi"
+    "code": "bi"
   },
   {
     "English": "Bambara",
-    "alpha2": "bm"
+    "code": "bm"
   },
   {
     "English": "Bengali",
-    "alpha2": "bn"
+    "code": "bn"
   },
   {
     "English": "Tibetan",
-    "alpha2": "bo"
+    "code": "bo"
   },
   {
     "English": "Breton",
-    "alpha2": "br"
+    "code": "br"
   },
   {
     "English": "Bosnian",
-    "alpha2": "bs"
+    "code": "bs"
   },
   {
     "English": "Catalan; Valencian",
-    "alpha2": "ca"
+    "code": "ca"
   },
   {
     "English": "Chechen",
-    "alpha2": "ce"
+    "code": "ce"
   },
   {
     "English": "Chamorro",
-    "alpha2": "ch"
+    "code": "ch"
   },
   {
     "English": "Corsican",
-    "alpha2": "co"
+    "code": "co"
   },
   {
     "English": "Cree",
-    "alpha2": "cr"
+    "code": "cr"
   },
   {
     "English": "Czech",
-    "alpha2": "cs"
+    "code": "cs"
   },
   {
     "English": "Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic",
-    "alpha2": "cu"
+    "code": "cu"
   },
   {
     "English": "Chuvash",
-    "alpha2": "cv"
+    "code": "cv"
   },
   {
     "English": "Welsh",
-    "alpha2": "cy"
+    "code": "cy"
   },
   {
     "English": "Danish",
-    "alpha2": "da"
+    "code": "da"
   },
   {
     "English": "German",
-    "alpha2": "de"
+    "code": "de"
   },
   {
     "English": "Divehi; Dhivehi; Maldivian",
-    "alpha2": "dv"
+    "code": "dv"
   },
   {
     "English": "Dzongkha",
-    "alpha2": "dz"
+    "code": "dz"
   },
   {
     "English": "Ewe",
-    "alpha2": "ee"
+    "code": "ee"
   },
   {
     "English": "Greek, Modern (1453-)",
-    "alpha2": "el"
+    "code": "el"
   },
   {
     "English": "English",
-    "alpha2": "en"
+    "code": "en"
   },
   {
     "English": "Esperanto",
-    "alpha2": "eo"
+    "code": "eo"
   },
   {
     "English": "Spanish; Castilian",
-    "alpha2": "es"
+    "code": "es"
   },
   {
     "English": "Estonian",
-    "alpha2": "et"
+    "code": "et"
   },
   {
     "English": "Basque",
-    "alpha2": "eu"
+    "code": "eu"
   },
   {
     "English": "Persian",
-    "alpha2": "fa"
+    "code": "fa"
   },
   {
     "English": "Fulah",
-    "alpha2": "ff"
+    "code": "ff"
   },
   {
     "English": "Finnish",
-    "alpha2": "fi"
+    "code": "fi"
   },
   {
     "English": "Fijian",
-    "alpha2": "fj"
+    "code": "fj"
   },
   {
     "English": "Faroese",
-    "alpha2": "fo"
+    "code": "fo"
   },
   {
     "English": "French",
-    "alpha2": "fr"
+    "code": "fr"
   },
   {
     "English": "Western Frisian",
-    "alpha2": "fy"
+    "code": "fy"
   },
   {
     "English": "Irish",
-    "alpha2": "ga"
+    "code": "ga"
   },
   {
     "English": "Gaelic; Scottish Gaelic",
-    "alpha2": "gd"
+    "code": "gd"
   },
   {
     "English": "Galician",
-    "alpha2": "gl"
+    "code": "gl"
   },
   {
     "English": "Guarani",
-    "alpha2": "gn"
+    "code": "gn"
   },
   {
     "English": "Gujarati",
-    "alpha2": "gu"
+    "code": "gu"
   },
   {
     "English": "Manx",
-    "alpha2": "gv"
+    "code": "gv"
   },
   {
     "English": "Hausa",
-    "alpha2": "ha"
+    "code": "ha"
   },
   {
     "English": "Hebrew",
-    "alpha2": "he"
+    "code": "he"
   },
   {
     "English": "Hindi",
-    "alpha2": "hi"
+    "code": "hi"
   },
   {
     "English": "Hiri Motu",
-    "alpha2": "ho"
+    "code": "ho"
   },
   {
     "English": "Croatian",
-    "alpha2": "hr"
+    "code": "hr"
   },
   {
     "English": "Haitian; Haitian Creole",
-    "alpha2": "ht"
+    "code": "ht"
   },
   {
     "English": "Hungarian",
-    "alpha2": "hu"
+    "code": "hu"
   },
   {
     "English": "Armenian",
-    "alpha2": "hy"
+    "code": "hy"
   },
   {
     "English": "Herero",
-    "alpha2": "hz"
+    "code": "hz"
   },
   {
     "English": "Interlingua (International Auxiliary Language Association)",
-    "alpha2": "ia"
+    "code": "ia"
   },
   {
     "English": "Indonesian",
-    "alpha2": "id"
+    "code": "id"
   },
   {
     "English": "Interlingue; Occidental",
-    "alpha2": "ie"
+    "code": "ie"
   },
   {
     "English": "Igbo",
-    "alpha2": "ig"
+    "code": "ig"
   },
   {
     "English": "Sichuan Yi; Nuosu",
-    "alpha2": "ii"
+    "code": "ii"
   },
   {
     "English": "Inupiaq",
-    "alpha2": "ik"
+    "code": "ik"
   },
   {
     "English": "Ido",
-    "alpha2": "io"
+    "code": "io"
   },
   {
     "English": "Icelandic",
-    "alpha2": "is"
+    "code": "is"
   },
   {
     "English": "Italian",
-    "alpha2": "it"
+    "code": "it"
   },
   {
     "English": "Inuktitut",
-    "alpha2": "iu"
+    "code": "iu"
   },
   {
     "English": "Japanese",
-    "alpha2": "ja"
+    "code": "ja"
   },
   {
     "English": "Javanese",
-    "alpha2": "jv"
+    "code": "jv"
   },
   {
     "English": "Georgian",
-    "alpha2": "ka"
+    "code": "ka"
   },
   {
     "English": "Kongo",
-    "alpha2": "kg"
+    "code": "kg"
   },
   {
     "English": "Kikuyu; Gikuyu",
-    "alpha2": "ki"
+    "code": "ki"
   },
   {
     "English": "Kuanyama; Kwanyama",
-    "alpha2": "kj"
+    "code": "kj"
   },
   {
     "English": "Kazakh",
-    "alpha2": "kk"
+    "code": "kk"
   },
   {
     "English": "Kalaallisut; Greenlandic",
-    "alpha2": "kl"
+    "code": "kl"
   },
   {
     "English": "Central Khmer",
-    "alpha2": "km"
+    "code": "km"
   },
   {
     "English": "Kannada",
-    "alpha2": "kn"
+    "code": "kn"
   },
   {
     "English": "Korean",
-    "alpha2": "ko"
+    "code": "ko"
   },
   {
     "English": "Kanuri",
-    "alpha2": "kr"
+    "code": "kr"
   },
   {
     "English": "Kashmiri",
-    "alpha2": "ks"
+    "code": "ks"
   },
   {
     "English": "Kurdish",
-    "alpha2": "ku"
+    "code": "ku"
   },
   {
     "English": "Komi",
-    "alpha2": "kv"
+    "code": "kv"
   },
   {
     "English": "Cornish",
-    "alpha2": "kw"
+    "code": "kw"
   },
   {
     "English": "Kirghiz; Kyrgyz",
-    "alpha2": "ky"
+    "code": "ky"
   },
   {
     "English": "Latin",
-    "alpha2": "la"
+    "code": "la"
   },
   {
     "English": "Luxembourgish; Letzeburgesch",
-    "alpha2": "lb"
+    "code": "lb"
   },
   {
     "English": "Ganda",
-    "alpha2": "lg"
+    "code": "lg"
   },
   {
     "English": "Limburgan; Limburger; Limburgish",
-    "alpha2": "li"
+    "code": "li"
   },
   {
     "English": "Lingala",
-    "alpha2": "ln"
+    "code": "ln"
   },
   {
     "English": "Lao",
-    "alpha2": "lo"
+    "code": "lo"
   },
   {
     "English": "Lithuanian",
-    "alpha2": "lt"
+    "code": "lt"
   },
   {
     "English": "Luba-Katanga",
-    "alpha2": "lu"
+    "code": "lu"
   },
   {
     "English": "Latvian",
-    "alpha2": "lv"
+    "code": "lv"
   },
   {
     "English": "Malagasy",
-    "alpha2": "mg"
+    "code": "mg"
   },
   {
     "English": "Marshallese",
-    "alpha2": "mh"
+    "code": "mh"
   },
   {
     "English": "Maori",
-    "alpha2": "mi"
+    "code": "mi"
   },
   {
     "English": "Macedonian",
-    "alpha2": "mk"
+    "code": "mk"
   },
   {
     "English": "Malayalam",
-    "alpha2": "ml"
+    "code": "ml"
   },
   {
     "English": "Mongolian",
-    "alpha2": "mn"
+    "code": "mn"
   },
   {
     "English": "Marathi",
-    "alpha2": "mr"
+    "code": "mr"
   },
   {
     "English": "Malay",
-    "alpha2": "ms"
+    "code": "ms"
   },
   {
     "English": "Maltese",
-    "alpha2": "mt"
+    "code": "mt"
   },
   {
     "English": "Burmese",
-    "alpha2": "my"
+    "code": "my"
   },
   {
     "English": "Nauru",
-    "alpha2": "na"
+    "code": "na"
   },
   {
     "English": "Bokm\u00e5l, Norwegian; Norwegian Bokm\u00e5l",
-    "alpha2": "nb"
+    "code": "nb"
   },
   {
     "English": "Ndebele, North; North Ndebele",
-    "alpha2": "nd"
+    "code": "nd"
   },
   {
     "English": "Nepali",
-    "alpha2": "ne"
+    "code": "ne"
   },
   {
     "English": "Ndonga",
-    "alpha2": "ng"
+    "code": "ng"
   },
   {
     "English": "Dutch; Flemish",
-    "alpha2": "nl"
+    "code": "nl"
   },
   {
     "English": "Norwegian Nynorsk; Nynorsk, Norwegian",
-    "alpha2": "nn"
+    "code": "nn"
   },
   {
     "English": "Norwegian",
-    "alpha2": "no"
+    "code": "no"
   },
   {
     "English": "Ndebele, South; South Ndebele",
-    "alpha2": "nr"
+    "code": "nr"
   },
   {
     "English": "Navajo; Navaho",
-    "alpha2": "nv"
+    "code": "nv"
   },
   {
     "English": "Chichewa; Chewa; Nyanja",
-    "alpha2": "ny"
+    "code": "ny"
   },
   {
     "English": "Occitan (post 1500)",
-    "alpha2": "oc"
+    "code": "oc"
   },
   {
     "English": "Ojibwa",
-    "alpha2": "oj"
+    "code": "oj"
   },
   {
     "English": "Oromo",
-    "alpha2": "om"
+    "code": "om"
   },
   {
     "English": "Oriya",
-    "alpha2": "or"
+    "code": "or"
   },
   {
     "English": "Ossetian; Ossetic",
-    "alpha2": "os"
+    "code": "os"
   },
   {
     "English": "Panjabi; Punjabi",
-    "alpha2": "pa"
+    "code": "pa"
   },
   {
     "English": "Pali",
-    "alpha2": "pi"
+    "code": "pi"
   },
   {
     "English": "Polish",
-    "alpha2": "pl"
+    "code": "pl"
   },
   {
     "English": "Pushto; Pashto",
-    "alpha2": "ps"
+    "code": "ps"
   },
   {
     "English": "Portuguese",
-    "alpha2": "pt"
+    "code": "pt"
   },
   {
     "English": "Quechua",
-    "alpha2": "qu"
+    "code": "qu"
   },
   {
     "English": "Romansh",
-    "alpha2": "rm"
+    "code": "rm"
   },
   {
     "English": "Rundi",
-    "alpha2": "rn"
+    "code": "rn"
   },
   {
     "English": "Romanian; Moldavian; Moldovan",
-    "alpha2": "ro"
+    "code": "ro"
   },
   {
     "English": "Russian",
-    "alpha2": "ru"
+    "code": "ru"
   },
   {
     "English": "Kinyarwanda",
-    "alpha2": "rw"
+    "code": "rw"
   },
   {
     "English": "Sanskrit",
-    "alpha2": "sa"
+    "code": "sa"
   },
   {
     "English": "Sardinian",
-    "alpha2": "sc"
+    "code": "sc"
   },
   {
     "English": "Sindhi",
-    "alpha2": "sd"
+    "code": "sd"
   },
   {
     "English": "Northern Sami",
-    "alpha2": "se"
+    "code": "se"
   },
   {
     "English": "Sango",
-    "alpha2": "sg"
+    "code": "sg"
   },
   {
     "English": "Sinhala; Sinhalese",
-    "alpha2": "si"
+    "code": "si"
   },
   {
     "English": "Slovak",
-    "alpha2": "sk"
+    "code": "sk"
   },
   {
     "English": "Slovenian",
-    "alpha2": "sl"
+    "code": "sl"
   },
   {
     "English": "Samoan",
-    "alpha2": "sm"
+    "code": "sm"
   },
   {
     "English": "Shona",
-    "alpha2": "sn"
+    "code": "sn"
   },
   {
     "English": "Somali",
-    "alpha2": "so"
+    "code": "so"
   },
   {
     "English": "Albanian",
-    "alpha2": "sq"
+    "code": "sq"
   },
   {
     "English": "Serbian",
-    "alpha2": "sr"
+    "code": "sr"
   },
   {
     "English": "Swati",
-    "alpha2": "ss"
+    "code": "ss"
   },
   {
     "English": "Sotho, Southern",
-    "alpha2": "st"
+    "code": "st"
   },
   {
     "English": "Sundanese",
-    "alpha2": "su"
+    "code": "su"
   },
   {
     "English": "Swedish",
-    "alpha2": "sv"
+    "code": "sv"
   },
   {
     "English": "Swahili",
-    "alpha2": "sw"
+    "code": "sw"
   },
   {
     "English": "Tamil",
-    "alpha2": "ta"
+    "code": "ta"
   },
   {
     "English": "Telugu",
-    "alpha2": "te"
+    "code": "te"
   },
   {
     "English": "Tajik",
-    "alpha2": "tg"
+    "code": "tg"
   },
   {
     "English": "Thai",
-    "alpha2": "th"
+    "code": "th"
   },
   {
     "English": "Tigrinya",
-    "alpha2": "ti"
+    "code": "ti"
   },
   {
     "English": "Turkmen",
-    "alpha2": "tk"
+    "code": "tk"
   },
   {
     "English": "Tagalog",
-    "alpha2": "tl"
+    "code": "tl"
   },
   {
     "English": "Tswana",
-    "alpha2": "tn"
+    "code": "tn"
   },
   {
     "English": "Tonga (Tonga Islands)",
-    "alpha2": "to"
+    "code": "to"
   },
   {
     "English": "Turkish",
-    "alpha2": "tr"
+    "code": "tr"
   },
   {
     "English": "Tsonga",
-    "alpha2": "ts"
+    "code": "ts"
   },
   {
     "English": "Tatar",
-    "alpha2": "tt"
+    "code": "tt"
   },
   {
     "English": "Twi",
-    "alpha2": "tw"
+    "code": "tw"
   },
   {
     "English": "Tahitian",
-    "alpha2": "ty"
+    "code": "ty"
   },
   {
     "English": "Uighur; Uyghur",
-    "alpha2": "ug"
+    "code": "ug"
   },
   {
     "English": "Ukrainian",
-    "alpha2": "uk"
+    "code": "uk"
   },
   {
     "English": "Urdu",
-    "alpha2": "ur"
+    "code": "ur"
   },
   {
     "English": "Uzbek",
-    "alpha2": "uz"
+    "code": "uz"
   },
   {
     "English": "Venda",
-    "alpha2": "ve"
+    "code": "ve"
   },
   {
     "English": "Vietnamese",
-    "alpha2": "vi"
+    "code": "vi"
   },
   {
     "English": "Volap\u00fck",
-    "alpha2": "vo"
+    "code": "vo"
   },
   {
     "English": "Walloon",
-    "alpha2": "wa"
+    "code": "wa"
   },
   {
     "English": "Wolof",
-    "alpha2": "wo"
+    "code": "wo"
   },
   {
     "English": "Xhosa",
-    "alpha2": "xh"
+    "code": "xh"
   },
   {
     "English": "Yiddish",
-    "alpha2": "yi"
+    "code": "yi"
   },
   {
     "English": "Yoruba",
-    "alpha2": "yo"
+    "code": "yo"
   },
   {
     "English": "Zhuang; Chuang",
-    "alpha2": "za"
+    "code": "za"
   },
   {
     "English": "Chinese",
-    "alpha2": "zh"
+    "code": "zh"
   },
   {
     "English": "Zulu",
-    "alpha2": "zu"
+    "code": "zu"
   }
 ]
