@@ -11,6 +11,7 @@ import SearchMovieTvCard from "./partials/searchMovieTvCard";
 const Search = ({match, search, searchKeywords, searching, searchSuccess, searchData, pageNo, searchFailure, searchError}) => {
   useEffect(() => {
     search()
+    document.title=`MTB: search '${searchKeywords?searchKeywords:``}'`
   },[pageNo]);
 
   return (

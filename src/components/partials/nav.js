@@ -28,20 +28,20 @@ const Navigation = ({match, userFirstName, userLastName, userInitials, dispatch}
             </Nav.Link>
             <Fade cascade bottom duration={400}>
               <div className="p-0 m-0 d-flex flex-wrap">
-                <Nav.Link href="/media_list/movie/popular/1"
+                <RouterLink to="/media_list/movie/popular/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child1">popular
-                </Nav.Link>
-                <Nav.Link href="/media_list/movie/top_rated/1"
+                </RouterLink>
+                <RouterLink to="/media_list/movie/top_rated/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child2">top
                                                                                                                                       rated
-                </Nav.Link>
-                <Nav.Link href="/media_list/movie/in_the_air/1"
+                </RouterLink>
+                <RouterLink to="/media_list/movie/now_playing/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child3">in
                                                                                                                                       theaters
-                </Nav.Link>
-                <Nav.Link href="/media_list/movie/upcoming/1"
+                </RouterLink>
+                <RouterLink to="/media_list/movie/upcoming/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child4">upcoming
-                </Nav.Link>
+                </RouterLink>
               </div>
             </Fade>
           </div>
@@ -50,22 +50,22 @@ const Navigation = ({match, userFirstName, userLastName, userInitials, dispatch}
             </Nav.Link>
             <Fade cascade bottom duration={400}>
               <div className="p-0 m-0 d-flex flex-wrap">
-                <Nav.Link href="/media_list/tv/popular/1"
+                <RouterLink to="/media_list/tv/popular/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child1">popular
-                </Nav.Link>
-                <Nav.Link href="/media_list/tv/top_rated/1"
+                </RouterLink>
+                <RouterLink to="/media_list/tv/top_rated/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child2">top
                                                                                                                                       rated
-                </Nav.Link>
-                <Nav.Link href="/media_list/tv/on_the_air/1"
+                </RouterLink>
+                <RouterLink to="/media_list/tv/on_the_air/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child3 "> Now
                                                                                                                                         on
                                                                                                                                         air
-                </Nav.Link>
-                <Nav.Link href="/media_list/tv/airing_today/1"
+                </RouterLink>
+                <RouterLink to="/media_list/tv/airing_today/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child4">Airing
                                                                                                                                       today
-                </Nav.Link>
+                </RouterLink>
               </div>
             </Fade>
           </div>
@@ -74,9 +74,9 @@ const Navigation = ({match, userFirstName, userLastName, userInitials, dispatch}
             </Nav.Link>
             <Fade cascade bottom duration={400}>
               <div className="p-0 m-0 d-flex flex-wrap">
-                <Nav.Link href="/media_list/person/popular/1"
+                <RouterLink to="/media_list/person/popular/1"
                           className="px-2 m-0 text-uppercase btn-sm text-dark bg-white font-italic font-weight-bold childText child1">popular
-                </Nav.Link>
+                </RouterLink>
               </div>
             </Fade>
           </div>

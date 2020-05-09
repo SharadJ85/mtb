@@ -14,6 +14,7 @@ const Home = ({fetchMovieNowPlaying, fetchTvOnTheAir, movie, tv}) => {
   useEffect(() => {
     fetchMovieNowPlaying();
     fetchTvOnTheAir()
+    document.title = `MTB: Home`
   }, []);
 
   return (

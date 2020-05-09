@@ -35,8 +35,10 @@ const MediaCard = ({mediaId, mediaType, posterPath, year, title, overview, ratin
             </div>)
         }
       </div>
-      <div className="ratingsStyle" style={ratingsStyle}>
-        <Ratings value={ratingValue} /></div>
+      {mediaType !== "person"
+        ? <div className="ratingsStyle" style={ratingsStyle}>
+          <Ratings value={ratingValue} /></div>
+        : null}
     </div>
   );
 };

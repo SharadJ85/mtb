@@ -11,6 +11,7 @@ import LoadingSpinner from "./partials/loadingSpinner";
 const MediaList = (props) => {
   useEffect(() => {
     props.fetchUrlData()
+    document.title=`MTB: ${props.match.params.generalType} ${props.match.params.media}${props.match.params.media===`tv`?` shows`:`s`}`
   });
 
   return (

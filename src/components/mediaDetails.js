@@ -51,7 +51,8 @@ const Media_Details = (props) => {
     props.fetchMediaVideos();
     props.fetchMediaCredits();
     props.fetchMediaReviews();
-  }, []);
+    document.title = `MTB: ${props.mediaDetails.title || props.mediaDetails.name} (${props.mediaDetails.id ? ((props.mediaDetails.release_date || props.mediaDetails.first_air_date).slice(0, 4)):``})`;
+  }, [props.mediaDetails]);
 
   return (
     <div className="mediaDiv">
@@ -159,7 +160,7 @@ const Media_Details = (props) => {
 
                                   {/*person details */}
                                   <div className="card-meta--title">
-                                    <h3 className="card-meta--name">
+                                    <h3 className="card-meta--name m-0">
 
                                       {/*person name */}
                                       {each[1]}</h3>
@@ -190,7 +191,7 @@ const Media_Details = (props) => {
                                       </div>
                                       {/*person details */}
                                       <div className="card-meta--title">
-                                        <h3 className="card-meta--name">
+                                        <h3 className="card-meta--name m-0">
                                           {/*person name */}
                                           {el.name}
                                         </h3>
@@ -288,10 +289,10 @@ const Media_Details = (props) => {
                     <h5 className="font-weight-light headText"><em> Original Lang</em></h5>
                     <div className="pt-1">
                       {isoCodes
-                        .filter(each=>each.code===props.mediaDetails.original_language)
-                        .map(el=>(
-                        <p>{el.English}</p>
-                      ))}
+                        .filter(each => each.code === props.mediaDetails.original_language)
+                        .map(el => (
+                          <p>{el.English}</p>
+                        ))}
                     </div>
                   </div>
                   <hr />

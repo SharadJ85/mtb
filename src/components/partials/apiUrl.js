@@ -23,7 +23,7 @@ export default class TmdbApiUrl {
    * @param imageSize | 0: original | 1: w500
    */
    imageURL(imageSize) {
-    const size = ["original", "w500"];
+    const size = ["original", "w500","w780"];
     return `http://image.tmdb.org/t/p/${size[imageSize]}`;
   }
 

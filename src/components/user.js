@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import "../assets/user.sass"
 import Navigation from "../components/partials/nav"
 import ParticlesBg from "particles-bg";
 import {Slide} from "react-reveal";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {connect} from "react-redux";
 
 const User = ({userProfileID, userInitials, userFirstName, userLastName, userEmail}) => {
+  useEffect(() => {
+    document.title = `MTB: user ${userProfileID ? userFirstName + ` ` + userLastName : ``}`
+  }, [userProfileID])
   return (
     <div className="mainUserDiv">
       <Navigation />
@@ -66,8 +67,8 @@ const User = ({userProfileID, userInitials, userFirstName, userLastName, userEma
 };
 const mapStateToProps = (state) => {
   return {
-    userProfileID:state.Auth.user.storeData.id,
-    userInitials:state.Auth.user.storeData.initials,
+    userProfileID: state.Auth.user.storeData.id,
+    userInitials: state.Auth.user.storeData.initials,
     userFirstName: state.Auth.user.storeData.firstName,
     userLastName: state.Auth.user.storeData.lastName,
     userEmail: state.Auth.user.storeData.email,

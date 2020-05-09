@@ -11,7 +11,8 @@ const Person_Details = ({fetchPersonDetails, person}) => {
   let api = new TmdbApiUrl();
   useEffect(() => {
     fetchPersonDetails();
-  }, []);
+    document.title=`MTB: ${person.name?person.name:``}`
+  }, [person.name]);
   const backgroundStyle = {backgroundColor: "#02131b"};
   return (
 
