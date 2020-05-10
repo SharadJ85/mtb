@@ -5,6 +5,9 @@ $cyprus: rgb(4, 15, 22)
 .mediaDiv
   position: relative
   background-color: #02131b
+
+.text-white
+  color: rgba(255,255,255,0.9)
 //
 //
 //
@@ -85,9 +88,11 @@ p
 
 .trailers::-webkit-scrollbar-thumb
   background: #666
+  border-radius: 0.2rem
 
 .trailers::-webkit-scrollbar-track
   background: rgba(102, 102, 102, 0.45)
+  border-radius: 0.2rem
 
 .videoThumbnail
   min-height: 13rem
@@ -124,6 +129,12 @@ p
 .videoThumbnail:hover .playButton
   cursor: pointer
   background: $tiber
+  box-shadow: none!important
+
+.playButton:focus
+  background-color: #191a1b!important
+  border-color: #0062cc!important
+  box-shadow: none!important
 
 .playButton::before
   background: inherit
@@ -150,11 +161,9 @@ p
 .trailersText
   max-width: 17rem
 
-.modal-content
-  background-color: #1a202c
-
-.modal-body
-  height: 500px
+.videoModal
+  background-color: rgba(4,15,22,0.5)
+  max-width: 51rem
 //
 //
 //
@@ -197,9 +206,11 @@ p
 
 .castCrewDiv::-webkit-scrollbar-thumb
   background: #666
+  border-radius: 0.2rem
 
 .castCrewDiv::-webkit-scrollbar-track
   background: rgba(102, 102, 102, 0.45)
+  border-radius: 0.2rem
 
 .nameCrewCast
   font-size: 1rem
@@ -226,7 +237,6 @@ p
 .detailsStatus
   background-color: #050e15b3
   min-height: 38rem
-  max-height: 61rem
   -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
   -moz-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
   box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
@@ -264,6 +274,46 @@ hr
 
 .card-header
   cursor: pointer
+
+.mediaListRelatedToMedia
+  height: 12.8rem
+  border-radius: 0.4rem
+  overflow: hidden
+  background-color: #10252e!important
+
+.mediaListRelatedToMediaDiv
+  height: 10.1rem
+  overflow-y: hidden
+  overflow-x: hidden
+
+.mediaListRelatedToMedia:hover .mediaListRelatedToMediaDiv
+  overflow-x: scroll
+
+.mediaListRelatedToMediaDiv::-webkit-scrollbar
+  height: 0.8rem
+
+.mediaListRelatedToMediaDiv::-webkit-scrollbar-thumb
+  background: #666
+  border-radius: 0.4rem
+
+.mediaListRelatedToMediaDiv::-webkit-scrollbar-track
+  background: rgba(102, 102, 102, 0.45)
+  border-radius: 0.4rem
+
+.mediaListRelatedToMediaContainer
+  position: relative
+  height: auto
+  border-radius: 0.5rem
+
+.mediaListRelatedToMediaImage
+  height: 9.83rem
+  @extend .mediaListRelatedToMediaContainer
+
+.mediaListRelatedToMediaTitle
+  background-color: rgba(0,0,0,0.7)
+  width: 97.2%
+  position: absolute
+  bottom: -4rem
 
 Link
   outline: none

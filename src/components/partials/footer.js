@@ -6,7 +6,7 @@ import {Fade} from "react-reveal"
 
 const Footer = () => {
   return (
-    <div className="container-fluid h-100 m-0 py-4"
+    <div className="container-fluid h-100 m-0 pb-4 pt-5"
          style={{height: "5rem", width: "100%", backgroundColor: "#0a0a0a"}}>
       <Fade big delay={400} duration={600}>
         <div className=" my-auto text-center ">

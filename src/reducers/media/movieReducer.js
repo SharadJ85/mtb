@@ -6,8 +6,12 @@ import {
   MOVIE_REVIEWS,
   MOVIE_TOP_RATED,
   MOVIE_UPCOMING,
-  MOVIE_VIDEOS
-} from "../actions/media/movieAction";
+  MOVIE_VIDEOS,
+  MOVIE_EXTERNAL_IDS,
+  MOVIE_KEYWORDS,
+  MOVIE_RECOMMENDED,
+  MOVIE_SIMILAR
+} from "../../actions/media/movieAction";
 
 const MovieReducer = (state = {
   popular: {},
@@ -19,6 +23,10 @@ const MovieReducer = (state = {
     credits: {},
     videos: {},
     reviews: {},
+    externalIds: {},
+    keywords: {},
+    recommended: {},
+    similar: {},
   },
 }, action) => {
   switch (action.type) {
@@ -72,6 +80,38 @@ const MovieReducer = (state = {
         movieDetails: {
           ...state.movieDetails,
           reviews: action.payload
+        }
+      };
+    case MOVIE_EXTERNAL_IDS:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          externalIds: action.payload
+        }
+      };
+    case MOVIE_KEYWORDS:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          keywords: action.payload
+        }
+      };
+    case MOVIE_RECOMMENDED:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          recommended: action.payload
+        }
+      };
+    case MOVIE_SIMILAR:
+      return {
+        ...state,
+        movieDetails: {
+          ...state.movieDetails,
+          similar: action.payload
         }
       };
     default:

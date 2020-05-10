@@ -2,26 +2,26 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-} from "../actions/auth/logInAction";
+} from "../../actions/auth/logInAction";
 import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
-} from "../actions/auth/logOutAction";
+} from "../../actions/auth/logOutAction";
 import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE
-} from "../actions/auth/signUpAction";
+} from "../../actions/auth/signUpAction";
 import {
   VERIFY_REQUEST,
   VERIFY_SUCCESS,
-} from "../actions/auth/verifyAction";
+} from "../../actions/auth/verifyAction";
 import {
   GET_STORE_USER_DATA_REQUEST,
   GET_STORE_USER_DATA_SUCCESS,
   GET_STORE_USER_DATA_FAILURE
-} from "../actions/auth/getUserStoreDataAction";
+} from "../../actions/auth/getUserStoreDataAction";
 
 const FirebaseAuthReducer = (
   state = {

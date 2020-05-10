@@ -1,4 +1,4 @@
-import {PERSON_POPULAR,PERSON_DETAILS} from "../actions/media/personAction";
+import {PERSON_POPULAR,PERSON_DETAILS} from "../../actions/media/personAction";
 
 const PersonReducer = (state = {
   popular: {},

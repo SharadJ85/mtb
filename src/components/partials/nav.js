@@ -8,9 +8,9 @@ import {Link as RouterLink, withRouter} from "react-router-dom";
 import {Fade, Zoom} from "react-reveal"
 import {logoutUser} from "../../actions/auth/logOutAction";
 import {connect} from "react-redux";
-import SearchAction from "../../actions/searchAction";
+import SearchAction from "../../actions/search/searchAction";
 
-const Navigation = ({match, history, userFirstName, userLastName, userInitials, dispatch}) => {
+const Navigation = ({ history, userFirstName, userLastName, userInitials, dispatch}) => {
   const navBarText = {color: '#00bce6', cursor: "default"};
 
   const [searchQuery, setSearchQuery] = useState({searchKeywords: null});

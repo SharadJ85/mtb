@@ -41,9 +41,8 @@ const ImageCollage = ({list, type}) => {
                   <Link to={`/media_details/${type}/${data[0].id}/`}>
                     <Row className="bigThumbnail p-0 m-0">
                       <Zoom>
-                        <img className="image" src={`${api.imageURL(2)}${data[0].backDrop}`} alt={data[0].title} />
-                        <h3
-                          className="px-2  align-self-end text-white thumbnailTextBottom">{data[0].title}</h3>
+                        <img className="image" src={`${api.imageURL(0)}${data[0].backDrop}`} alt={data[0].title} />
+                        <h3 className="px-2  align-self-end text-white thumbnailTextBottom">{data[0].title}</h3>
                       </Zoom>
                     </Row>
                   </Link>
@@ -92,7 +91,7 @@ const ImageCollage = ({list, type}) => {
                   <Link to={`/media_details/${type}/${data[8].id}/`}>
                     <Row className="bigThumbnail p-0 m-0">
                       <Zoom>
-                        <img className="image" src={`${api.imageURL(2)}${data[8].backDrop}`} alt={data[8].title} />
+                        <img className="image" src={`${api.imageURL(0)}${data[8].backDrop}`} alt={data[8].title} />
                         <h3 className="px-2  align-self-end text-white thumbnailTextTop">{data[8].title}</h3>
                       </Zoom>
                     </Row>

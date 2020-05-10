@@ -1,34 +1,31 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Navigation from "./partials/nav";
 import "../assets/mediaDetails.sass"
 import isoCodes from "./partials/ISO_639-1_codes_to_english";
 import TmdbApiUrl from "./partials/apiUrl";
 import Ratings from "./partials/ratings";
 import Badge from "react-bootstrap/Badge";
-import {Accordion, Card, Col, ListGroup, Tab} from "react-bootstrap";
+import {Accordion, Button, Card, Col, ListGroup, Modal, Tab} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {movieDetailsType} from "../actions/media/movieAction";
+import {Fade} from "react-reveal";
+import {faEnvelope, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 const Media_Details = (props) => {
 
   let api = new TmdbApiUrl();
 
-  //set media status
-  const mediaDetailsStatus = (status) => {
-    switch (status) {
-      case "Released":
-        return (<Badge variant="success">Released</Badge>);
-      case "In Production":
-        return (<Badge variant="danger">In Production</Badge>);
-      case "Upcoming":
-        return (<Badge variant="warning">Upcoming</Badge>);
-      default:
-        return (<Badge variant="light">{status}</Badge>)
+  //set page title
+  const title = () => {
+    if (props.mediaDetails.id) {
+      return `MTB: ${props.mediaDetails.title || props.mediaDetails.name} (${(props.mediaDetails.release_date || props.mediaDetails.first_air_date).slice(0, 4)})`
+    } else {
+      return ``
     }
   };
-
   //list directors
   const listOfDirectors = (credits = props.mediaCredits) => {
     const directorsAndTasks = [];
@@ -45,14 +42,34 @@ const Media_Details = (props) => {
     }
     return directorsAndTasks;
   };
-
+  //set media status
+  const mediaDetailsStatus = (status) => {
+    switch (status) {
+      case "Released":
+        return (<Badge variant="success">Released</Badge>);
+      case "In Production":
+        return (<Badge variant="danger">In Production</Badge>);
+      case "Upcoming":
+        return (<Badge variant="warning">Upcoming</Badge>);
+      default:
+        return (<Badge variant="light">{status}</Badge>)
+    }
+  };
+  //set video modal
+  const [modal, setModal] = useState({isOn: false, title: null, sourceKey: null, id: null});
+  //
+  //
   useEffect(() => {
     props.fetchMediaDetails();
     props.fetchMediaVideos();
     props.fetchMediaCredits();
     props.fetchMediaReviews();
-    document.title = `MTB: ${props.mediaDetails.title || props.mediaDetails.name} (${props.mediaDetails.id ? ((props.mediaDetails.release_date || props.mediaDetails.first_air_date).slice(0, 4)):``})`;
-  }, [props.mediaDetails]);
+    props.fetchMediaExternalIds();
+    props.fetchMediaKeywords();
+    props.fetchMediaRecommended();
+    props.fetchMediaSimilar();
+    document.title = title();
+  }, [props.mediaDetails.id]);
 
   return (
     <div className="mediaDiv">
@@ -227,8 +244,14 @@ const Media_Details = (props) => {
                           <img className="videoImage " src={`https://img.youtube.com/vi/${video.key}/0.jpg`}
                                alt={video.name} />
                           {/*Button trigger modal */}
-                          <button type="button" className="playButton" data-toggle="modal"
-                                  data-target="#myVideoModal" />
+                          <Button type="button" className="playButton" data-toggle="modal"
+                                  data-target="#myVideoModal"
+                                  onClick={() => setModal({
+                                    isOn: true,
+                                    title: video.name,
+                                    sourceKey: video.key,
+                                    id: video.id
+                                  })} />
                         </div>
                         <p className="text-white-50 pl-2 pt-1 trailersText">{video.type}: {video.name}</p>
                       </div>
@@ -237,31 +260,35 @@ const Media_Details = (props) => {
                     {/*Modal*/}
                     <div className="modal fade" id="myVideoModal" tabIndex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div className="modal-content">
-                          <div className="modal-header pt-2 pb-1">
-                            <h5 className="modal-title text-truncate text-white" id="exampleModalLongTitle">modal
-                                                                                                            text</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div className="modal-body p-0">
-                            <iframe id="cartoonVideo" width="798" height="500"
-                                    src="https://www.youtube.com/embed/YE7VzlLtp-4"
-                                    allowFullScreen />
-                          </div>
-                        </div>
-                      </div>
+                      <Modal
+                        dialogClassName="videoModal"
+                        show={modal.isOn}
+                        onHide={() => setModal({isOn: false, title: null, sourceKey: null, id: null})}
+                        aria-labelledby="example-modal-sizes-title-lg" >
+                        <Modal.Header closeButton className="pt-2 px-3 p-0 border-0 text-white"
+                                      style={{backgroundColor: "rgba(4,15,22,1)"}}>
+                          <Modal.Title id="example-modal-sizes-title-lg text-truncate">
+                            {modal.title}
+                            {/*<FontAwesomeIcon icon={faTimes} className="text-white-50" style={{maxWidth:"1rem"}}/>*/}
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="p-0 m-0 border-0 pt-2 px-2"
+                                    style={{backgroundColor: "rgba(4,15,22,1)"}}>
+                          <iframe className="border-0" id={`${modal.id}`} width="798" height="500"
+                                  title={modal.title}
+                                  src={`https://www.youtube.com/embed/${modal.sourceKey}`}
+                                  allowFullScreen />
+                        </Modal.Body>
+                      </Modal>
                     </div>
                   </div>
                 </div>)
                 : null
               : null}
 
-            {/*/!*  details*!/*/}
+            {/*  details */}
             <div className="container-fluid row p-0 m-0 pb-5 justify-content-around">
-              {/*details-- Status*/}
+              {/* details-- Status*/}
               <div className="detailsStatus col-3 order-2 m-3 pb-2 ">
                 <div className="text-white-50  container m-auto">
                   <div className="mt-4">
@@ -317,137 +344,165 @@ const Media_Details = (props) => {
                     </div>
                   </div>
                   <hr />
+                  <div className="mt-2 font-weight-bold pt-1">
+                    <h5 className="font-weight-light headText"><em> Keywords</em></h5>
+                    <div className="pt-1">
+                      {props.mediaKeywords.id
+                        ? props.mediaKeywords.keywords.length > 0
+                          ? <p> {props.mediaKeywords.keywords.map(keyword => (
+                            <Badge variant={`light`} className="text-capitalize px-2 py-2 m-1">{keyword.name}</Badge>)
+                          )}</p>
+                          : <p className="text-white-50">-</p>
+                        : null
+                      }
+                    </div>
+                  </div>
+                  <hr />
                 </div>
 
                 {/* external links*/}
-                <div className="ml-3 ">
+                <div className="ml-3 mt-1">
+                  <h5 className="font-weight-light headText my-2"><em> External Links</em></h5>
                   {props.mediaDetails.homepage
                     ? (<div className="my-2">
                       <a href={props.mediaDetails.homepage} rel="noopener noreferrer" target="_blank">
                         <img src={require("../assets/images/home.png")} alt="home" className="externalLink" /></a>
                     </div>)
                     : null}
-                  {props.mediaDetails.imdb_id
+                  {props.mediaExternalIds.imdb_id
                     ? (<div className="my-2">
-                      <a href={`https://www.imdb.com/name/${props.mediaDetails.imdb_id}/?ref_=nv_sr_srsg_0`}
+                      <a href={`https://www.imdb.com/name/${props.mediaExternalIds.imdb_id}/?ref_=nv_sr_srsg_0`}
                          rel="noopener noreferrer" target="_blank">
                         <img src={require("../assets/images/imdb.png")} alt="imdb" className="externalLink" /></a>
                     </div>)
                     : null}
-                  <div className="my-2">
-                    <Link to="#">
-                      <img src={require("../assets/images/insta.png")} alt="insta" className="externalLink" /></Link>
-                  </div>
-                  <div className="my-2">
-                    <Link to="#">
-                      <img src={require("../assets/images/twitr.png")} alt="twtr" className="externalLink" /></Link>
-                  </div>
-                  <div className="my-2">
-                    <Link to="#">
-                      <img src={require("../assets/images/fbk.png")} alt="fk" className="externalLink" /></Link>
-                  </div>
+                  {props.mediaExternalIds.instagram_id
+                    ? (<div className="my-2">
+                      <a href={`https://www.instagram.com/${props.mediaExternalIds.instagram_id}`}
+                         rel="noopener noreferrer" target="_blank">
+                        <img src={require("../assets/images/insta.png")} alt="insta" className="externalLink" /></a>
+                    </div>)
+                    : null}
+                  {props.mediaExternalIds.twitter_id
+                    ? (<div className="my-2">
+                      <a href={`https://twitter.com/${props.mediaExternalIds.twitter_id}`}
+                         rel="noopener noreferrer" target="_blank">
+                        <img src={require("../assets/images/twitr.png")} alt="twtr" className="externalLink" /></a>
+                    </div>)
+                    : null}
+                  {props.mediaExternalIds.facebook_id
+                    ? (<div className="my-2">
+                      <a href={`https://www.facebook.com/${props.mediaExternalIds.facebook_id}`}
+                         rel="noopener noreferrer" target="_blank">
+                        <img src={require("../assets/images/fbk.png")} alt="fk" className="externalLink" /></a>
+                    </div>)
+                    : null}
                 </div>
               </div>
-              {/*details-- Cast / Crew / Reviews  */}
-              <div className="CrewCast col order-1 p-0 mt-5">
-                {/*crew and cast */}
+
+              {/* details-- Cast / Crew / Reviews  */}
+              <div className="CrewCast col order-1 p-0 mt-4">
+
+                {/* crew and cast */}
                 {props.mediaCredits.id
-                  ? (<Tab.Container id="list-group-tabs-example" defaultActiveKey="#castTab">
-                    {/*crew and cast tab*/}
-                    <div className="justify-content-between tabCrewCast">
-                      <ListGroup horizontal={true} className="text-center font-weight-bold">
-                        <Col className="p-0 m-0 mx-2">
-                          <ListGroup.Item action href="#castTab" variant={"tiber"} className="listTab shadow ">
-                            Cast
-                          </ListGroup.Item></Col>
-                        <Col className="p-0 m-0 mx-2">
-                          <ListGroup.Item action href="#crewTab" variant={"tiber"} className="listTab shadow ">
-                            Crew
-                          </ListGroup.Item></Col>
-                      </ListGroup>
-                    </div>
-                    <div className="w-100 " />
-                    {/*crew and cast data*/}
-                    <div className="justify-content-start">
-                      <Tab.Content className="mt-2 ">
-                        <Tab.Pane eventKey="#castTab">
-                          <div className="tabContentCrewCast tab-pane show active"
-                               aria-labelledby="list-cast-list">
-                            <div className="castCrewDiv">
-                              <div className="m-0 p-0 py-2 d-flex">
+                  ? (<div className="mt-5 mb-4">
+                    <Tab.Container id="list-group-tabs-example" defaultActiveKey="#castTab">
+                      {/*crew and cast tab*/}
+                      <div className="justify-content-between tabCrewCast">
+                        <ListGroup horizontal={true} className="text-center font-weight-bold">
+                          <Col className="p-0 m-0 mx-2">
+                            <ListGroup.Item action href="#castTab" variant={"tiber"} className="listTab shadow ">
+                              Cast
+                            </ListGroup.Item></Col>
+                          <Col className="p-0 m-0 mx-2">
+                            <ListGroup.Item action href="#crewTab" variant={"tiber"} className="listTab shadow ">
+                              Crew
+                            </ListGroup.Item></Col>
+                        </ListGroup>
+                      </div>
+                      <div className="w-100 " />
+                      {/*crew and cast data*/}
+                      <div className="justify-content-start">
+                        <Tab.Content className="mt-2 ">
+                          <Tab.Pane eventKey="#castTab">
+                            <div className="tabContentCrewCast tab-pane show active"
+                                 aria-labelledby="list-cast-list">
+                              <div className="castCrewDiv">
+                                <div className="m-0 p-0 py-2 d-flex">
 
-                                {/*each cast card */}
-                                {props.mediaCredits.cast.map(cast => (
-                                  <Link to={`/person_details/${cast.id}`}>
-                                    <div className="crewCastBtn text-white mx-2 font-weight-bold">
+                                  {/*each cast card */}
+                                  {props.mediaCredits.cast.map(cast => (
+                                    <Link to={`/person_details/${cast.id}`}>
+                                      <div className="crewCastBtn text-white mx-2 font-weight-bold">
 
-                                      {/*cast card cast image*/}
-                                      <img src={cast.profile_path
-                                        ? `${api.imageURL(0)}${cast.profile_path}`
-                                        : `${require(`../assets/images/imageUnavailable.jpg`)}`}
-                                           className="imageCrewCast" alt={cast.name} />
+                                        {/*cast card cast image*/}
+                                        <img src={cast.profile_path
+                                          ? `${api.imageURL(0)}${cast.profile_path}`
+                                          : `${require(`../assets/images/imageUnavailable.jpg`)}`}
+                                             className="imageCrewCast" alt={cast.name} />
 
-                                      {/*cast details */}
-                                      <div className=" mt-3 ">
-                                        <div className="m-1 pl-1 text-truncate nameCrewCast">
-                                          {/*cast name */}
-                                          {cast.name}
-                                        </div>
-                                        <div className="m-1 pl-1 pb-1 text-truncate jobCrewCast">
-                                          {/*cast character name */}
-                                          {cast.character}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="#crewTab">
-                          <div className="tabContentCrewCast tab-pane"
-                               aria-labelledby="list-crew-list">
-                            <div className="crew castCrewDiv">
-                              <div className="m-0 p-0 py-2 d-flex">
-
-                                {/*each crew card */}
-                                {props.mediaCredits.crew.map(crew => (
-                                  <Link to={`/person_details/${crew.id}`}>
-                                    <div className="crewCastBtn text-white mx-2 font-weight-bold">
-
-                                      {/*crew card crew image*/}
-                                      <img src={crew.profile_path
-                                        ? `${api.imageURL(0)}${crew.profile_path}`
-                                        : `${require(`../assets/images/imageUnavailable.jpg`)}`}
-                                           className="imageCrewCast" alt={crew.name} />
-
-                                      {/*crew details */}
-                                      <div className=" mt-3 ">
-                                        <div className="m-1 pl-1 text-truncate nameCrewCast">
-                                          {/*crew name */}
-                                          {crew.name}
-                                        </div>
-                                        <div className="m-1 pl-1 pb-1 text-truncate jobCrewCast">
-                                          {/*crew job */}
-                                          {crew.job}
+                                        {/*cast details */}
+                                        <div className=" mt-3 ">
+                                          <div className="m-1 pl-1 text-truncate nameCrewCast">
+                                            {/*cast name */}
+                                            {cast.name}
+                                          </div>
+                                          <div className="m-1 pl-1 pb-1 text-truncate jobCrewCast">
+                                            {/*cast character name */}
+                                            {cast.character}
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </Link>
-                                ))}
-                                {/*}) */}
+                                    </Link>
+                                  ))}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Tab.Pane>
-                      </Tab.Content>
-                    </div>
-                  </Tab.Container>)
+                          </Tab.Pane>
+                          <Tab.Pane eventKey="#crewTab">
+                            <div className="tabContentCrewCast tab-pane"
+                                 aria-labelledby="list-crew-list">
+                              <div className="crew castCrewDiv">
+                                <div className="m-0 p-0 py-2 d-flex">
+
+                                  {/*each crew card */}
+                                  {props.mediaCredits.crew.map(crew => (
+                                    <Link to={`/person_details/${crew.id}`}>
+                                      <div className="crewCastBtn text-white mx-2 font-weight-bold">
+
+                                        {/*crew card crew image*/}
+                                        <img src={crew.profile_path
+                                          ? `${api.imageURL(0)}${crew.profile_path}`
+                                          : `${require(`../assets/images/imageUnavailable.jpg`)}`}
+                                             className="imageCrewCast" alt={crew.name} />
+
+                                        {/*crew details */}
+                                        <div className=" mt-3 ">
+                                          <div className="m-1 pl-1 text-truncate nameCrewCast">
+                                            {/*crew name */}
+                                            {crew.name}
+                                          </div>
+                                          <div className="m-1 pl-1 pb-1 text-truncate jobCrewCast">
+                                            {/*crew job */}
+                                            {crew.job}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </Link>
+                                  ))}
+                                  {/*}) */}
+                                </div>
+                              </div>
+                            </div>
+                          </Tab.Pane>
+                        </Tab.Content>
+                      </div>
+                    </Tab.Container></div>)
                   : null}
-                {/*   Reviews*/}
+
+                {/* Reviews*/}
                 {props.mediaReviews.id
-                  ? (<Accordion className="mt-4 mx-auto reviews">
+                  ? (<Accordion className="mt-5 mb-4 mx-auto reviews">
                     <Card className="text-center text-white font-weight-bold shadow-sm reviewsHead">
                       <Accordion.Toggle as={Card.Header} eventKey="0" className="p-2">
                         Reviews
@@ -479,22 +534,79 @@ const Media_Details = (props) => {
                     </Card>
                   </Accordion>)
                   : null}
+
+                {/* recommendation */}
+                {props.mediaRecommended.results
+                  ? props.mediaRecommended.results.length > 0
+                    ? (<div className="mt-5 mb-4 mediaListRelatedToMedia">
+                      <h4 className="m-0 mb-1 ml-3 mt-2 font-italic font-weight-lighter text-">
+                        Recommended {props.match.params.media}{props.match.params.media === `tv` ? ` shows` : `s`}</h4>
+                      <div className=" mediaListRelatedToMediaDiv">
+                        <div className="d-inline-flex">
+                          <Fade>
+                            {props.mediaRecommended.results.map(media => (
+                              <Link to={`/media_details/${props.match.params.media}/${media.id}`}
+                                    className="mediaListRelatedToMediaContainer">
+                                <img className="mediaListRelatedToMediaImage m-1"
+                                     src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
+                                     alt={`data[el].title`} />
+                                <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
+                                  {media.title} ({media.release_date.slice(0, 4)})</h6>
+                              </Link>
+                            ))}
+                          </Fade>
+                        </div>
+                      </div>
+                    </div>)
+                    : null
+                  : null}
+
+                {/* similar */}
+                {props.mediaSimilar.results
+                  ? props.mediaSimilar.results.length > 0
+                    ? (<div className="mt-5 mb-4 mediaListRelatedToMedia">
+                      <h4 className="m-0 mb-1 ml-3 mt-2 font-italic font-weight-lighter text-">
+                        Similar {props.match.params.media}{props.match.params.media === `tv` ? ` shows` : `s`}</h4>
+                      <div className=" mediaListRelatedToMediaDiv">
+                        <div className="d-inline-flex">
+                          <Fade>
+                            {props.mediaSimilar.results.map(media => (
+                              <Link to={`/media_details/${props.match.params.media}/${media.id}`}
+                                    className="mediaListRelatedToMediaContainer">
+                                <img className="mediaListRelatedToMediaImage m-1"
+                                     src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
+                                     alt={`data[el].title`} />
+                                <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
+                                  {media.title} ({media.release_date.slice(0, 4)})</h6>
+                              </Link>
+                            ))}
+                          </Fade>
+                        </div>
+                      </div>
+                    </div>)
+                    : null
+                  : null}
               </div>
             </div>
 
           </div>
           : null
       }
-    </div>)
+    </div>);
 };
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  let ID = ownProps.match.params.mediaId;
   return {
-    fetchMediaDetails: () => dispatch(movieDetailsType(1, ownProps.match.params.mediaId)),
-    fetchMediaVideos: () => dispatch(movieDetailsType(2, ownProps.match.params.mediaId)),
-    fetchMediaCredits: () => dispatch(movieDetailsType(3, ownProps.match.params.mediaId)),
-    fetchMediaReviews: () => dispatch(movieDetailsType(4, ownProps.match.params.mediaId)),
+    fetchMediaDetails: () => dispatch(movieDetailsType(1, ID)),
+    fetchMediaVideos: () => dispatch(movieDetailsType(2, ID)),
+    fetchMediaCredits: () => dispatch(movieDetailsType(3, ID)),
+    fetchMediaReviews: () => dispatch(movieDetailsType(4, ID)),
+    fetchMediaExternalIds: () => dispatch(movieDetailsType(5, ID)),
+    fetchMediaKeywords: () => dispatch(movieDetailsType(6, ID)),
+    fetchMediaRecommended: () => dispatch(movieDetailsType(7, ID)),
+    fetchMediaSimilar: () => dispatch(movieDetailsType(8, ID)),
   }
 };
 
@@ -504,6 +616,10 @@ const mapStateToProps = (state) => {
     mediaVideos: state.Movie.movieDetails.videos,
     mediaCredits: state.Movie.movieDetails.credits,
     mediaReviews: state.Movie.movieDetails.reviews,
+    mediaExternalIds: state.Movie.movieDetails.externalIds,
+    mediaKeywords: state.Movie.movieDetails.keywords,
+    mediaRecommended: state.Movie.movieDetails.recommended,
+    mediaSimilar: state.Movie.movieDetails.similar,
   }
 };
 

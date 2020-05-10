@@ -1,4 +1,4 @@
-import {SEARCH_FAILURE, SEARCH_REQUEST, SEARCH_SUCCESS} from "../actions/searchAction";
+import {SEARCH_FAILURE, SEARCH_REQUEST, SEARCH_SUCCESS} from "../../actions/search/searchAction";
 
 const SearchReducer = (
   state = {

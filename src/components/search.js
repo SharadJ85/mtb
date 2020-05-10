@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import SearchActorCard from "./partials/searchActorCard";
 import Navigation from "./partials/nav";
 import Pagination from "./partials/pagination";
-import SearchAction from "../actions/searchAction";
+import SearchAction from "../actions/search/searchAction";
 import {connect} from "react-redux";
 import {Fade} from "react-reveal";
 import LoadingSpinner from "./partials/loadingSpinner";
@@ -44,8 +44,8 @@ const Search = ({match, search, searchKeywords, searching, searchSuccess, search
                     </div>
                   </div>
                   : <div className="container InvalidKeywords">
-                    <h3 className="text-white-50 text InvalidKeywordsText">
-                      Search Keyword '<strong className="text-white">{searchKeywords}</strong>'Unavailable
+                    <h3 className="text-white-50 text-center my-5 InvalidKeywordsText">
+                      Search Keyword '<strong className="text-white">{searchKeywords}</strong>' not available.
                     </h3>
                   </div>
                 }

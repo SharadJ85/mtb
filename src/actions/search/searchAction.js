@@ -1,4 +1,4 @@
-import TmdbApiUrl from "../components/partials/apiUrl";
+import TmdbApiUrl from "../../components/partials/apiUrl";
 import axios from "axios";
 
 let api = new TmdbApiUrl();
