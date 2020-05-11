@@ -18,7 +18,6 @@ export const fetchMyAPI = (fetchUrl, successTypeName,failureTypeName=null,isFetc
         payload: fetchData.data,
       })
     } catch (err) {
-      console.log(`${successTypeName} fetchMyApi function error is==>${err}`);
       if(failureTypeName){dispatch({
         type: failureTypeName,
         payload: err,

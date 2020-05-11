@@ -1,56 +1,59 @@
 import React, {useEffect, useState} from 'react';
-import Navigation from "./partials/nav";
 import "../assets/mediaDetails.sass"
+import Navigation from "./partials/nav";
 import isoCodes from "./partials/ISO_639-1_codes_to_english";
 import TmdbApiUrl from "./partials/apiUrl";
 import Ratings from "./partials/ratings";
+import LoadingSpinner from "./partials/loadingSpinner";
 import Badge from "react-bootstrap/Badge";
 import {Accordion, Button, Card, Col, ListGroup, Modal, Tab} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {movieDetailsType} from "../actions/media/movieAction";
+import {tvDetailsType} from "../actions/media/tvAction";
 import {Fade} from "react-reveal";
-import {faEnvelope, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 const Media_Details = (props) => {
-
+  //set TmdbApiUrl class
   let api = new TmdbApiUrl();
-
   //set page title
   const title = () => {
     if (props.mediaDetails.id) {
-      return `MTB: ${props.mediaDetails.title || props.mediaDetails.name} (${(props.mediaDetails.release_date || props.mediaDetails.first_air_date).slice(0, 4)})`
+      return `MTB: ${props.mediaDetails.title || props.mediaDetails.name} (${(props.mediaDetails[props.match.params.media === "movie" ? "release_date" : "first_air_date"]).slice(0, 4)})`
     } else {
       return ``
     }
   };
   //list directors
-  const listOfDirectors = (credits = props.mediaCredits) => {
+  const listOfDirectors = (media = props.match.params.media) => {
     const directorsAndTasks = [];
-    if (credits.id) {
+    if (props.mediaCredits.id && media === "movie") {
+      const {crew} = props.mediaCredits;
       const directorsAndTasksProperties = [];
-      credits.crew
+      crew
         .filter(el => el.job === `Director`)
-        .map(eachObj => directorsAndTasksProperties.push(credits.crew.filter(elm => elm.id === eachObj.id)));
+        .map(eachObj => directorsAndTasksProperties.push(crew.filter(elm => elm.id === eachObj.id)));
       directorsAndTasksProperties.map(eachJob => {
         const jobs = [];
         eachJob.map(el => jobs.push(el.job));
         return directorsAndTasks.push([eachJob[0].id, eachJob[0].name, eachJob[0].profile_path, jobs])
       })
+    } else if (props.mediaDetails.id && media === "tv") {
+      const jobs = ["Creator"];
+      props.mediaDetails.created_by.map(each => directorsAndTasks.push([each.id, each.name, each.profile_path, jobs]))
     }
     return directorsAndTasks;
   };
   //set media status
   const mediaDetailsStatus = (status) => {
-    switch (status) {
-      case "Released":
-        return (<Badge variant="success">Released</Badge>);
-      case "In Production":
-        return (<Badge variant="danger">In Production</Badge>);
-      case "Upcoming":
-        return (<Badge variant="warning">Upcoming</Badge>);
+    switch (true) {
+      case (status === "Released") || (status === "Ended"):
+        return (<Badge variant="success">{status}</Badge>);
+      case status === "In Production":
+        return (<Badge variant="danger">{status}</Badge>);
+      case (status === "Upcoming") || (status === "Returning Series"):
+        return (<Badge variant="warning">{status}</Badge>);
       default:
         return (<Badge variant="light">{status}</Badge>)
     }
@@ -69,7 +72,7 @@ const Media_Details = (props) => {
     props.fetchMediaRecommended();
     props.fetchMediaSimilar();
     document.title = title();
-  }, [props.mediaDetails.id]);
+  }, [props.mediaDetails.id, props.match.params.mediaId]);
 
   return (
     <div className="mediaDiv">
@@ -116,7 +119,7 @@ const Media_Details = (props) => {
                       <div className=" pt-2 px-2 text-capitalize font-weight-bolder mt-1">
                         <h1>
                           {/*title/date */}
-                          {props.mediaDetails.title} ({props.mediaDetails.release_date.slice(0, 4)})
+                          {props.mediaDetails.title || props.mediaDetails.name} ({props.mediaDetails[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})
                         </h1>
                       </div>
                       {/*media tag line */}
@@ -133,18 +136,16 @@ const Media_Details = (props) => {
 
                         {/*if media genre is adult show red pill button */}
                         {props.mediaDetails.adult
-                          ? <Link className=" m-2 btn btn-danger btn-sm text-uppercase font-weight-bold" to="#"
-                                  role="button">
+                          ? <Badge variant={`danger`}
+                                   className=" text-uppercase font-weight-bold px-2 py-2 m-2">
                             adult
-                          </Link>
+                          </Badge>
                           : null}
                         {/*media genres */}
                         {props.mediaDetails.genres.length > 0
                           ? props.mediaDetails.genres.map(genre => (
-                            <Link className="m-2 btn btn-dark btn-sm text-uppercase font-weight-bold" to="#"
-                                  role="button">
-                              {genre.name}
-                            </Link>
+                            <Badge variant={`dark`}
+                                   className=" text-uppercase font-weight-bold px-2 py-2 m-2">{genre.name}</Badge>
                           ))
                           : null}
                       </div>
@@ -170,9 +171,15 @@ const Media_Details = (props) => {
                             ? listOfDirectors().map(each => (
                               <Link to={`/person_details/${each[0]}`}>
                                 <div className="card-meta--container p-2 align-self-center">
+
                                   {/*person avatar */}
-                                  <div className="card-meta--avatar rounded-circle"
-                                       style={{background: `url(${api.imageURL(0)}${each[2]}) center/cover`}}>
+                                  <div
+                                    className="card-meta--avatar rounded-circle text-uppercase text-white d-flex justify-content-center"
+                                    style={{
+                                      background: `url(${api.imageURL(0)}${each[2]}) center/cover`,
+                                      backgroundColor: "#04000e"
+                                    }}>
+                                    {each[2] ? null : each[1].slice(0, 1)}
                                   </div>
 
                                   {/*person details */}
@@ -203,8 +210,13 @@ const Media_Details = (props) => {
                                   <Link to={`/person_details/${el.id}`}>
                                     {/*person avatar */}
                                     <div className="card-meta--container p-2 align-self-center">
-                                      <div className="card-meta--avatar rounded-circle"
-                                           style={{background: `url(${api.imageURL(0)}${el.profile_path}) center/cover`}}>
+                                      <div
+                                        className="card-meta--avatar rounded-circle text-uppercase text-white d-flex justify-content-center"
+                                        style={{
+                                          background: `url(${api.imageURL(0)}${el.profile_path}) center/cover`,
+                                          backgroundColor: "#04000e"
+                                        }}>
+                                        {el.profile_path ? null : el.name.slice(0, 1)}
                                       </div>
                                       {/*person details */}
                                       <div className="card-meta--title">
@@ -235,7 +247,9 @@ const Media_Details = (props) => {
             {props.mediaVideos.id
               ? props.mediaVideos.results.length > 0
                 ? (<div className="videos ">
+                  {/*header*/}
                   <h2 className="container m-0 py-4 px-4 text-white ">Related Videos</h2>
+                  {/*video thumbnails*/}
                   <div className="trailers d-flex justify-content-start">
                     {/* each video */}
                     {props.mediaVideos.results.map(video => (
@@ -256,31 +270,29 @@ const Media_Details = (props) => {
                         <p className="text-white-50 pl-2 pt-1 trailersText">{video.type}: {video.name}</p>
                       </div>
                     ))}
-
-                    {/*Modal*/}
-                    <div className="modal fade" id="myVideoModal" tabIndex="-1" role="dialog"
-                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <Modal
-                        dialogClassName="videoModal"
-                        show={modal.isOn}
-                        onHide={() => setModal({isOn: false, title: null, sourceKey: null, id: null})}
-                        aria-labelledby="example-modal-sizes-title-lg" >
-                        <Modal.Header closeButton className="pt-2 px-3 p-0 border-0 text-white"
-                                      style={{backgroundColor: "rgba(4,15,22,1)"}}>
-                          <Modal.Title id="example-modal-sizes-title-lg text-truncate">
-                            {modal.title}
-                            {/*<FontAwesomeIcon icon={faTimes} className="text-white-50" style={{maxWidth:"1rem"}}/>*/}
-                          </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className="p-0 m-0 border-0 pt-2 px-2"
+                  </div>
+                  {/*Modal*/}
+                  <div className="mainModal">
+                    <Modal
+                      dialogClassName="videoModal"
+                      show={modal.isOn}
+                      onHide={() => setModal({isOn: false, title: null, sourceKey: null, id: null})}
+                      aria-labelledby="example-modal-sizes-title-lg"
+                      style={{backgroundColor: "rgba(0,0,0,0.9)"}}>
+                      <Modal.Header closeButton className="pt-2 px-3 p-0 border-0 text-white"
                                     style={{backgroundColor: "rgba(4,15,22,1)"}}>
-                          <iframe className="border-0" id={`${modal.id}`} width="798" height="500"
-                                  title={modal.title}
-                                  src={`https://www.youtube.com/embed/${modal.sourceKey}`}
-                                  allowFullScreen />
-                        </Modal.Body>
-                      </Modal>
-                    </div>
+                        <Modal.Title id="example-modal-sizes-title-lg" className="text-truncate w-100">
+                          {modal.title}
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body className="p-0 m-0 border-0 pt-2 px-2"
+                                  style={{backgroundColor: "rgba(4,15,22,1)"}}>
+                        <iframe className="border-0" id={`${modal.id}`} width="798" height="449"
+                                title={modal.title}
+                                src={`https://www.youtube.com/embed/${modal.sourceKey}`}
+                                allowFullScreen />
+                      </Modal.Body>
+                    </Modal>
                   </div>
                 </div>)
                 : null
@@ -292,28 +304,48 @@ const Media_Details = (props) => {
               <div className="detailsStatus col-3 order-2 m-3 pb-2 ">
                 <div className="text-white-50  container m-auto">
                   <div className="mt-4">
-                    <h5 className="font-weight-light headText"><em>Status</em></h5>
+                    <h5 className="font-weight-light headText text-capitalize"><em>Status</em></h5>
                     <div>
                       <h4>{mediaDetailsStatus(props.mediaDetails.status)}</h4>
                     </div>
+                    <hr />
                   </div>
-                  <hr />
-                  <div className="mt-2 font-weight-bold pt-1">
-                    <h5 className="font-weight-light headText"><em> Runtime</em></h5>
-                    <div className="pt-1">
-                      <p>{props.mediaDetails.runtime} mins</p>
+                  {props.mediaDetails.runtime
+                    ? <div className="mt-2 font-weight-bold pt-1">
+                      <h5 className="font-weight-light headText text-capitalize"><em> Runtime</em></h5>
+                      <div className="pt-1">
+                        <p>{props.mediaDetails.runtime} mins</p>
+                      </div>
+                      <hr />
                     </div>
-                  </div>
-                  <hr />
-                  <div className="mt-2 font-weight-bold pt-1">
-                    <h5 className="font-weight-light headText"><em> Original Title</em></h5>
-                    <div className="pt-1">
-                      <p>{props.mediaDetails.original_title}</p>
+                    : null}
+                  {props.mediaDetails.number_of_seasons
+                    ? <div className="mt-2 font-weight-bold pt-1">
+                      <h5 className="font-weight-light headText text-capitalize"><em> seasons</em></h5>
+                      <div className="pt-1">
+                        <p>{props.mediaDetails.number_of_seasons}</p>
+                      </div>
+                      <hr />
                     </div>
-                  </div>
-                  <hr />
+                    : null}
+                  {props.mediaDetails.number_of_episodes
+                    ? <div className="mt-2 font-weight-bold pt-1">
+                      <h5 className="font-weight-light headText text-capitalize"><em>episodes</em></h5>
+                      <div className="pt-1">
+                        <p>{props.mediaDetails.number_of_episodes}</p>
+                      </div>
+                      <hr />
+                    </div>
+                    : null}
                   <div className="mt-2 font-weight-bold pt-1">
-                    <h5 className="font-weight-light headText"><em> Original Lang</em></h5>
+                    <h5 className="font-weight-light headText text-capitalize"><em> Original Title</em></h5>
+                    <div className="pt-1">
+                      <p>{props.mediaDetails.original_title || props.mediaDetails.original_name}</p>
+                    </div>
+                    <hr />
+                  </div>
+                  <div className="mt-2 font-weight-bold pt-1">
+                    <h5 className="font-weight-light headText text-capitalize"><em> Original Lang</em></h5>
                     <div className="pt-1">
                       {isoCodes
                         .filter(each => each.code === props.mediaDetails.original_language)
@@ -321,43 +353,48 @@ const Media_Details = (props) => {
                           <p>{el.English}</p>
                         ))}
                     </div>
+                    <hr />
                   </div>
-                  <hr />
-                  <div className="mt-2 font-weight-bold pt-1">
-                    <h5 className="font-weight-light headText"><em> Budget</em></h5>
-                    <div className="pt-1">
-                      {props.mediaDetails.budget === 0
-                        ? <p className="text-white-50">-</p>
-                        : <p>$ {props.mediaDetails.budget.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -2)}</p>
-                      }
+                  {props.mediaDetails.budget
+                    ? <div className="mt-2 font-weight-bold pt-1">
+                      <h5 className="font-weight-light headText text-capitalize"><em> Budget</em></h5>
+                      <div className="pt-1">
+                        {props.mediaDetails.budget === 0
+                          ? <p className="text-white-50">-</p>
+                          :
+                          <p>$ {props.mediaDetails.budget.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -2)}</p>}
+                      </div>
+                      <hr />
                     </div>
-                  </div>
-                  <hr />
-                  <div className="mt-2 font-weight-bold pt-1">
-                    <h5 className="font-weight-light headText"><em> Revenue</em></h5>
-                    <div className="pt-1">
-                      {props.mediaDetails.revenue === 0
-                        ? <p className="text-white-50">-</p>
-                        :
-                        <p>$ {props.mediaDetails.revenue.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -2)}</p>
-                      }
+                    : null}
+                  {props.mediaDetails.revenue
+                    ? <div className="mt-2 font-weight-bold pt-1">
+                      <h5 className="font-weight-light headText text-capitalize"><em> Revenue</em></h5>
+                      <div className="pt-1">
+                        {props.mediaDetails.revenue === 0
+                          ? <p className="text-white-50">-</p>
+                          :
+                          <p>$ {props.mediaDetails.revenue.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').slice(0, -2)}</p>}
+                      </div>
+                      <hr />
                     </div>
-                  </div>
-                  <hr />
+                    : null
+                  }
                   <div className="mt-2 font-weight-bold pt-1">
-                    <h5 className="font-weight-light headText"><em> Keywords</em></h5>
+                    <h5 className="font-weight-light headText text-capitalize"><em> Keywords</em></h5>
                     <div className="pt-1">
                       {props.mediaKeywords.id
-                        ? props.mediaKeywords.keywords.length > 0
-                          ? <p> {props.mediaKeywords.keywords.map(keyword => (
+                        ? props.mediaKeywords[props.match.params.media === "movie" ? "keywords" : "results"].length > 0
+                          ?
+                          <p> {props.mediaKeywords[props.match.params.media === "movie" ? "keywords" : "results"].map(keyword => (
                             <Badge variant={`light`} className="text-capitalize px-2 py-2 m-1">{keyword.name}</Badge>)
                           )}</p>
                           : <p className="text-white-50">-</p>
                         : null
                       }
                     </div>
+                    <hr />
                   </div>
-                  <hr />
                 </div>
 
                 {/* external links*/}
@@ -400,7 +437,7 @@ const Media_Details = (props) => {
                 </div>
               </div>
 
-              {/* details-- Cast / Crew / Reviews  */}
+              {/* details-- Cast / Crew / Reviews / recommendations / similar */}
               <div className="CrewCast col order-1 p-0 mt-4">
 
                 {/* crew and cast */}
@@ -551,7 +588,7 @@ const Media_Details = (props) => {
                                      src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
                                      alt={`data[el].title`} />
                                 <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
-                                  {media.title} ({media.release_date.slice(0, 4)})</h6>
+                                  {media.title || media.name} ({media[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
                               </Link>
                             ))}
                           </Fade>
@@ -577,7 +614,7 @@ const Media_Details = (props) => {
                                      src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
                                      alt={`data[el].title`} />
                                 <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
-                                  {media.title} ({media.release_date.slice(0, 4)})</h6>
+                                  {media.title || media.name} ({media[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
                               </Link>
                             ))}
                           </Fade>
@@ -590,7 +627,13 @@ const Media_Details = (props) => {
             </div>
 
           </div>
-          : null
+          : (
+            <div className="container text-center" style={{padding: "10rem"}}>
+              <Fade duration={400}>
+                <LoadingSpinner />
+              </Fade>
+            </div>
+          )
       }
     </div>);
 };
@@ -598,28 +641,56 @@ const Media_Details = (props) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   let ID = ownProps.match.params.mediaId;
-  return {
-    fetchMediaDetails: () => dispatch(movieDetailsType(1, ID)),
-    fetchMediaVideos: () => dispatch(movieDetailsType(2, ID)),
-    fetchMediaCredits: () => dispatch(movieDetailsType(3, ID)),
-    fetchMediaReviews: () => dispatch(movieDetailsType(4, ID)),
-    fetchMediaExternalIds: () => dispatch(movieDetailsType(5, ID)),
-    fetchMediaKeywords: () => dispatch(movieDetailsType(6, ID)),
-    fetchMediaRecommended: () => dispatch(movieDetailsType(7, ID)),
-    fetchMediaSimilar: () => dispatch(movieDetailsType(8, ID)),
+  let media = ownProps.match.params.media;
+  if (media === "movie") {
+    return {
+      fetchMediaDetails: () => dispatch(movieDetailsType(1, ID)),
+      fetchMediaVideos: () => dispatch(movieDetailsType(2, ID)),
+      fetchMediaCredits: () => dispatch(movieDetailsType(3, ID)),
+      fetchMediaReviews: () => dispatch(movieDetailsType(4, ID)),
+      fetchMediaExternalIds: () => dispatch(movieDetailsType(5, ID)),
+      fetchMediaKeywords: () => dispatch(movieDetailsType(6, ID)),
+      fetchMediaRecommended: () => dispatch(movieDetailsType(7, ID)),
+      fetchMediaSimilar: () => dispatch(movieDetailsType(8, ID)),
+    }
+  } else if (media === "tv") {
+    return {
+      fetchMediaDetails: () => dispatch(tvDetailsType(1, ID)),
+      fetchMediaVideos: () => dispatch(tvDetailsType(2, ID)),
+      fetchMediaCredits: () => dispatch(tvDetailsType(3, ID)),
+      fetchMediaReviews: () => dispatch(tvDetailsType(4, ID)),
+      fetchMediaExternalIds: () => dispatch(tvDetailsType(5, ID)),
+      fetchMediaKeywords: () => dispatch(tvDetailsType(6, ID)),
+      fetchMediaRecommended: () => dispatch(tvDetailsType(7, ID)),
+      fetchMediaSimilar: () => dispatch(tvDetailsType(8, ID)),
+    }
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    mediaDetails: state.Movie.movieDetails.movie,
-    mediaVideos: state.Movie.movieDetails.videos,
-    mediaCredits: state.Movie.movieDetails.credits,
-    mediaReviews: state.Movie.movieDetails.reviews,
-    mediaExternalIds: state.Movie.movieDetails.externalIds,
-    mediaKeywords: state.Movie.movieDetails.keywords,
-    mediaRecommended: state.Movie.movieDetails.recommended,
-    mediaSimilar: state.Movie.movieDetails.similar,
+const mapStateToProps = (state, ownProps) => {
+  let media = ownProps.match.params.media;
+  if (media === "movie") {
+    return {
+      mediaDetails: state.Movie.movieDetails.movie,
+      mediaVideos: state.Movie.movieDetails.videos,
+      mediaCredits: state.Movie.movieDetails.credits,
+      mediaReviews: state.Movie.movieDetails.reviews,
+      mediaExternalIds: state.Movie.movieDetails.externalIds,
+      mediaKeywords: state.Movie.movieDetails.keywords,
+      mediaRecommended: state.Movie.movieDetails.recommended,
+      mediaSimilar: state.Movie.movieDetails.similar,
+    }
+  } else if (media === "tv") {
+    return {
+      mediaDetails: state.Tv.tvDetails.tv,
+      mediaVideos: state.Tv.tvDetails.videos,
+      mediaCredits: state.Tv.tvDetails.credits,
+      mediaReviews: state.Tv.tvDetails.reviews,
+      mediaExternalIds: state.Tv.tvDetails.externalIds,
+      mediaKeywords: state.Tv.tvDetails.keywords,
+      mediaRecommended: state.Tv.tvDetails.recommended,
+      mediaSimilar: state.Tv.tvDetails.similar,
+    }
   }
 };
 
