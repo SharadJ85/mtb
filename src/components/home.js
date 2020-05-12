@@ -13,7 +13,7 @@ const Home = ({fetchMovieNowPlaying, fetchTvOnTheAir, movie, tv}) => {
 
   useEffect(() => {
     fetchMovieNowPlaying();
-    fetchTvOnTheAir()
+    fetchTvOnTheAir();
     document.title = `MTB: Home`
   }, []);
 
@@ -25,7 +25,7 @@ const Home = ({fetchMovieNowPlaying, fetchTvOnTheAir, movie, tv}) => {
           <h4 className="py-2 m-0">Movies in Theaters</h4>
         </Row>
         {movie.results
-          ? (<ImageCollage list={movie.results.slice(0, 9)} type={`movie`}/>)
+          ? (<ImageCollage list={movie.results.slice(0, 9)} type={`movie`} />)
           : (<div className="container text-center py-5">
             <Fade duration={400}>
               <LoadingSpinner />

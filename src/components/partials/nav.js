@@ -87,7 +87,7 @@ const Navigation = ({ history, userFirstName, userLastName, userInitials, dispat
             {userInitials}</div>
           <Zoom delay={200} duration={300}>
             <div
-              className="px-3 avatarChild justify-content-center text-center text-white bg-dark rounded border border-secondary">
+              className="px-2 avatarChild justify-content-center text-center text-white bg-dark rounded border border-secondary">
               <div className=" w-100 pt-4 d-flex justify-content-center">
                 <div
                   className="avatarCircleBig d-flex align-items-center justify-content-center bg-light text-dark font-weight-bold">

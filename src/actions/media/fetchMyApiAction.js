@@ -4,10 +4,10 @@ import axios from "axios";
 // this is used to dispatch action to fetch data from api
 // fetchUrl=url of api
 // typeName=action type
-export const fetchMyAPI = (fetchUrl, successTypeName,failureTypeName=null,isFetchingTypeName=null) => {
+export const fetchMyAPI = (fetchUrl, successTypeName, failureTypeName = null, isFetchingTypeName = null) => {
   return async dispatch => {
     try {
-      if(isFetchingTypeName){
+      if (isFetchingTypeName) {
         dispatch({
           type: isFetchingTypeName
         })
@@ -18,10 +18,13 @@ export const fetchMyAPI = (fetchUrl, successTypeName,failureTypeName=null,isFetc
         payload: fetchData.data,
       })
     } catch (err) {
-      if(failureTypeName){dispatch({
-        type: failureTypeName,
-        payload: err,
-      })
+      console.log("errorTypeName==>", successTypeName);
+      console.log("error is==>", err);
+      if (failureTypeName) {
+        dispatch({
+          type: failureTypeName,
+          payload: err,
+        })
       }
     }
   }
