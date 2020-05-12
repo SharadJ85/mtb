@@ -7,16 +7,18 @@ import {Fade, Slide} from 'react-reveal';
 import {faCheck, faEnvelope, faLock, faTimes, faUser,} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ParticlesBg from 'particles-bg'
-import {Link, Redirect, useHistory, useLocation} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {signUpUser} from "../actions/auth/signUpAction";
 import {loginUser} from "../actions/auth/logInAction";
+import {SmallLoadingSpinner} from "./partials/loadingSpinner";
 
 const Login = ({
                  location,
                  isLoggingIn,
                  logInError,
                  logInErrorType,
+                 isSigningUp,
                  signUpError,
                  signUpErrorType,
                  isAuthenticated,
@@ -39,7 +41,7 @@ const Login = ({
       password: ``,
       repeatPassword: ``
     });
-    const [signUpDataValid, setSignUpDataValid] = useState(false);
+    //const [signUpDataValid, setSignUpDataValid] = useState(false);
 
     const handleOtherClick = () => {
       setCurrentCard({logInDiv: !currentCard.logInDiv});
@@ -60,27 +62,27 @@ const Login = ({
       if (matchWith !== ``) {
         switch (true) {
           case regexEpx && !repeatPassword:
-            setSignUpDataValid(true);
+            //setSignUpDataValid(true);
             return (
               <Fade>
                 <FontAwesomeIcon icon={faCheck} className="text-success" />
               </Fade>);
           case regexEpx && repeatPassword:
             if (signUpData.repeatPassword !== signUpData.password) {
-              setSignUpDataValid(false);
+              //setSignUpDataValid(false);
               return (
                 <Fade>
                   < FontAwesomeIcon icon={faTimes} className="text-danger" />
                 </Fade>);
             } else {
-              setSignUpDataValid(true);
+              //setSignUpDataValid(true);
               return (
                 <Fade>
                   <FontAwesomeIcon icon={faCheck} className="text-success" />
                 </Fade>);
             }
           default:
-            setSignUpDataValid(false);
+            //setSignUpDataValid(false);
             return (
               <Fade>
                 < FontAwesomeIcon icon={faTimes} className="text-danger" />
@@ -88,8 +90,7 @@ const Login = ({
         }
       }
     };
-    console.log("valid==>", signUpDataValid);
-    console.log("valid==>", signUpDataValid);
+    //console.log("valid==>", signUpDataValid);
 
     const changeTitle = (notLogIn) => {
       if (notLogIn) {
@@ -148,26 +149,39 @@ const Login = ({
                         </div>
                       </Fade>
                     </div>
-                    <div className="container-fluid m-0 p-0 row " style={{height: "0.8rem"}}>
+                    <div className="container-fluid m-0 p-0 row " style={{height: "1rem"}}>
                       <div className="col-7 font-weight-bold m-0 px-2">
                         <p className="text-danger ml-3 mt-1 font-weight-bold text-capitalize"
                            style={{fontSize: "1rem"}}>
-                          {logInError ? (logInErrorType.code).slice(5).replace(/-/g, ' ') : null}</p>
+                          {logInError
+                            ? logInErrorType.code
+                              ? (logInErrorType.code).slice(5).replace(/-/g, ' ')
+                              : null
+                            : null}</p>
                       </div>
                       <div className="col forgot m-0 p-0 ml-3 mt-1">
                         <Link to="#">Forgot Password?</Link>
                       </div>
                     </div>
                     <div className="login_fields__submit">
-                      <div className="text-center logInButtons ">
+                      <div className="text-center logInButtons d-flex justify-content-center">
                         <button onClick={() => handleOtherClick()}
                                 className="btn btn-outline-light px-5 m-2 mt-3">
                           Sign up
                         </button>
-                        <button onClick={() => handleLogInSubmit()}
-                                className="btn btn-outline-light submitButtons px-5 m-2 mt-3">
-                          Log In
-                        </button>
+                        {isLoggingIn
+                          ? <Fade>
+                            <div className="submitButtons px-5 m-2 mt-3 pt-1">
+                              <SmallLoadingSpinner />
+                            </div>
+                          </Fade>
+                          : <Fade>
+                            <button onClick={() => handleLogInSubmit()}
+                                    className="btn btn-outline-light submitButtons px-5 m-2 mt-3">
+                              Log In
+                            </button>
+                          </Fade>
+                        }
                       </div>
                     </div>
                   </div>
@@ -325,11 +339,20 @@ const Login = ({
                       </p>
                     </div>
                     <div className="login_fields__submit py-1">
-                      <div className="text-center">
-                        <button className="btn btn-outline-light submitButtons px-5 m-2"
-                                onClick={() => handleSignUpSubmit()}>
-                          Sign up
-                        </button>
+                      <div className="text-center d-flex justify-content-center">
+                        {isSigningUp
+                          ? <Fade>
+                            <div className="submitButtons px-5 m-2 pt-1">
+                              <SmallLoadingSpinner />
+                            </div>
+                          </Fade>
+                          : <Fade>
+                            <button className="btn btn-outline-light submitButtons px-5 m-2"
+                                    onClick={() => handleSignUpSubmit()}>
+                              Sign up
+                            </button>
+                          </Fade>
+                        }
                         <button className="btn btn-outline-light px-5 m-2"
                                 onClick={() => handleOtherClick()}>
                           Log In
@@ -350,6 +373,7 @@ const mapStateToProps = (state) => {
     isLoggingIn: state.Auth.isLoggingIn,
     logInError: state.Auth.logInError,
     logInErrorType: state.Auth.errors.logIn,
+    isSigningUp: state.Auth.isSigningUp,
     signUpError: state.Auth.signUpError,
     signUpErrorType: state.Auth.errors.signUp,
     isAuthenticated: state.Auth.isAuthenticated

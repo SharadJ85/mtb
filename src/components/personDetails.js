@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import TmdbApiUrl from "./partials/apiUrl";
 import {Fade,Slide} from "react-reveal";
 import {Link} from "react-router-dom";
+import LoadingSpinner from "./partials/loadingSpinner";
 
 
 const Person_Details = ({fetchPersonDetails, fetchPersonKnownFor, fetchPersonExternalIds, person, knownFor, externalIds}) => {
@@ -111,7 +112,13 @@ const Person_Details = ({fetchPersonDetails, fetchPersonKnownFor, fetchPersonExt
                     : <div />}
                 </div>
               </div>
-              : <div />
+              : (
+                <div className="container text-center" style={{padding: "10rem"}}>
+                  <Fade duration={400}>
+                    <LoadingSpinner />
+                  </Fade>
+                </div>
+              )
           }
         </div>
         <div className="blueBox" />

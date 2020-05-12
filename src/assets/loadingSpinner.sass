@@ -1,3 +1,5 @@
+//BIG loader
+
 @font-face
   font-family: "icomoon"
   src: url("https://s3.amazonaws.com/icomoon.io/4/Loading/icomoon.eot?-9haulc")
@@ -43,3 +45,25 @@
 
 .spinner--steps2
   animation: anim-rotate 1s infinite steps(12)
+
+
+//small loader
+.smallLoader
+  border: 0.3rem solid #f3f3f3
+  border-top: 0.3rem solid #0c0c11
+  border-radius: 50%
+  width: 2rem
+  height: 2rem
+  animation: spin 2s linear infinite
+  -webkit-animation: spin 2s linear infinite
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+@-webkit-keyframes spin
+  0%
+    -webkit-transform: rotate(0deg)
+  100%
+    -webkit-transform: rotate(360deg)

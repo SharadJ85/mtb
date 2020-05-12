@@ -11,10 +11,16 @@ const LoadingSpinner = () => {
       <div>
         <h3 className="text-danger font-weight-bold">
           Network Error:
-            <div>You have <strong>Slow</strong> or <strong>No</strong> Internet connection</div>
+          <div>You have <strong>Slow</strong> or <strong>No</strong> Internet connection</div>
         </h3>
       </div>)
   }
 };
 
 export default LoadingSpinner;
+
+export const SmallLoadingSpinner = () => {
+  return (
+    <div className="smallLoader" />
+  )
+};
