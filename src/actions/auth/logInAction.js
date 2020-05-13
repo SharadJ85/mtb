@@ -1,4 +1,4 @@
-import {myFirebase} from "../../firebase/firebase";
+import {myFirebaseApp} from "../../firebase/firebase";
 import {getUserData} from "./getUserStoreDataAction";
 
 //actions types
@@ -30,7 +30,7 @@ export const loginError = (error) => {
 //functioning actions
 export const loginUser = (email, password) => dispatch => {
   dispatch(requestLogin());
-  myFirebase
+  myFirebaseApp
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(resp => {

@@ -1,4 +1,4 @@
-import {myFirebase} from "../../firebase/firebase";
+import {myFirebaseApp} from "../../firebase/firebase";
 import {receiveLogin} from "./logInAction"
 import {getUserData} from "./getUserStoreDataAction"
 
@@ -22,7 +22,7 @@ export const verifySuccess = () => {
 //functioning actions
 export const verifyAuth = () => dispatch => {
   dispatch(verifyRequest());
-  myFirebase
+  myFirebaseApp
     .auth()
     .onAuthStateChanged(user => {
       if (user !== null) {

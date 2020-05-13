@@ -164,9 +164,9 @@ const Media_Details = (props) => {
                         <h4>Featured</h4>
 
                         {/*Crew*/}
-                        {listOfDirectors().length>0
+                        {listOfDirectors().length > 0
                           ? <h6 className="mb-0 pl-2 mt-3">Crew</h6>
-                          :null}
+                          : null}
                         <div className="cast pl-2 d-flex justify-content-start flex-wrap">
                           {/*filter director name from crew array*/}
                           {props.mediaCredits.id
@@ -584,13 +584,17 @@ const Media_Details = (props) => {
                         <div className="d-inline-flex">
                           <Fade>
                             {props.mediaRecommended.results.map(media => (
-                              <Link to={`/media_details/${props.match.params.media}/${media.id}`}
-                                    className="mediaListRelatedToMediaContainer">
-                                <img className="mediaListRelatedToMediaImage m-1"
-                                     src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
-                                     alt={media.title || media.name} />
-                                <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
-                                  {media.title || media.name} ({media[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
+                              <Link to={`/media_details/${props.match.params.media}/${media.id}`}>
+                                <div className="mediaListRelatedToMediaContainer p-0 m-1">
+                                  <img className="mediaListRelatedToMediaImage"
+                                       src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
+                                       alt={media.title || media.name} />
+                                  <div className="  pl-0 relatedMediaRating">
+                                    <Ratings value={media.vote_average} />
+                                  </div>
+                                  <h6 className="mediaListRelatedToMediaTitle text-white px-3 py-1 w-100">
+                                    {media.title || media.name} ({media[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
+                                </div>
                               </Link>
                             ))}
                           </Fade>
@@ -610,13 +614,18 @@ const Media_Details = (props) => {
                         <div className="d-inline-flex">
                           <Fade>
                             {props.mediaSimilar.results.map(media => (
-                              <Link to={`/media_details/${props.match.params.media}/${media.id}`}
-                                    className="mediaListRelatedToMediaContainer">
-                                <img className="mediaListRelatedToMediaImage m-1"
-                                     src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
-                                     alt={media.title || media.name} />
-                                <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
-                                  {media.title || media.name} ({media[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
+                              <Link to={`/media_details/${props.match.params.media}/${media.id}`}>
+                                <div className="mediaListRelatedToMediaContainer p-0 m-1">
+                                  <img className="mediaListRelatedToMediaImage"
+                                       src={media.backdrop_path ? `${api.imageURL(1)}${media.backdrop_path}` : require("../assets/images/ImageUnavailableLandscape.png")}
+                                       alt={media.title || media.name} />
+                                  <div className="  pl-0 relatedMediaRating">
+                                    <Ratings value={media.vote_average} />
+                                  </div>
+                                  <h6 className="mediaListRelatedToMediaTitle text-white px-3 py-1 w-100">
+                                    {media.title || media.name} {`(${media[props.match.params.media === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})`}</h6>
+                                </div>
+
                               </Link>
                             ))}
                           </Fade>

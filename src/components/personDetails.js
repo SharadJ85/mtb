@@ -5,9 +5,10 @@ import defaultImage from "../assets/images/imageUnavailable.jpg"
 import {personDetails} from "../actions/media/personAction";
 import {connect} from "react-redux";
 import TmdbApiUrl from "./partials/apiUrl";
-import {Fade,Slide} from "react-reveal";
+import {Fade} from "react-reveal";
 import {Link} from "react-router-dom";
 import LoadingSpinner from "./partials/loadingSpinner";
+import Ratings from "./partials/ratings";
 
 
 const Person_Details = ({fetchPersonDetails, fetchPersonKnownFor, fetchPersonExternalIds, person, knownFor, externalIds}) => {
@@ -90,21 +91,25 @@ const Person_Details = ({fetchPersonDetails, fetchPersonKnownFor, fetchPersonExt
                           Known For </h4>
                         <div className=" mediaListRelatedToMediaDiv">
                           <div className="d-inline-flex">
-                            <Slide left>
+                            <Fade>
                               {knownFor.results.map(each => (
-                                <Link to={`/media_details/${each.media_type}/${each.media.id}`}
-                                      className="mediaListRelatedToMediaContainer">
-                                  <img className="mediaListRelatedToMediaImage m-1"
-                                       src={each.media.backdrop_path
-                                         ? `${api.imageURL(1)}${each.media.backdrop_path}`
-                                         : require("../assets/images/ImageUnavailableLandscape.png")}
-                                       alt={each.media.title || each.media.name} />
-                                  <h6 className="mediaListRelatedToMediaTitle text-white pl-3 py-1 mx-1">
-                                    {each.media.title || each.media.name} ({each.media[each.media_type === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
+                                <Link to={`/media_details/${each.media_type}/${each.media.id}`}>
+                                  <div className="mediaListRelatedToMediaContainer p-0 m-1">
+                                    <img className="mediaListRelatedToMediaImage"
+                                         src={each.media.backdrop_path
+                                           ? `${api.imageURL(1)}${each.media.backdrop_path}`
+                                           : require("../assets/images/ImageUnavailableLandscape.png")}
+                                         alt={each.media.title || each.media.name} />
+                                    <div className="  pl-0 relatedMediaRating">
+                                      <Ratings value={each.media.vote_average} />
+                                    </div>
+                                    <h6 className="mediaListRelatedToMediaTitle text-white px-3 py-1 w-100">
+                                      {each.media.title || each.media.name} ({each.media[each.media_type === "movie" ? "release_date" : "first_air_date"].slice(0, 4)})</h6>
+                                  </div>
                                 </Link>
                               ))}
                               <div />
-                            </Slide>
+                            </Fade>
                           </div>
                         </div>
                       </div>)

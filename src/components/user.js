@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 const User = ({userProfileID, userInitials, userFirstName, userLastName, userEmail}) => {
   useEffect(() => {
     document.title = `MTB: user ${userProfileID ? userFirstName + ` ` + userLastName : ``}`
-  }, [userProfileID])
+  }, [userProfileID]);
   return (
     <div className="mainUserDiv">
       <Navigation />

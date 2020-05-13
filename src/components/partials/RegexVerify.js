@@ -27,7 +27,7 @@ export default class RegexVerify {
    * check password with /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/
    */
    passwordRegex(value) {
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})/;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_])(?=.{6,})/;
     return passwordPattern.test(value);
   };
 }

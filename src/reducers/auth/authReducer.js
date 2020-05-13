@@ -11,7 +11,7 @@ import {
 import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
 } from "../../actions/auth/signUpAction";
 import {
   VERIFY_REQUEST,
@@ -20,7 +20,7 @@ import {
 import {
   GET_STORE_USER_DATA_REQUEST,
   GET_STORE_USER_DATA_SUCCESS,
-  GET_STORE_USER_DATA_FAILURE
+  GET_STORE_USER_DATA_FAILURE,
 } from "../../actions/auth/getUserStoreDataAction";
 
 const FirebaseAuthReducer = (
@@ -43,7 +43,7 @@ const FirebaseAuthReducer = (
     },
     user: {
       baseData: {},
-      storeData: {}
+      storeData: {},
     }
   },
   action) => {

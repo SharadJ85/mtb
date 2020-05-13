@@ -1,4 +1,4 @@
-import {myFirestore} from "../../firebase/firebase";
+import {myFirestoreApp} from "../../firebase/firebase";
 
 //actions types
 export const GET_STORE_USER_DATA_REQUEST = "GET_STORE_USER_DATA_REQUEST";
@@ -29,7 +29,7 @@ const storeUserDataError = (error) => {
 //functioning actions
 export const getUserData = userId => dispatch => {
   dispatch(requestStoreUserData());
-  myFirestore
+  myFirestoreApp
     .collection(`users`)
     .doc(`${userId}`)
     .get()

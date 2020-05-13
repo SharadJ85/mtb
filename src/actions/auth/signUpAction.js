@@ -1,13 +1,14 @@
-import {myFirebase, myFirestore} from "../../firebase/firebase";
+import {myFirebase, myFirebaseApp, myFirestoreApp} from "../../firebase/firebase";
 import {getUserData} from "./getUserStoreDataAction"
-
+import {verifyAuth} from "./verifyAction";
+import {loginError, receiveLogin, requestLogin} from "./logInAction";
 //actions types
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
 
 //main actions
-const requestSignUp = () => {
+export const requestSignUp = () => {
   return {
     type: SIGNUP_REQUEST
   };
@@ -34,7 +35,7 @@ export const signUpUser = (firstName, lastName, email, password) => dispatch => 
     email: email,
     password: password
   };
-  myFirebase
+  myFirebaseApp
     .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(resp => {
@@ -42,7 +43,7 @@ export const signUpUser = (firstName, lastName, email, password) => dispatch => 
         ...enteredUserData,
         id: resp.user.uid
       };
-      return myFirestore
+      return myFirestoreApp
         .collection('users')
         .doc(resp.user.uid)
         .set(enteredUserData)

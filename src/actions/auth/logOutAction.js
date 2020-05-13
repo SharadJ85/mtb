@@ -1,4 +1,4 @@
-import {myFirebase} from "../../firebase/firebase";
+import {myFirebaseApp} from "../../firebase/firebase";
 
 //actions types
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
@@ -28,7 +28,7 @@ export const logoutError = (error) => {
 //functioning actions
 export const logoutUser = () => dispatch => {
   dispatch(requestLogout());
-  myFirebase
+  myFirebaseApp
     .auth()
     .signOut()
     .then(() => {
