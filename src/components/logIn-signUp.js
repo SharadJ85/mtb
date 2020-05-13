@@ -143,7 +143,7 @@ const Login = ({
                         </div>
                         <input placeholder="Email" type="text"
                                onChange={e => setLogInData({...logInData, email: e.target.value})}
-                               className="col text-white-50 px-2"
+                               className="col text-white-50 inputTextDiv"
                                autoComplete="email" />
                         <div className="validation align-self-center mr-3">
                         </div>
@@ -154,7 +154,7 @@ const Login = ({
                         </div>
                         <input placeholder="Password" type="password"
                                onChange={e => setLogInData({...logInData, password: e.target.value})}
-                               className="col text-white-50 px-2"
+                               className="col text-white-50 inputTextDiv"
                                autoComplete="current-password" />
                         <div className="validation align-self-center">
                         </div>
@@ -242,7 +242,7 @@ const Login = ({
                             </Popover>}>
                           <input placeholder="FirstName" type="text"
                                  onChange={e => setSignUpData({...signUpData, firstName: e.target.value})}
-                                 className="col text-white-50 px-2" />
+                                 className="col text-white-50 inputTextDiv" />
                         </OverlayTrigger>
                         <div className="validation align-self-center">
                           {checkDataWithRegexExp(regex.nameRegex(signUpData.firstName), signUpData.firstName)}
@@ -268,7 +268,7 @@ const Login = ({
                             </Popover>}>
                           <input placeholder="LastName" type="text"
                                  onChange={e => setSignUpData({...signUpData, lastName: e.target.value})}
-                                 className="col text-white-50 px-2" />
+                                 className="col text-white-50 inputTextDiv" />
                         </OverlayTrigger>
                         <div className="validation align-self-center">
                           {checkDataWithRegexExp(regex.nameRegex(signUpData.lastName), signUpData.lastName)}
@@ -296,7 +296,7 @@ const Login = ({
                           </Popover>}>
                         <input placeholder="Email" type="text"
                                onChange={e => setSignUpData({...signUpData, email: e.target.value})}
-                               className="col text-white-50 px-2" />
+                               className="col text-white-50 inputTextDiv" />
                       </OverlayTrigger>
                       <div className="validation align-self-center">
                         {checkDataWithRegexExp(regex.emailRegex(signUpData.email), signUpData.email)}
@@ -325,7 +325,7 @@ const Login = ({
                           </Popover>}>
                         <input placeholder="Password" type="password"
                                onChange={e => setSignUpData({...signUpData, password: e.target.value})}
-                               className="col text-white-50 px-2" />
+                               className="col text-white-50 inputTextDiv" />
                       </OverlayTrigger>
                       <div className="validation align-self-center">
                         {checkDataWithRegexExp(regex.passwordRegex(signUpData.password), signUpData.password)}
@@ -350,7 +350,7 @@ const Login = ({
                           </Popover>}>
                         <input placeholder="Repeat Password" type="password"
                                onChange={e => setSignUpData({...signUpData, repeatPassword: e.target.value})}
-                               className="col text-white-50 px-2" />
+                               className="col text-white-50 inputTextDiv" />
                       </OverlayTrigger>
                       <div className="validation align-self-center">
                         {checkDataWithRegexExp(regex.passwordRegex(signUpData.repeatPassword), signUpData.repeatPassword, true)}
