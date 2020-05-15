@@ -24,7 +24,7 @@ export default class TmdbApiUrl {
    */
    imageURL(imageSize) {
     const size = ["original", "w500","w780"];
-    return `http://image.tmdb.org/t/p/${size[imageSize]}`;
+    return `https://image.tmdb.org/t/p/${size[imageSize]}`;
   }
 
   /**

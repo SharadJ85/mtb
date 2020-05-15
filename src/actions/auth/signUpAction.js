@@ -1,7 +1,5 @@
-import {myFirebase, myFirebaseApp, myFirestoreApp} from "../../firebase/firebase";
+import {myFirebaseApp, myFirestoreApp} from "../../firebase/firebase";
 import {getUserData} from "./getUserStoreDataAction"
-import {verifyAuth} from "./verifyAction";
-import {loginError, receiveLogin, requestLogin} from "./logInAction";
 //actions types
 export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";

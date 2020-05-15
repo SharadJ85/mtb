@@ -49,7 +49,7 @@ export const signInSignUpWithGoogle = () => dispatch => {
       console.log("signUpWithGoogle==>success");
     })
     .catch(error => {
-      console.log(`action->signUpError chain->getRedirectResult error==>${error}`);
+      console.log(`action->signUpError,chain->getRedirectResult,error is==>${error}`);
       dispatch(loginError(error));
       dispatch(signUpError(error));
     });

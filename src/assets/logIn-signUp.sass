@@ -45,8 +45,26 @@ input
   background-color: #007bff1a
   height: 3rem
 
+.forgotButton
+  letter-spacing: unset
+.forgotButton:hover
+  letter-spacing: unset
+  color: #007bff!important
+
 .loginSignUpButtons
   position: relative
+
+.forgotPasswordButtons
+  position: absolute
+  bottom: -12.5rem
+  left: 0
+  right: 0
+
+.customCheckIconDiv
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 7rem
 
 a
   color: rgba(255, 255, 255, 0.5)
@@ -70,8 +88,8 @@ a
   opacity: 0.8
 
 .googleButton:hover
-  animation: rotate 2s infinite
-  animation-timing-function: cubic-bezier(0.3, 1, 0.2, 1)
+  -webkit-animation: rotate 1600ms infinite
+  -webkit-animation-timing-function: cubic-bezier(0.3, 1, 0.2, 1)
 
 @keyframes rotate
   from

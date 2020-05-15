@@ -71,8 +71,8 @@ const App = ({isAuthenticated, isVerifying}) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.Auth.isAuthenticated,
-    isVerifying: state.Auth.isVerifying
+    isAuthenticated: state.Auth.verify.isAuthenticated,
+    isVerifying: state.Auth.verify.isVerifying
   };
 };
 export default connect(mapStateToProps)(App);
