@@ -5,3 +5,4 @@
 #make screen responsive
 #signup regex errors
 #site browser compatibility(firefox)
+#remove chrome redux extension middleware

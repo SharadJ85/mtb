@@ -16,14 +16,20 @@
   opacity: 0.2
 
 #completion
-  animation: scale 1.5s ease-in-out
+  animation: scale 1500ms ease-in-out
+  animation-delay: 500ms
+  opacity: 0
 
 @keyframes scale
   0%
     transform: scale(0.01)
+    opacity: 1
   40%
     transform: scale(1.14)
+    opacity: 1
   75%
     transform: scale(0.9)
+    opacity: 1
   100%
     transform: scale(1)
+    opacity: 1
