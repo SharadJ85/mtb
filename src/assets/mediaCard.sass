@@ -1,0 +1,104 @@
+a
+  text-decoration: none
+
+h3
+  font-family: "Open Sans", sans-serif
+  font-weight: 300
+
+.background
+  width: 205px
+  height: 300px
+  background-color: rgba(255, 255, 255, 0)
+  position: relative
+  overflow: hidden
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2)
+  filter: brightness(0.75)
+  background-size: cover
+  transition: all 0.5s
+
+.mediaCard
+  width: max-content
+  position: relative
+  .data .content p
+    font-size: 15px
+    font-weight: 400
+
+  .wrapper
+    width: 205px
+    height: 300px
+    background-color: rgba(255, 255, 255, 0)
+    position: relative
+    overflow: hidden
+    border-radius: 4px
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2)
+
+    &:hover .data
+      -webkit-transform: translateY(0)
+      transform: translateY(0)
+
+    &:hover .background
+      filter: brightness(0.2)
+      transition: all 0.5s
+
+  .data
+    position: absolute
+    bottom: 0
+    width: 100%
+    -webkit-transition: -webkit-transform 0.3s
+    transition: -webkit-transform 0.3s
+    transition: transform 0.3s, -webkit-transform 0.3s
+
+    .content
+      position: relative
+      z-index: 1
+
+  .date
+    font-size: 12px
+    color: whitesmoke
+
+  .title
+    text-shadow: 2px 2px 4px #000000
+    margin-top: 0
+    font-weight: 300
+
+  .text
+    text-shadow: 2px 2px 4px #000000
+    padding-left: 0.3rem
+    padding-right: 0.3rem
+    text-align: start
+    overflow: hidden
+    height: 4.5rem
+    margin: -2px
+    margin:
+      top: 1rem
+
+.posterCard
+  position: relative
+  width: 205px
+  max-width: 205px
+  .wrapper:hover .menu-content span
+    -webkit-transform: translate(-50%, -10px)
+    transform: translate(-50%, -10px)
+    opacity: 1
+
+  .title a
+    color: #fff
+
+  .button
+    display: block
+    width: 100px
+    margin: 0.5rem auto 0
+    text-align: start
+    font-size: 12px
+    color: #fff
+    line-height: 1
+    position: relative
+    font-weight: 700
+
+
+.shiftVertically
+  -webkit-transform: translateY(calc(70px + 3.5rem))
+  transform: translateY(calc(70px + 3.5rem))
+
+.ratingStyle:hover
+  transform: scale(1.1)

@@ -1,0 +1,17 @@
+@mixin boxSize($height,$width,$margin:0,$borderRadius:0)
+  height: $height
+  width: $width
+  max-height: $height
+  max-width: $width
+  margin: $margin
+  border-radius: $borderRadius
+
+
+.customScroll::-webkit-scrollbar
+    width: 5px
+
+.customScroll::-webkit-scrollbar-thumb
+  background: #ddd
+
+.customScroll::-webkit-scrollbar-track
+  background: #666

@@ -1,0 +1,335 @@
+$tiber: rgb(17, 38, 47)
+$cyprus: rgb(4, 15, 22)
+//
+//MAIN DIV
+.mediaDiv
+  position: relative
+  background-color: #02131b
+
+.text-white
+  color: rgba(255,255,255,0.9)
+//
+//
+//
+//BRIEF DETAILS
+
+#briefDetails
+  border-bottom: 2px solid gray
+  position: relative
+  height: max-content
+  min-height: 550px
+
+.briefDetailsContainer
+  padding-top: 4rem
+  padding-bottom: 1.5rem
+
+h1
+  font-size: 2rem
+
+.mediaTagLine
+  color: #9a9c9e
+
+.ratingDiv
+  max-width: 5rem !important
+
+h5
+  font-size: 1.2rem !important
+
+h4
+  font-size: 1.3rem
+
+.mediaSummary
+  max-width: 48rem
+
+p
+  font-size: 1rem
+
+
+.card-meta--container
+  display: -webkit-box
+  display: flex
+  padding-bottom: 0.8rem
+
+
+.card-meta--avatar
+  width: 40px
+  height: 40px
+  align-self: center
+  font-size: 1.55rem
+  box-shadow: 0 0 0.5rem 0 rgba(255, 255, 255, 0.1)
+
+
+.card-meta--title
+  padding: 0.2rem 1rem
+
+
+.card-meta--name
+  font-size: 1.1rem
+
+
+.card-meta--character
+  color: #A5A9BB
+  font-size: 0.9rem
+//
+//
+//
+//VIDEO DETAILS
+.videos
+  background-color: #0a0a0a
+
+.trailers
+  overflow-x: hidden
+  overflow-y: hidden
+  height: 19.5rem
+
+.trailers:hover
+  overflow-x: scroll
+
+.trailers::-webkit-scrollbar
+  height: 0.8rem
+
+.trailers::-webkit-scrollbar-thumb
+  background: #666
+  border-radius: 0.2rem
+
+.trailers::-webkit-scrollbar-track
+  background: rgba(102, 102, 102, 0.45)
+  border-radius: 0.2rem
+
+.videoThumbnail
+  min-height: 13rem
+  min-width: 17.3rem
+  background-size: contain
+  background-repeat: no-repeat
+  position: relative
+
+
+.videoImage
+  border-radius: 0.5rem
+  background-repeat: no-repeat
+  height: 13rem
+  width: auto
+
+.playButton
+  border: none
+  outline: none!important
+  background: red
+  border-radius: 50% / 10%
+  color: #FFFFFF
+  height: 3rem
+  width: 4rem
+  margin: 20px auto
+  padding: 0
+  position: absolute
+  left: calc(50% - 2rem)
+  top: calc(50% - 2.5rem)
+  text-align: center
+  text-indent: 0.1em
+  transition: all 150ms ease-out
+
+.playButton:hover
+  cursor: pointer
+  background: $tiber
+  box-shadow: none!important
+
+.playButton:focus
+  background-color: #191a1b!important
+  border-color: #0062cc!important
+  box-shadow: none!important
+
+.playButton::before
+  background: inherit
+  border-radius: 5% / 50%
+  bottom: 9%
+  content: ""
+  left: -5%
+  position: absolute
+  right: -5%
+  top: 9%
+
+.playButton::after
+  border-style: solid
+  border-width: 1rem 0 1rem 1.732rem
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.75)
+  content: ' '
+  font-size: 0.75rem
+  height: 0
+  margin: -1rem 0 0 -0.75rem
+  top: 50%
+  position: absolute
+  width: 0
+
+.trailersText
+  max-width: 17rem
+
+.videoModal
+  background-color: rgba(4,15,22,0.5)
+  max-width: 51rem
+
+.close:focus
+  outline: none
+//
+//
+//
+//DETAILS
+//
+// cast/crew
+.CrewCast
+  min-height: 100vh
+  max-width: 54rem
+
+.tabCrewCast
+  display: grid
+
+.listTab
+  border-radius: 25px
+  outline: none
+  width: 26.4rem
+  transition-duration: 0.2s
+
+.listTab:hover
+  transform: translateY(-5px)
+  transition-duration: 0.4s
+
+
+.tabContentCrewCast
+  max-height: 20rem
+
+.castCrewDiv
+  max-width: 54.6rem
+  height: 17.8rem
+  overflow-x: hidden
+  padding: 0
+  margin: 0
+
+.castCrewDiv:hover
+  overflow-x: auto
+
+.castCrewDiv::-webkit-scrollbar
+  height: 0.8rem
+
+.castCrewDiv::-webkit-scrollbar-thumb
+  background: #666
+  border-radius: 0.2rem
+
+.castCrewDiv::-webkit-scrollbar-track
+  background: rgba(102, 102, 102, 0.45)
+  border-radius: 0.2rem
+
+.nameCrewCast
+  font-size: 1rem
+
+.jobCrewCast
+  font-size: 0.8rem
+
+.imageCrewCast
+  height: 195px
+  width: inherit
+  background-size: contain
+  border-top-left-radius: 3px
+  border-top-right-radius: 3px
+  margin-bottom: -.5rem
+
+.crewCastBtn
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.2)
+  height: max-content
+  width: 130px
+  border-radius: 3px
+  background-color: darkslategray
+//
+//status
+.detailsStatus
+  background-color: #050e15b3
+  min-height: 38rem
+  -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
+  -moz-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.75)
+
+.headText
+  letter-spacing: 1px
+
+hr
+  background-color: $tiber
+
+.externalLink
+  height: 4rem
+  max-width: 277px
+  background-position: center
+  background-size: cover
+  border-radius: 4px
+
+.reviews
+  max-width: 54rem
+
+.reviewsHead
+  background-color: $tiber
+  border-color: $cyprus
+
+.reviewsBody
+  background-color: #101620
+
+.reviewsCardHead
+  background-color: #111721
+  color: ghostwhite
+
+.reviewsCardBody
+  background-color: #ffffffd1
+  color: #191a1b
+
+.card-header
+  cursor: pointer
+
+.mediaListRelatedToMedia
+  height: 15rem
+  width: auto
+  border-radius: 0.4rem
+  overflow: hidden
+  background-color: #10252e!important
+
+.mediaListRelatedToMediaDiv
+  height: 12.3rem
+  overflow-y: hidden
+  overflow-x: hidden
+
+.mediaListRelatedToMedia:hover .mediaListRelatedToMediaDiv
+  overflow-x: scroll
+
+.mediaListRelatedToMediaDiv::-webkit-scrollbar
+  height: 0.8rem
+
+.mediaListRelatedToMediaDiv::-webkit-scrollbar-thumb
+  background: #666
+  border-radius: 0.4rem
+
+.mediaListRelatedToMediaDiv::-webkit-scrollbar-track
+  background: rgba(102, 102, 102, 0.45)
+  border-radius: 0.4rem
+
+.mediaListRelatedToMediaContainer
+  position: relative
+  border-radius: 0.5rem
+
+.mediaListRelatedToMediaImage
+  min-width: 21.63rem
+  height: 12.15rem
+  @extend .mediaListRelatedToMediaContainer
+
+.mediaListRelatedToMediaTitle
+  background-color: rgba(0,0,0,0.7)
+  position: absolute
+  bottom: 1rem
+
+.relatedMediaRating
+  position: absolute
+  width: 3rem
+  top: -0.3rem
+  right: -0.4rem
+
+Link
+  outline: none
+  box-shadow: none
+
+Link:hover
+  @extend Link
+Link:focus
+  @extend Link

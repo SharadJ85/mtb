@@ -1,0 +1,7 @@
+#put loader for pages
+#empty redux states on request
+#mediaAction error handling
+#entire site's fonts
+#make screen responsive
+#signup regex errors
+#site browser compatibility(firefox)

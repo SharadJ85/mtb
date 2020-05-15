@@ -1,0 +1,57 @@
+//@import "_partial/customDiv"
+@mixin boxSize($height,$width,$margin:0,$borderRadius:0)
+  height: $height
+  width: $width
+  max-height: $height
+  max-width: $width
+  margin: $margin
+  border-radius: $borderRadius
+
+.imageCollage
+  @include boxSize(432px, 1280px, auto)
+
+.Col1 .Col3
+  @include boxSize(432px, 512px)
+
+.Col2
+  @include boxSize(432px, 256px)
+
+.smallThumbnail
+  @include boxSize(144px, 256px)
+  z-index: 0
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1)
+  position: relative
+
+.bigThumbnail
+  @extend .smallThumbnail
+  @include boxSize(288px, 512px)
+
+.bigThumbnail:hover,.smallThumbnail:hover
+  -webkit-box-shadow: 0 11px 20px 10px rgba(0, 0, 0, 0.75)
+  -moz-box-shadow: 0 11px 20px 10px rgba(0, 0, 0, 0.75)
+  box-shadow: 0 11px 20px 10px rgba(0, 0, 0, 0.75)
+  transform: scale(1.1)
+  z-index: 15
+  cursor: pointer
+  border-radius: 4px
+
+.image
+  height: inherit
+  background-size: cover
+
+.image:hover
+  border-radius: 4px
+
+.thumbnailTextBottom
+  position: absolute
+  bottom: 0
+  left: 0
+  text-shadow: 2px 2px 3px rgba(0,0,0,1)
+  font-weight: 400!important
+  font-family: inherit
+
+.thumbnailTextTop
+  @extend .thumbnailTextBottom
+  top: 0
+  padding-top: 0.2rem
+

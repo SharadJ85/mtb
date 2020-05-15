@@ -1,0 +1,43 @@
+@import url(https://fonts.googleapis.com/css?family=Gudea:400,700)
+
+
+@mixin box($height,$width,$borderRadius:0)
+  height: $height
+  width: $width
+  min-height: $height
+  min-width: $width
+  border-radius: $borderRadius
+
+
+.mainUserDiv
+  position: relative
+
+.userContent
+  height: 33rem
+  width: 50rem
+  background-color: #171921
+  margin: auto
+  position: absolute
+  top: 4%
+  bottom: 0
+  right: 0
+  left: 0
+  border-radius: 4px
+  font-family: "Gudea", sans-serif
+  box-shadow: 0 3px 2rem 6px #000
+  z-index: 6
+
+.userAvatar
+  @include box(9rem,9rem,50%)
+  border: 4px solid #29313c
+
+.initialsText
+  color: #d1d1d1
+  font-size: 5rem
+
+h3
+  color: #d1d1d1
+
+.userFields
+  background-color: #007bff1a
+  height: 9rem
