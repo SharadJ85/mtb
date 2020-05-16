@@ -5,7 +5,7 @@ import GoogleIcon from "./partials/googleIcon";
 import RegexVerify from "./partials/RegexVerify";
 import {SmallLoadingSpinner} from "./partials/loadingSpinner";
 import {OverlayTrigger, Popover} from "react-bootstrap";
-import {Fade} from 'react-reveal';
+import {Fade, Slide} from 'react-reveal';
 import {faCheck, faEnvelope, faLock, faTimes, faUser,} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ParticlesBg from 'particles-bg'
@@ -145,6 +145,7 @@ const Login = ({
         <Fade cascade effect="fadein">
           {(currentCard.logInDiv)
             ? (
+              // login
               <Fade cascade effect="fadein">
                 <div className="logIn-signUp">
                   {/* LOGO*/}
@@ -250,9 +251,9 @@ const Login = ({
                         <div className="login_title text-white-50 m-3 px-2 mt-5">
                           <span>Enter your account Email address</span>
                         </div>
+                        {/* login email*/}
                         <div className=" container-fluid p-0 m-0">
                           <Fade right cascade>
-                            {/* login email*/}
                             <div className="login_fields row container-fluid m-0 my-2">
                               <div className="icon col-1 pl-2 align-self-center typeLogo">
                                 <FontAwesomeIcon icon={faEnvelope} className="text-white-50" />
@@ -279,10 +280,11 @@ const Login = ({
                             </p>
                           </div>
                         </div>
+                        {/* Check animation*/}
                         <div className="d-flex justify-content-center align-items-center customCheckIconDiv">
                           {(!isResettingPassword && !resetPasswordError && resetPasswordSuccess)
                             ? <CheckAnimationIcon width={"5rem"} />
-                            : null}
+                            : <div/>}
                         </div>
                         {/* loginSignUpButtons*/}
                         <div className="loginSignUpButtons ">
@@ -330,43 +332,80 @@ const Login = ({
                     {/* user name*/}
                     <div className="login_fields row container-fluid m-0 my-2">
                       {/* user first name*/}
-                        <div className="col container-fluid row">
-                          <div className="icon col-1 pl-2 align-self-center typeLogo">
-                            <Fade right cascade>
+                      <div className="col container-fluid row">
+                        <div className="icon col-1 pl-2 align-self-center typeLogo">
+                          <Fade right cascade>
                             <FontAwesomeIcon icon={faUser} className="text-white-50" />
-                            </Fade>
-                          </div>
-                          <OverlayTrigger
-                            className="bg-dark"
-                            trigger="focus"
-                            key="left"
-                            placement="left"
-                            overlay={
-                              <Popover className=" rounded mr-5 stylesPopOver" id={`popover-positioned-left`}>
-                                <Popover.Title className=" text-white border-bottom stylesPopOver" as="h3">
-                                  First name must contain...</Popover.Title>
-                                <Popover.Content className=" text-white">
-                                  2 or more alphabetical character <br /> (a-z) or (A-Z)
-                                </Popover.Content>
-                              </Popover>}>
-                            <Fade right cascade>
-                            <input placeholder="FirstName" type="text"
-                                   onChange={e => setSignUpData({...signUpData, firstName: e.target.value})}
-                                   className="col text-white-50 inputTextDiv" />
-                            </Fade>
-                          </OverlayTrigger>
-                          <div className="validation align-self-center">
-                            {checkDataWithRegexExp(regex.nameRegex(signUpData.firstName), signUpData.firstName)}
-                          </div>
+                          </Fade>
                         </div>
-                      {/* user last name*/}
-                        <div className="col container-fluid row">
-                          <div className="icon col-1 ml-2 pl-2 align-self-center typeLogo"
-                               style={{borderLeft: "1px solid #7c828c"}}>
-                            <Fade right cascade>
-                            <FontAwesomeIcon icon={faUser} className="text-white-50" />
-                            </Fade>
+                        <Slide right>
+                          <div className="p-0 col my-auto">
+                            <OverlayTrigger
+                              className="bg-dark"
+                              trigger="focus"
+                              key="left"
+                              placement="left"
+                              overlay={
+                                <Popover className=" rounded mr-5 stylesPopOver" id={`popover-positioned-left`}>
+                                  <Popover.Title className=" text-white border-bottom stylesPopOver" as="h3">
+                                    First name must contain...</Popover.Title>
+                                  <Popover.Content className=" text-white">
+                                    2 or more alphabetical character <br />
+                                    (a-z) or (A-Z)
+                                  </Popover.Content>
+                                </Popover>}>
+                              <input placeholder="FirstName" type="text"
+                                     onChange={e => setSignUpData({...signUpData, firstName: e.target.value})}
+                                     className="w-100 text-white-50 inputTextDiv" />
+                            </OverlayTrigger>
                           </div>
+                        </Slide>
+                        <div className="validation align-self-center">
+                          {checkDataWithRegexExp(regex.nameRegex(signUpData.firstName), signUpData.firstName)}
+                        </div>
+                      </div>
+                      {/* user last name*/}
+                      <div className="col container-fluid row">
+                        <div className="icon col-1 pl-0 align-self-center typeLogo">
+                          <Fade right cascade>
+                            <FontAwesomeIcon icon={faUser} className="text-white-50" />
+                          </Fade>
+                        </div>
+                        <Slide right>
+                          <div className="p-0 col my-auto">
+                            <OverlayTrigger
+                              className="bg-dark"
+                              trigger="focus"
+                              key="right"
+                              placement="right"
+                              overlay={
+                                <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                                  <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
+                                    Last name must contain...</Popover.Title>
+                                  <Popover.Content className=" text-white">
+                                    2 or more alphabetical character <br /> (a-z) or (A-Z)
+                                  </Popover.Content>
+                                </Popover>}>
+                              <input placeholder="LastName" type="text"
+                                     onChange={e => setSignUpData({...signUpData, lastName: e.target.value})}
+                                     className="w-100 text-white-50 inputTextDiv" />
+                            </OverlayTrigger>
+                          </div>
+                        </Slide>
+                        <div className="validation align-self-center">
+                          {checkDataWithRegexExp(regex.nameRegex(signUpData.lastName), signUpData.lastName)}
+                        </div>
+                      </div>
+                    </div>
+                    {/* email*/}
+                    <div className="login_fields row container-fluid m-0 my-2">
+                      <div className="icon col-1 pl-2 align-self-center typeLogo">
+                        <Fade right>
+                          <FontAwesomeIcon icon={faEnvelope} className="text-white-50" />
+                        </Fade>
+                      </div>
+                      <Slide right>
+                        <div className="p-0 col my-auto">
                           <OverlayTrigger
                             className="bg-dark"
                             trigger="focus"
@@ -375,50 +414,19 @@ const Login = ({
                             overlay={
                               <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
                                 <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
-                                  Last name must contain...</Popover.Title>
+                                  Email must contain ...
+                                </Popover.Title>
                                 <Popover.Content className=" text-white">
-                                  2 or more alphabetical character <br /> (a-z) or (A-Z)
+                                  alpha-numeric characters <br />
+                                  (a-z) or (A-Z) or (0-9) or (._-)
                                 </Popover.Content>
                               </Popover>}>
-                            <Fade right cascade>
-                            <input placeholder="LastName" type="text"
-                                   onChange={e => setSignUpData({...signUpData, lastName: e.target.value})}
-                                   className="col text-white-50 inputTextDiv" />
-                            </Fade>
+                            <input placeholder="Email" type="text"
+                                   onChange={e => setSignUpData({...signUpData, email: e.target.value})}
+                                   className="w-100 text-white-50 inputTextDiv" />
                           </OverlayTrigger>
-                          <div className="validation align-self-center">
-                            {checkDataWithRegexExp(regex.nameRegex(signUpData.lastName), signUpData.lastName)}
-                          </div>
                         </div>
-                    </div>
-                    {/* email*/}
-                    <div className="login_fields row container-fluid m-0 my-2">
-                      <div className="icon col-1 pl-2 align-self-center typeLogo">
-                        <Fade right cascade>
-                        <FontAwesomeIcon icon={faEnvelope} className="text-white-50" />
-                        </Fade>
-                      </div>
-                      <OverlayTrigger
-                        className="bg-dark"
-                        trigger="focus"
-                        key="right"
-                        placement="right"
-                        overlay={
-                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
-                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
-                              Email must contain ...
-                            </Popover.Title>
-                            <Popover.Content className=" text-white">
-                              alpha-numeric characters <br />
-                              (a-z) or (A-Z) or (0-9) or (._-)
-                            </Popover.Content>
-                          </Popover>}>
-                        <Fade right cascade>
-                        <input placeholder="Email" type="text"
-                               onChange={e => setSignUpData({...signUpData, email: e.target.value})}
-                               className="col text-white-50 inputTextDiv" />
-                        </Fade>
-                      </OverlayTrigger>
+                      </Slide>
                       <div className="validation align-self-center">
                         {checkDataWithRegexExp(regex.emailRegex(signUpData.email), signUpData.email)}
                       </div>
@@ -427,32 +435,34 @@ const Login = ({
                     <div className="login_fields row container-fluid m-0 my-2">
                       <div className="icon col-1 pl-2 align-self-center typeLogo">
                         <Fade right cascade>
-                        <FontAwesomeIcon icon={faLock} className="text-white-50" />
+                          <FontAwesomeIcon icon={faLock} className="text-white-50" />
                         </Fade>
                       </div>
-                      <OverlayTrigger
-                        className="bg-dark"
-                        trigger="focus"
-                        key="right"
-                        placement="right"
-                        overlay={
-                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
-                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
-                              Password must contain at least...</Popover.Title>
-                            <Popover.Content className=" text-white">
-                              1 lowercase alphabetical character(a-z).<br />
-                              1 uppercase alphabetical character(A-Z).<br />
-                              1 numeric character(0-9).<br />
-                              1 special character(_,!,@,#,$,%,^,&,*).<br />
-                              6 characters or more.
-                            </Popover.Content>
-                          </Popover>}>
-                        <Fade right cascade>
-                        <input placeholder="Password" type="password"
-                               onChange={e => setSignUpData({...signUpData, password: e.target.value})}
-                               className="col text-white-50 inputTextDiv" />
-                        </Fade>
-                      </OverlayTrigger>
+                      <Slide right>
+                        <div className="p-0 col my-auto">
+                          <OverlayTrigger
+                            className="bg-dark"
+                            trigger="focus"
+                            key="right"
+                            placement="right"
+                            overlay={
+                              <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                                <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
+                                  Password must contain at least...</Popover.Title>
+                                <Popover.Content className=" text-white">
+                                  1 lowercase alphabetical character(a-z).<br />
+                                  1 uppercase alphabetical character(A-Z).<br />
+                                  1 numeric character(0-9).<br />
+                                  1 special character(_,!,@,#,$,%,^,&,*).<br />
+                                  6 characters or more.
+                                </Popover.Content>
+                              </Popover>}>
+                            <input placeholder="Password" type="password"
+                                   onChange={e => setSignUpData({...signUpData, password: e.target.value})}
+                                   className="w-100 text-white-50 inputTextDiv" />
+                          </OverlayTrigger>
+                        </div>
+                      </Slide>
                       <div className="validation align-self-center">
                         {checkDataWithRegexExp(regex.passwordRegex(signUpData.password), signUpData.password)}
                       </div>
@@ -460,29 +470,31 @@ const Login = ({
                     {/* repeat password*/}
                     <div className="login_fields row container-fluid m-0 ">
                       <Fade right cascade>
-                      <div className="icon col-1 pl-2 align-self-center typeLogo">
-                        <FontAwesomeIcon icon={faLock} className="text-white-50" />
-                      </div>
+                        <div className="icon col-1 pl-2 align-self-center typeLogo">
+                          <FontAwesomeIcon icon={faLock} className="text-white-50" />
+                        </div>
                       </Fade>
-                      <OverlayTrigger
-                        className="bg-dark"
-                        trigger="focus"
-                        key="right"
-                        placement="right"
-                        overlay={
-                          <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
-                            <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
-                              Repeat Password...</Popover.Title>
-                            <Popover.Content className=" text-white">
-                              must be same as above.
-                            </Popover.Content>
-                          </Popover>}>
-                        <Fade right cascade>
-                        <input placeholder="Repeat Password" type="password"
-                               onChange={e => setSignUpData({...signUpData, repeatPassword: e.target.value})}
-                               className="col text-white-50 inputTextDiv" />
-                        </Fade>
-                      </OverlayTrigger>
+                      <Slide right>
+                        <div className="p-0 col my-auto">
+                          <OverlayTrigger
+                            className="bg-dark"
+                            trigger="focus"
+                            key="right"
+                            placement="right"
+                            overlay={
+                              <Popover className="bg-dark rounded ml-5 stylesPopOver" id={`popover-positioned-right`}>
+                                <Popover.Title className=" text-white border-bottom bg-dark stylesPopOver" as="h3">
+                                  Repeat Password...</Popover.Title>
+                                <Popover.Content className=" text-white">
+                                  must be same as above.
+                                </Popover.Content>
+                              </Popover>}>
+                            <input placeholder="Repeat Password" type="password"
+                                   onChange={e => setSignUpData({...signUpData, repeatPassword: e.target.value})}
+                                   className="w-100 text-white-50 inputTextDiv" />
+                          </OverlayTrigger>
+                        </div>
+                      </Slide>
                       <div className="validation align-self-center">
                         {checkDataWithRegexExp(regex.passwordRegex(signUpData.repeatPassword), signUpData.repeatPassword, true)}
                       </div>
