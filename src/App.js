@@ -1,23 +1,40 @@
 import React from "react";
 import "./assets/app.sass";
 import "./assets/customBootstrap.sass";
-import {Route, Switch} from "react-router-dom";
-import {connect} from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 import Footer from "./components/partials/footer";
 import ProtectedRoute from "./components/partials/ProtectedRoute";
-import Login from "./components/logIn-signUp"
-import Home from "./components/home"
-import Search from "./components/search"
-import Media_Details from "./components/mediaDetails"
-import Media_List from "./components/mediaList"
-import User from "./components/user"
-import Person_Details from "./components/personDetails"
+import Login from "./components/logIn-signUp";
+import Home from "./components/home";
+import Search from "./components/search";
+import Media_Details from "./components/mediaDetails";
+import Media_List from "./components/mediaList";
+import User from "./components/user";
+import Person_Details from "./components/personDetails";
 
-const App = ({isAuthenticated, isVerifying}) => {
+const code = `<link
+rel="stylesheet"
+type="text/css"
+href="https://d2dqfs9gri1lg3.cloudfront.net/index.daaf980a.css"
+/>
+<vudoo-video-element
+  id="video-page"
+  integrationid="9643a153-5ed0-4c15-9e27-def3384351f7"
+  integrationtype="carousel"
+></vudoo-video-element>
+<script src="https://d2dqfs9gri1lg3.cloudfront.net/index.23781534.js"></script>`;
+
+const App = ({ isAuthenticated, isVerifying }) => {
   return (
     <div className="App">
       <div className="main">
         <Switch>
+          <Route
+            exact
+            path="/test-magik-page"
+            component={<div>{code}</div>}
+          />
           <Route exact path="/login" component={Login} />
           <ProtectedRoute
             exact
@@ -68,11 +85,10 @@ const App = ({isAuthenticated, isVerifying}) => {
   );
 };
 
-
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.Auth.verify.isAuthenticated,
-    isVerifying: state.Auth.verify.isVerifying
+    isVerifying: state.Auth.verify.isVerifying,
   };
 };
 export default connect(mapStateToProps)(App);
